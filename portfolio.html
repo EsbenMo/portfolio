@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Senior UX/UI Designer — 8 years of accessibility-first design, user research, and workshops.">
+<title>Esben — UX/UI Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #E3000B;
+  --yellow: #FFD700;
+  --blue: #006DB6;
+  --green: #007A3D;
+  --orange: #FF6B00;
+  --white: #FFFFFF;
+  --black: #1A1A1A;
+  --studio-red: #B83228;
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body: 'DM Sans', sans-serif;
+  --f-mono: 'Space Mono', monospace;
+  --ease-b: cubic-bezier(0.34,1.56,0.64,1);
+  --ease-s: cubic-bezier(0.25,0,0,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);color:var(--black);background:var(--white);overflow-x:hidden}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.skip{position:absolute;top:-100%;left:1rem;background:var(--black);color:var(--white);padding:.5rem 1rem;font-family:var(--f-mono);font-size:.75rem;z-index:9999;transition:top .2s}
+.skip:focus{top:1rem}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--white);border-bottom:3px solid var(--black)}
+.nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--black);text-decoration:none;padding:.25rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
+.nav-links a:hover{border-color:var(--red)}
+.nav-links a:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:2px}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:72px;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 4rem}
+.eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1.5rem}
+.hero-name{font-family:var(--f-display);font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-name em{font-style:normal;color:var(--red)}
+.hero-desc{font-size:1.05rem;line-height:1.7;color:#555;max-width:38ch;margin-bottom:2.5rem}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;font-family:var(--f-display);font-weight:600;font-size:.875rem;padding:.875rem 2rem;text-decoration:none;border:3px solid var(--black);box-shadow:4px 4px 0 var(--black);transition:transform .15s,box-shadow .15s;cursor:pointer}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn-red{background:var(--red);color:var(--white)}
+.btn-white{background:var(--white);color:var(--black)}
+.hero-right{background:var(--yellow);border-left:3px solid var(--black);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.brick-grid{display:grid;grid-template-columns:repeat(5,60px);grid-template-rows:repeat(6,60px);gap:6px;padding:2rem}
+.brick{border:3px solid var(--black);border-radius:3px;position:relative;opacity:0;transform:translateY(16px);animation:brickIn .4s var(--ease-b) forwards}
+.brick::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:22px;height:22px;background:rgba(255,255,255,.25);border:2px solid rgba(0,0,0,.15);border-radius:50%}
+@keyframes brickIn{to{opacity:1;transform:none}}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--black);border-bottom:3px solid var(--black)}
+.stat{padding:2rem;border-right:3px solid var(--black);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--f-display);font-size:2.8rem;font-weight:700;line-height:1;letter-spacing:-.03em}
+.stat-l{font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:#666;margin-top:.4rem}
+
+/* SECTIONS shared */
+.section-label{font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--red);display:block;margin-bottom:1rem}
+.section-title{font-family:var(--f-display);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
+
+/* ABOUT */
+#about{padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;border-bottom:3px solid var(--black);align-items:start}
+.about-text p{font-size:1rem;line-height:1.75;color:#444;margin-top:1.25rem}
+.disciplines{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+.disc-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:3px solid var(--black);font-family:var(--f-display);font-weight:500;font-size:.95rem;opacity:0;transform:translateX(24px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.disc-item.on{opacity:1;transform:none}
+.disc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:2px solid var(--black)}
+
+/* WORK */
+#work{padding:6rem 4rem;border-bottom:3px solid var(--black)}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem}
+.case{padding:3rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden;cursor:pointer;transition:transform .2s var(--ease-b);outline:none}
+.case:hover{transform:scale(1.025);z-index:2}
+.case:focus-visible{outline:4px solid var(--blue);outline-offset:-4px;z-index:3}
+.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;opacity:.5;margin-bottom:1.5rem}
+.case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.4rem}
+.case-org{font-family:var(--f-mono);font-size:.7rem;opacity:.65;margin-bottom:.75rem}
+.case-desc{font-size:.875rem;line-height:1.65;opacity:.85;margin-bottom:1.25rem}
+.case-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border:2px solid currentColor;border-radius:2px}
+.c1{background:var(--red);color:var(--white)}
+.c2{background:var(--yellow);color:var(--black)}
+.c3{background:var(--blue);color:var(--white)}
+.c4{background:var(--green);color:var(--white)}
+
+/* PROCESS */
+#process{padding:6rem 4rem;border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
+#process .section-label{color:var(--yellow)}
+#process .section-title{color:var(--white)}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:4rem;border:3px solid rgba(255,255,255,.15)}
+.step{padding:2.5rem 1.75rem;border-right:3px solid rgba(255,255,255,.15);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.step:last-child{border-right:none}
+.step.on{opacity:1;transform:none}
+.step-icon{font-size:1.6rem;margin-bottom:1.25rem}
+.step-name{font-family:var(--f-display);font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.step-desc{font-size:.85rem;line-height:1.65;opacity:.65}
+
+/* ACCESSIBILITY */
+#accessibility{padding:6rem 4rem;border-bottom:3px solid var(--black);background:var(--yellow)}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.a11y-card{background:var(--white);border:3px solid var(--black);padding:2rem;box-shadow:5px 5px 0 var(--black);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.a11y-card.on{opacity:1;transform:none}
+.wcag-badge{display:inline-block;background:var(--green);color:var(--white);font-family:var(--f-mono);font-size:.65rem;padding:.2rem .5rem;margin-bottom:.75rem;border:2px solid var(--black)}
+.a11y-card h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.a11y-card p{font-size:.875rem;line-height:1.7;color:#444}
+
+/* CONTACT */
+#contact{padding:8rem 4rem;text-align:center;border-bottom:3px solid var(--black)}
+#contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1.25rem}
+#contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2.5rem;line-height:1.7}
+
+/* DOOR */
+.door-section{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem 2rem;background:var(--white);border-bottom:3px solid var(--black);cursor:pointer;gap:1rem}
+.door-section:hover .door-svg{filter:drop-shadow(0 0 18px rgba(184,50,40,.35))}
+.door-section:hover .door-text{color:var(--studio-red)}
+.door-section:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.door-svg{animation:doorGlow 5s ease-in-out infinite;transition:filter .4s}
+@keyframes doorGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(184,50,40,.15))}50%{filter:drop-shadow(0 0 14px rgba(184,50,40,.4))}}
+.door-text{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb;transition:color .4s}
+
+/* FOOTER */
+footer{padding:1.75rem 4rem;display:flex;align-items:center;justify-content:space-between}
+footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
+.door-btn{font-family:var(--f-mono);font-size:.65rem;color:#bbb;background:none;border:none;cursor:pointer;padding:0;transition:color .4s;animation:doorPulse 4s ease-in-out infinite}
+.door-btn:hover{color:var(--studio-red)}
+.door-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+@keyframes doorPulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-s),transform .6s var(--ease-s)}
+.reveal.on{opacity:1;transform:none}
+
+/* =====================
+   THE RED STUDIO
+   ===================== */
+#studio{display:none;position:fixed;inset:0;z-index:1000;background:var(--studio-red);flex-direction:column;overflow:hidden}
+#studio.open{display:flex;animation:studioIn .7s var(--ease-s) both}
+@keyframes studioIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.studio-close{position:absolute;top:1rem;right:1.5rem;background:none;border:2px solid rgba(255,255,255,.5);color:rgba(255,255,255,.8);font-family:var(--f-mono);font-size:.65rem;padding:.45rem .9rem;cursor:pointer;z-index:10;transition:border-color .2s,color .2s;letter-spacing:.08em}
+.studio-close:hover{border-color:var(--white);color:var(--white)}
+.studio-close:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+.studio-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2.5rem 1.5rem 0;overflow-y:auto;position:relative}
+.studio-heading{font-family:var(--f-display);font-size:.85rem;font-style:italic;color:rgba(255,220,180,.55);margin-bottom:1.2rem;letter-spacing:.04em;text-align:center}
+.studio-sub{font-family:var(--f-mono);font-size:.6rem;color:rgba(255,220,180,.4);margin-bottom:1.5rem;text-align:center;letter-spacing:.1em;text-transform:uppercase}
+
+/* COLOR PALETTE */
+.palette{display:flex;gap:8px;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.pal-swatch{width:26px;height:26px;border-radius:50%;border:3px solid rgba(0,0,0,.3);cursor:pointer;transition:transform .15s,border-color .15s}
+.pal-swatch:hover,.pal-swatch.active{transform:scale(1.35);border-color:var(--white)}
+.pal-swatch:focus-visible{outline:3px solid var(--white);outline-offset:2px}
+
+/* PAINTINGS ROW */
+.paintings-row{display:flex;gap:1.25rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.pframe{background:rgba(180,40,28,.35);border:3px solid rgba(255,210,160,.5);padding:10px;flex-shrink:0}
+.pframe svg{display:block;cursor:crosshair}
+.plabel{font-family:var(--f-mono);font-size:.55rem;color:rgba(255,210,160,.55);text-align:center;margin-top:5px;letter-spacing:.12em;text-transform:uppercase}
+
+/* FLOATING ANIMALS */
+#floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1001}
+.fan{position:absolute;pointer-events:none;animation:fanFloat 4s ease-in-out infinite}
+.fan.swim{animation:fanSwim 5s linear infinite}
+@keyframes fanFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(4deg)}}
+@keyframes fanSwim{0%{transform:translateX(0) scaleX(1)}49%{transform:translateX(80px) scaleX(1)}50%{transform:translateX(80px) scaleX(-1)}100%{transform:translateX(0) scaleX(-1)}}
+.fan.bird-fly{animation:fanBird 3s ease-in-out infinite}
+@keyframes fanBird{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-25px) rotate(5deg)}}
+
+/* INSTRUMENTS + KITCHEN STRIP */
+.studio-strip{display:flex;gap:2rem;justify-content:center;align-items:flex-end;padding:1rem 1rem 1.25rem;background:rgba(0,0,0,.25);border-top:2px solid rgba(255,255,255,.1);flex-wrap:wrap;flex-shrink:0}
+.instrument-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.inst-label{font-family:var(--f-mono);font-size:.55rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;text-align:center}
+
+/* PIANO */
+.piano-wrap{position:relative;height:90px;user-select:none}
+.pw-whites{display:flex;gap:1.5px}
+.pk-w{width:28px;height:90px;background:#f0ebe0;border:2px solid #444;border-radius:0 0 3px 3px;cursor:pointer;transition:background .05s,transform .1s;position:relative;flex-shrink:0}
+.pk-w:hover{background:#ddd8c8}
+.pk-w.pressed{background:var(--yellow);transform:scaleY(.97) translateY(2px)}
+.pk-w.dance{animation:keyDance .45s var(--ease-b)}
+@keyframes keyDance{0%{transform:translateY(0)}30%{transform:translateY(-12px) rotate(-4deg)}65%{transform:translateY(-5px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}
+.pw-blacks{position:absolute;top:0;left:0;right:0;pointer-events:none}
+.pk-b{position:absolute;width:19px;height:55px;background:#1a1a1a;border:2px solid #000;border-radius:0 0 3px 3px;cursor:pointer;z-index:2;transition:background .05s;pointer-events:all}
+.pk-b:hover{background:#333}
+.pk-b.pressed{background:var(--orange)}
+.pk-b.dance{animation:keyDance .45s var(--ease-b)}
+.satie-btn{background:none;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.65);font-family:var(--f-mono);font-size:.55rem;padding:.3rem .65rem;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:border-color .2s,color .2s;margin-top:.3rem}
+.satie-btn:hover{border-color:var(--white);color:var(--white)}
+
+/* BASS */
+.bass-str{stroke:#d4a853;cursor:pointer;transition:filter .1s}
+.bass-str:hover{filter:brightness(1.6)}
+.bass-str.vib{animation:strVib .7s ease-out}
+@keyframes strVib{0%,100%{filter:none}15%{filter:brightness(2.5) blur(.5px)}35%{filter:brightness(1.8) blur(.3px)}60%{filter:brightness(1.4)}80%{filter:brightness(1.1)}}
+
+/* KITCHEN */
+.veg{cursor:pointer;transition:transform .1s}
+.veg:hover{filter:brightness(1.15)}
+.veg.chopped{animation:chopAnim .35s ease-out forwards}
+@keyframes chopAnim{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(6deg)}70%{transform:scale(.9) translateY(4px)}100%{transform:scale(.95) translateY(2px)}}
+.bubble{animation:bub var(--bd,2s) ease-in infinite;animation-delay:var(--bdd,0s)}
+@keyframes bub{0%{transform:translateY(0) scale(1);opacity:.85}100%{transform:translateY(-22px) scale(.2);opacity:0}}
+.flame{animation:flm .3s ease-in-out infinite alternate}
+@keyframes flm{from{transform:scaleY(.85) translateY(2px);opacity:.75}to{transform:scaleY(1.15) translateY(-2px);opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:2.5rem 1.5rem}
+  #about{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2rem}
+  #work{padding:3rem 1.5rem}
+  .work-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-bottom:3px solid var(--black)}
+  .process-steps{grid-template-columns:1fr 1fr}
+  #process{padding:3rem 1.5rem}
+  .a11y-grid{grid-template-columns:1fr}
+  #accessibility{padding:3rem 1.5rem}
+  #contact{padding:4rem 1.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:.75rem;text-align:center}
+  .studio-strip{flex-direction:column;align-items:center}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to main content</a>
+
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="Esben — home">Esben<span>.</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#accessibility">Accessibility</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-label="Introduction">
+  <div class="hero-left">
+    <p class="eyebrow">Senior UX/UI Designer · Copenhagen</p>
+    <h1 class="hero-name">Design that<br><em>works for everyone.</em></h1>
+    <p class="hero-desc">8 years of research, workshops, and tested interfaces — built on the belief that accessible design is simply good design.</p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-red">View my work</a>
+      <a href="#contact" class="btn btn-white">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right" aria-hidden="true">
+    <div class="brick-grid" id="brickGrid"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" role="region" aria-label="Key numbers">
+  <div class="stat"><div class="stat-n" style="color:var(--red)">8</div><div class="stat-l">Years in practice</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--blue)">40+</div><div class="stat-l">Projects shipped</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--green);font-size:1.8rem">WCAG AA</div><div class="stat-l">Every project</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--yellow);-webkit-text-stroke:1.5px var(--black);text-stroke:1.5px var(--black)">200+</div><div class="stat-l">Users interviewed</div></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" aria-labelledby="about-h">
+  <div class="about-text reveal">
+    <span class="section-label">Who I am</span>
+    <h2 class="section-title" id="about-h">I ask "why?" before I open Figma.</h2>
+    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do — and who it needs to not leave behind.</p>
+    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load — these are design problems, not compliance checkboxes.</p>
+    <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
+  </div>
+  <div class="disciplines" aria-label="Core disciplines">
+    <div class="disc-item" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
+    <div class="disc-item" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
+    <div class="disc-item" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
+    <div class="disc-item" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
+    <div class="disc-item" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" aria-labelledby="work-h">
+  <div class="reveal">
+    <span class="section-label">Selected work</span>
+    <h2 class="section-title" id="work-h">Projects that mattered.</h2>
+  </div>
+  <div class="work-grid" role="list">
+    <article class="case c1 reveal" role="listitem" tabindex="0" aria-label="Case study: NHS Digital — Accessible Patient Forms">
+      <div class="case-n">Case 01</div>
+      <h3 class="case-title">Accessible Patient Forms</h3>
+      <div class="case-org">NHS Digital · 2023</div>
+      <p class="case-desc">Redesigned the patient registration and referral forms used by 4M people annually. 18 research sessions with users including those with low literacy, motor impairments, and screen reader dependency — leading to a 34% drop in form abandonment.</p>
+      <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Testing</span></div>
+    </article>
+    <article class="case c2 reveal" role="listitem" tabindex="0" aria-label="Case study: IKEA — Mobile Navigation Redesign">
+      <div class="case-n">Case 02</div>
+      <h3 class="case-title">Mobile Navigation Redesign</h3>
+      <div class="case-org">IKEA Digital · 2022</div>
+      <p class="case-desc">Led a 3-day co-design workshop with cross-functional teams across 6 markets to untangle a navigation structure that had grown over 12 years. Prototyped 4 directions, tested with 60 users, shipped to 180M monthly visitors.</p>
+      <div class="case-tags"><span class="tag">UX Design</span><span class="tag">Workshops</span><span class="tag">Prototyping</span></div>
+    </article>
+    <article class="case c3 reveal" role="listitem" tabindex="0" aria-label="Case study: Spotify — Podcast Discovery Interface">
+      <div class="case-n">Case 03</div>
+      <h3 class="case-title">Podcast Discovery Interface</h3>
+      <div class="case-org">Spotify · 2021</div>
+      <p class="case-desc">Investigated why podcast listeners weren't exploring beyond their first show. Diary studies with 24 participants uncovered the real barrier — social proof, not search. Redesigned discovery around listener behaviour, validated with A/B test across 2M users.</p>
+      <div class="case-tags"><span class="tag">Research</span><span class="tag">UI Design</span><span class="tag">A/B Testing</span></div>
+    </article>
+    <article class="case c4 reveal" role="listitem" tabindex="0" aria-label="Case study: Transport for London — Journey Planner Accessibility">
+      <div class="case-n">Case 04</div>
+      <h3 class="case-title">Journey Planner Accessibility</h3>
+      <div class="case-org">Transport for London · 2020</div>
+      <p class="case-desc">Audited and redesigned the step-free route planner used by wheelchair users and parents with pushchairs. Ran field research at 12 stations, then ran 3 rounds of testing with mobility-impaired users. Achieved WCAG 2.1 AA across the full journey flow.</p>
+      <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Service Design</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" aria-labelledby="process-h">
+  <div class="reveal">
+    <span class="section-label">How I work</span>
+    <h2 class="section-title" id="process-h">Research first. Always.</h2>
+  </div>
+  <div class="process-steps" role="list">
+    <div class="step" role="listitem"><div class="step-icon" aria-hidden="true">🔍</div><div class="step-name">Research</div><p class="step-desc">Interviews, diary studies, analytics. Understanding people before designing for them.</p></div>
+    <div class="step" role="listitem"><div class="step-icon" aria-hidden="true">🧩</div><div class="step-name">Workshops</div><p class="step-desc">Co-design sessions that align teams and surface constraints no brief ever mentions.</p></div>
+    <div class="step" role="listitem"><div class="step-icon" aria-hidden="true">✏️</div><div class="step-name">Prototyping</div><p class="step-desc">From sketch to clickable prototype at the fidelity that answers the specific question.</p></div>
+    <div class="step" role="listitem"><div class="step-icon" aria-hidden="true">🧪</div><div class="step-name">Testing</div><p class="step-desc">Moderated, unmoderated, heuristic. Never launch without evidence.</p></div>
+    <div class="step" role="listitem"><div class="step-icon" aria-hidden="true">♿</div><div class="step-name">Accessibility</div><p class="step-desc">WCAG audit, assistive tech, real users with disabilities. Built in, not bolted on.</p></div>
+  </div>
+</section>
+
+<!-- ACCESSIBILITY -->
+<section id="accessibility" aria-labelledby="a11y-h">
+  <div class="reveal">
+    <span class="section-label">My commitment</span>
+    <h2 class="section-title" id="a11y-h">Built for everyone, by design.</h2>
+  </div>
+  <div class="a11y-grid">
+    <div class="a11y-card"><span class="wcag-badge">WCAG 2.1 AA</span><h3>Colour isn't the only signal</h3><p>Every piece of information conveyed through colour also exists in text, pattern, or shape. Contrast is a baseline, not a finish line.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">Keyboard</span><h3>If you can't tab through it, it's broken</h3><p>Every interactive element has a visible focus state. Skip links, logical tab order — not extras, but the interface itself.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">Screen readers</span><h3>Names that describe, not label</h3><p>Accessible names, landmark regions, live announcements. Tested with NVDA, JAWS, and VoiceOver before any prototype is done.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">Real users</span><h3>Disability is context, not edge case</h3><p>People with disabilities are included in every research round — not a separate study, but the same study as everyone else.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" aria-labelledby="contact-h">
+  <div class="reveal">
+    <span class="section-label">Let's talk</span>
+    <h2 class="section-title" id="contact-h">I'm available for the right project.</h2>
+    <p>If you're building something that matters to people who've been left out of the design conversation — I want to hear from you.</p>
+    <a href="mailto:hello@esben.design" class="btn btn-red">Send me a message</a>
+  </div>
+</section>
+
+<!-- DOOR NUDGE -->
+<button class="door-section" id="openStudio2" aria-label="Enter the secret studio">
+  <svg class="door-svg" width="90" height="140" viewBox="0 0 90 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Frame -->
+    <rect x="4" y="4" width="82" height="132" rx="3" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <!-- Door panel -->
+    <rect x="10" y="10" width="70" height="126" rx="2" fill="rgba(184,50,40,.08)" stroke="rgba(184,50,40,.5)" stroke-width="1.5"/>
+    <!-- Upper panel inset -->
+    <rect x="18" y="18" width="54" height="44" rx="2" fill="none" stroke="rgba(184,50,40,.4)" stroke-width="1"/>
+    <!-- Lower panel inset -->
+    <rect x="18" y="72" width="54" height="54" rx="2" fill="none" stroke="rgba(184,50,40,.4)" stroke-width="1"/>
+    <!-- Knob -->
+    <circle cx="65" cy="75" r="5" fill="rgba(184,50,40,.6)" stroke="#1A1A1A" stroke-width="1.5"/>
+    <!-- Keyhole -->
+    <circle cx="65" cy="73" r="2.5" fill="#1A1A1A"/>
+    <path d="M63.5 75 L66.5 75 L66 79 L64 79 Z" fill="#1A1A1A"/>
+    <!-- Hinge marks -->
+    <rect x="12" y="22" width="4" height="8" rx="1" fill="rgba(0,0,0,.2)"/>
+    <rect x="12" y="106" width="4" height="8" rx="1" fill="rgba(0,0,0,.2)"/>
+    <!-- Light crack (ajar glow) -->
+    <line x1="10" y1="10" x2="10" y2="136" stroke="rgba(184,50,40,.6)" stroke-width="1.5" stroke-dasharray="4 6"/>
+  </svg>
+  <span class="door-text">something is on the other side</span>
+</button>
+
+</main>
+
+<footer>
+  <small>© Esben 2024 · Copenhagen, Denmark</small>
+  <button class="door-btn" id="openStudio" aria-label="Open the secret studio">◆ the studio is ajar</button>
+</footer>
+
+<!-- FLOATING ANIMALS (outside studio, fixed overlay) -->
+<div id="floaters" aria-hidden="true"></div>
+
+<!-- THE RED STUDIO -->
+<div id="studio" role="dialog" aria-modal="true" aria-label="The Red Studio — Matisse's world, now yours">
+  <button class="studio-close" id="closeStudio">← Leave the studio</button>
+
+  <div class="studio-main">
+    <div class="studio-heading">Henri Matisse · The Red Studio, 1911 — step inside</div>
+    <div class="studio-sub">Choose a colour · click the paintings to fill them · when an animal is complete, it escapes</div>
+
+    <!-- PALETTE -->
+    <div class="palette" id="palette" role="toolbar" aria-label="Paint colours"></div>
+
+    <!-- PAINTINGS -->
+    <div class="paintings-row" id="paintings" aria-label="Paintings to colour"></div>
+  </div>
+
+  <!-- INSTRUMENTS + KITCHEN -->
+  <div class="studio-strip">
+
+    <!-- BASS -->
+    <div class="instrument-wrap">
+      <div class="inst-label">Bass — strum or pluck</div>
+      <svg width="150" height="200" viewBox="0 0 150 200" aria-label="Bass guitar — click strings to play">
+        <ellipse cx="75" cy="148" rx="52" ry="48" fill="#7A3B1E" stroke="#4a1e00" stroke-width="2"/>
+        <ellipse cx="75" cy="143" rx="40" ry="37" fill="#9B4F2A" stroke="#4a1e00" stroke-width="1"/>
+        <rect x="68" y="22" width="14" height="104" fill="#5A2D0C" stroke="#3a1500" stroke-width="1"/>
+        <rect x="61" y="10" width="28" height="22" rx="3" fill="#4a2200" stroke="#2a1000" stroke-width="1"/>
+        <circle cx="67" cy="16" r="3.5" fill="#C8A030"/><circle cx="75" cy="13" r="3.5" fill="#C8A030"/>
+        <circle cx="83" cy="16" r="3.5" fill="#C8A030"/><circle cx="75" cy="20" r="3.5" fill="#C8A030"/>
+        <circle cx="75" cy="150" r="13" fill="#3a1800" stroke="#2a1000" stroke-width="1"/>
+        <rect x="66" y="118" width="18" height="3" fill="#C8A030"/>
+        <line class="bass-str" x1="70" y1="22" x2="70" y2="115" stroke-width="3" data-freq="41.2"/>
+        <line class="bass-str" x1="74" y1="22" x2="74" y2="115" stroke-width="2.5" data-freq="55"/>
+        <line class="bass-str" x1="78" y1="22" x2="78" y2="115" stroke-width="2" data-freq="73.4"/>
+        <line class="bass-str" x1="82" y1="22" x2="82" y2="115" stroke-width="1.5" data-freq="98"/>
+      </svg>
+    </div>
+
+    <!-- PIANO -->
+    <div class="instrument-wrap">
+      <div class="inst-label">Satie's piano</div>
+      <div class="piano-wrap" id="piano">
+        <div class="pw-whites" id="pianoW"></div>
+        <div class="pw-blacks" id="pianoB"></div>
+      </div>
+      <button class="satie-btn" id="satieBtn">▶ Gymnopédie No.1</button>
+    </div>
+
+    <!-- KITCHEN -->
+    <div class="instrument-wrap">
+      <div class="inst-label">Kitchen — chop &amp; simmer</div>
+      <svg width="210" height="148" viewBox="0 0 210 148" aria-label="Kitchen with cutting board and soup pot">
+        <!-- TABLE -->
+        <rect x="4" y="96" width="202" height="48" rx="4" fill="#7A5C14" stroke="#4a3800" stroke-width="2"/>
+        <rect x="4" y="96" width="202" height="7" fill="#9A7820" rx="2"/>
+        <!-- CUTTING BOARD -->
+        <rect x="8" y="62" width="118" height="40" rx="3" fill="#C8941E" stroke="#7A5C14" stroke-width="2"/>
+        <line x1="28" y1="62" x2="28" y2="102" stroke="#B08010" stroke-width=".5"/>
+        <line x1="52" y1="62" x2="52" y2="102" stroke="#B08010" stroke-width=".5"/>
+        <line x1="76" y1="62" x2="76" y2="102" stroke="#B08010" stroke-width=".5"/>
+        <line x1="100" y1="62" x2="100" y2="102" stroke="#B08010" stroke-width=".5"/>
+        <!-- CARROT -->
+        <g class="veg" id="vc" data-c="0" role="button" tabindex="0" aria-label="Carrot — click to chop">
+          <ellipse cx="28" cy="82" rx="7" ry="13" fill="#FF6B00"/>
+          <path d="M26 70 Q28 63 30 70" fill="#007A3D"/>
+          <path d="M24 72 Q19 65 26 69" fill="#007A3D"/>
+        </g>
+        <!-- ONION -->
+        <g class="veg" id="vo" data-c="0" role="button" tabindex="0" aria-label="Onion — click to chop">
+          <ellipse cx="64" cy="83" rx="11" ry="11" fill="#DDB84A"/>
+          <ellipse cx="64" cy="79" rx="9" ry="7.5" fill="#EDD060" stroke="#C09030" stroke-width=".5"/>
+          <line x1="64" y1="72" x2="64" y2="68" stroke="#007A3D" stroke-width="2"/>
+        </g>
+        <!-- POTATO -->
+        <g class="veg" id="vp" data-c="0" role="button" tabindex="0" aria-label="Potato — click to chop">
+          <ellipse cx="100" cy="83" rx="13" ry="9" fill="#B89830" stroke="#8A7020" stroke-width="1"/>
+          <circle cx="94" cy="80" r="1.8" fill="#8A7020"/>
+          <circle cx="103" cy="86" r="1.8" fill="#8A7020"/>
+        </g>
+        <!-- KNIFE -->
+        <rect x="82" y="104" width="38" height="3.5" rx="1" fill="#c0c0c0" stroke="#aaa" stroke-width=".5"/>
+        <rect x="118" y="103" width="11" height="5.5" rx="1" fill="#7A3B1E"/>
+        <!-- STOVE BURNER -->
+        <circle cx="170" cy="82" r="24" fill="#2a2a2a" stroke="#1a1a1a" stroke-width="2"/>
+        <circle cx="170" cy="82" r="19" fill="#181818"/>
+        <circle cx="170" cy="82" r="5" fill="#383838"/>
+        <circle cx="170" cy="82" r="15" fill="none" stroke="#404040" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <!-- FLAMES -->
+        <ellipse cx="170" cy="74" rx="7" ry="9" fill="#FF4500" opacity=".7" class="flame"/>
+        <ellipse cx="170" cy="75" rx="4.5" ry="6.5" fill="#FFD700" opacity=".85" class="flame" style="animation-delay:.1s"/>
+        <!-- POT -->
+        <rect x="147" y="48" width="46" height="28" fill="#888" stroke="#666" stroke-width="2"/>
+        <ellipse cx="170" cy="48" rx="23" ry="6.5" fill="#999" stroke="#777" stroke-width="2"/>
+        <ellipse cx="170" cy="76" rx="23" ry="6.5" fill="#888" stroke="#666" stroke-width="2"/>
+        <rect x="141" y="51" width="8" height="6" rx="2" fill="#777"/>
+        <rect x="181" y="51" width="8" height="6" rx="2" fill="#777"/>
+        <!-- SOUP SURFACE -->
+        <ellipse cx="170" cy="48" rx="19" ry="5" fill="#C0622A" stroke="#9A4A1A" stroke-width="1"/>
+        <circle class="bubble" cx="164" cy="46" r="3" fill="#D07030" style="--bd:2s;--bdd:0s"/>
+        <circle class="bubble" cx="172" cy="44" r="2" fill="#D07030" style="--bd:1.5s;--bdd:.5s"/>
+        <circle class="bubble" cx="177" cy="47" r="2.5" fill="#D07030" style="--bd:2.5s;--bdd:.9s"/>
+        <circle class="bubble" cx="168" cy="47" r="1.5" fill="#D07030" style="--bd:1.8s;--bdd:.3s"/>
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── AUDIO ──────────────────────────────────────────────
+let AC = null;
+function ac() {
+  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur=.8, type='triangle', vol=.28) {
+  const c = ac(), o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
+  f.type = 'lowpass'; f.frequency.value = 2200;
+  o.connect(f); f.connect(g); g.connect(c.destination);
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, c.currentTime);
+  g.gain.linearRampToValueAtTime(vol, c.currentTime + .01);
+  g.gain.exponentialRampToValueAtTime(.001, c.currentTime + dur);
+  o.start(); o.stop(c.currentTime + dur);
+}
+function pianoTone(freq) {
+  const c = ac();
+  [['triangle', 1], ['sine', .5]].forEach(([t, m]) => {
+    const o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
+    f.type = 'lowpass'; f.frequency.value = 3500;
+    o.connect(f); f.connect(g); g.connect(c.destination);
+    o.type = t; o.frequency.value = freq * m;
+    g.gain.setValueAtTime(0, c.currentTime);
+    g.gain.linearRampToValueAtTime(.18, c.currentTime + .008);
+    g.gain.exponentialRampToValueAtTime(.08, c.currentTime + .12);
+    g.gain.exponentialRampToValueAtTime(.001, c.currentTime + 2.8);
+    o.start(); o.stop(c.currentTime + 2.8);
+  });
+}
+function bassTone(freq) {
+  const c = ac(), o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
+  f.type = 'lowpass'; f.frequency.value = 380; f.Q.value = 2;
+  o.connect(f); f.connect(g); g.connect(c.destination);
+  o.type = 'sawtooth'; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, c.currentTime);
+  g.gain.linearRampToValueAtTime(.38, c.currentTime + .02);
+  g.gain.exponentialRampToValueAtTime(.001, c.currentTime + 1.8);
+  o.start(); o.stop(c.currentTime + 1.8);
+}
+
+// ── HERO BRICKS ────────────────────────────────────────
+const cols = ['#E3000B','#FFD700','#006DB6','#007A3D','#FF6B00'];
+const grid = document.getElementById('brickGrid');
+if (grid) for (let i = 0; i < 30; i++) {
+  const b = document.createElement('div');
+  b.className = 'brick';
+  b.style.cssText = `background:${cols[i % 5]};animation-delay:${i * .05}s`;
+  grid.appendChild(b);
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, d = parseFloat(el.dataset.d || 0);
+    setTimeout(() => el.classList.add('on'), d * 1000);
+    io.unobserve(el);
+  });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card').forEach(el => io.observe(el));
+
+// ── PIANO SETUP ────────────────────────────────────────
+const noteData = [
+  {n:'C4', f:261.63, t:'w'},{n:'C#4',f:277.18,t:'b',off:20},
+  {n:'D4', f:293.66, t:'w'},{n:'D#4',f:311.13,t:'b',off:50},
+  {n:'E4', f:329.63, t:'w'},
+  {n:'F4', f:349.23, t:'w'},{n:'F#4',f:369.99,t:'b',off:110},
+  {n:'G4', f:392.00, t:'w'},{n:'G#4',f:415.30,t:'b',off:140},
+  {n:'A4', f:440.00, t:'w'},{n:'A#4',f:466.16,t:'b',off:170},
+  {n:'B4', f:493.88, t:'w'},
+  {n:'C5', f:523.25, t:'w'},{n:'C#5',f:554.37,t:'b',off:228},
+  {n:'D5', f:587.33, t:'w'},{n:'D#5',f:622.25,t:'b',off:258},
+  {n:'E5', f:659.25, t:'w'},
+  {n:'F5', f:698.46, t:'w'},{n:'F#5',f:739.99,t:'b',off:318},
+  {n:'G5', f:783.99, t:'w'},{n:'G#5',f:830.61,t:'b',off:348},
+  {n:'A5', f:880.00, t:'w'},{n:'A#5',f:932.33,t:'b',off:378},
+  {n:'B5', f:987.77, t:'w'},
+];
+const pianoW = document.getElementById('pianoW'), pianoB = document.getElementById('pianoB');
+if (pianoW) {
+  noteData.filter(n=>n.t==='w').forEach(n => {
+    const k = document.createElement('div');
+    k.className='pk-w'; k.dataset.n=n.n; k.dataset.f=n.f;
+    k.setAttribute('role','button'); k.setAttribute('tabindex','0');
+    k.setAttribute('aria-label',`${n.n}`);
+    k.addEventListener('mousedown', ()=>hitKey(k,n.f));
+    k.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hitKey(k,n.f);}});
+    pianoW.appendChild(k);
+  });
+  noteData.filter(n=>n.t==='b').forEach(n => {
+    const k = document.createElement('div');
+    k.className='pk-b'; k.dataset.n=n.n; k.dataset.f=n.f;
+    k.style.left=n.off+'px';
+    k.setAttribute('role','button'); k.setAttribute('tabindex','0');
+    k.setAttribute('aria-label',`${n.n}`);
+    k.addEventListener('mousedown', e=>{e.stopPropagation();hitKey(k,n.f);});
+    k.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hitKey(k,n.f);}});
+    pianoB.appendChild(k);
+  });
+}
+function hitKey(el, freq) {
+  pianoTone(freq);
+  el.classList.add('pressed','dance');
+  setTimeout(()=>el.classList.remove('pressed'), 280);
+  setTimeout(()=>el.classList.remove('dance'), 480);
+}
+
+// Satie Gymnopédie No.1 — opening melody
+const satie = [
+  ['E5',1300],['D5',1300],['A4',650],['D5',650],['E5',1300],
+  ['F#5',1300],['G5',1300],['F#5',650],['E5',650],['D5',1300],
+  ['C#5',1300],['B4',650],['A4',1950],['B4',650],['C#5',650],['D5',1300],
+  ['E5',1300],['A4',650],['B4',650],['C#5',1950]
+];
+let satPlaying=false, satTimers=[];
+document.getElementById('satieBtn')?.addEventListener('click', ()=>{
+  if (satPlaying) {
+    satTimers.forEach(clearTimeout); satTimers=[];
+    satPlaying=false;
+    document.getElementById('satieBtn').textContent='▶ Gymnopédie No.1';
+    return;
+  }
+  satPlaying=true;
+  document.getElementById('satieBtn').textContent='■ Stop';
+  let t=0;
+  satie.forEach(([n,d])=>{
+    const id=setTimeout(()=>{
+      const nd=noteData.find(x=>x.n===n);
+      if(nd){ pianoTone(nd.f); const k=document.querySelector(`[data-n="${n}"]`); if(k)hitKey(k,nd.f); }
+    }, t);
+    satTimers.push(id); t+=d;
+  });
+  const end=setTimeout(()=>{satPlaying=false;document.getElementById('satieBtn').textContent='▶ Gymnopédie No.1';},t+200);
+  satTimers.push(end);
+});
+
+// ── BASS ───────────────────────────────────────────────
+let bassDrag=false;
+document.querySelectorAll('.bass-str').forEach(s=>{
+  s.addEventListener('click',()=>pluckString(s));
+  s.addEventListener('touchstart',()=>pluckString(s),{passive:true});
+  s.addEventListener('mouseenter',()=>{ if(bassDrag) pluckString(s); });
+});
+const bassSvg=document.querySelector('[aria-label="Bass guitar — click strings to play"]');
+if(bassSvg){
+  bassSvg.addEventListener('mousedown',()=>bassDrag=true);
+  bassSvg.addEventListener('mouseup',()=>bassDrag=false);
+  bassSvg.addEventListener('mouseleave',()=>bassDrag=false);
+}
+function pluckString(el){
+  bassTone(parseFloat(el.dataset.freq));
+  el.classList.remove('vib'); void el.offsetWidth; el.classList.add('vib');
+  setTimeout(()=>el.classList.remove('vib'),750);
+}
+
+// ── VEGETABLES ────────────────────────────────────────
+document.querySelectorAll('.veg').forEach(v=>{
+  v.addEventListener('click',()=>chop(v));
+  v.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chop(v);}});
+});
+function chop(el){
+  if(el.dataset.c==='1') return;
+  el.dataset.c='1';
+  tone(190+Math.random()*40,.12,'square',.18);
+  el.classList.add('chopped');
+  el.setAttribute('aria-label', el.getAttribute('aria-label').replace('click to chop','chopped'));
+}
+
+// ── MATISSE PAINTING GAME ──────────────────────────────
+const swatches=[
+  {n:'Red',h:'#C8372D'},{n:'Cobalt',h:'#1E3A8A'},{n:'Yellow',h:'#F5C518'},
+  {n:'Viridian',h:'#2D6A4F'},{n:'Ochre',h:'#C8892A'},{n:'Rose',h:'#E8446A'},
+  {n:'Cerulean',h:'#4A90D9'},{n:'Ivory',h:'#F0EDD0'},{n:'Orange',h:'#E8650A'},
+  {n:'Violet',h:'#7B4FBF'},
+];
+let selColor=swatches[0].h;
+const palEl=document.getElementById('palette');
+if(palEl) swatches.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='pal-swatch'+(i===0?' active':'');
+  b.style.background=s.h; b.title=s.n;
+  b.setAttribute('aria-label',`Choose ${s.n}`);
+  b.addEventListener('click',()=>{
+    selColor=s.h;
+    document.querySelectorAll('.pal-swatch').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  });
+  palEl.appendChild(b);
+});
+
+const animals=[
+  { id:'dog', label:'Dog', w:130, h:110,
+    regions:[
+      {id:'body',d:'M22 58 Q22 36 44 36 Q68 36 76 50 Q84 64 78 80 Q68 92 48 92 Q26 92 22 76 Z',l:'Body'},
+      {id:'head',d:'M60 36 Q58 14 76 14 Q94 14 94 32 Q94 48 76 48 Q60 48 60 36 Z',l:'Head'},
+      {id:'ear', d:'M60 18 Q54 6 48 14 Q52 24 60 22 Z',l:'Ear'},
+      {id:'tail', d:'M22 60 Q4 44 8 32 Q14 26 18 38 Q20 52 22 58 Z',l:'Tail'},
+      {id:'fl',  d:'M32 92 L30 108 L40 108 L40 92 Z',l:'Front leg'},
+      {id:'rl',  d:'M56 92 L54 108 L64 108 L64 92 Z',l:'Rear leg'},
+    ]
+  },
+  { id:'bird', label:'Bird', w:110, h:95,
+    regions:[
+      {id:'body',d:'M22 48 Q22 28 46 26 Q70 24 76 42 Q82 58 64 68 Q40 72 26 60 Z',l:'Body'},
+      {id:'wing',d:'M26 48 Q10 36 8 18 Q18 22 28 36 Z',l:'Wing'},
+      {id:'beak',d:'M72 40 L88 36 L72 46 Z',l:'Beak'},
+      {id:'tail',d:'M26 60 Q10 68 8 80 Q20 72 28 64 Z',l:'Tail'},
+    ]
+  },
+  { id:'tree', label:'Tree', w:100, h:120,
+    regions:[
+      {id:'trunk', d:'M42 82 L42 115 L58 115 L58 82 Z',l:'Trunk'},
+      {id:'crown', d:'M50 8 Q22 24 28 54 Q50 66 72 54 Q78 24 50 8 Z',l:'Canopy top'},
+      {id:'mid',   d:'M50 38 Q18 56 24 82 Q50 94 76 82 Q82 56 50 38 Z',l:'Canopy mid'},
+    ]
+  },
+  { id:'fish', label:'Fish', w:130, h:82,
+    regions:[
+      {id:'body', d:'M18 41 Q18 20 52 18 Q88 16 98 36 Q108 52 84 60 Q50 66 18 52 Z',l:'Body'},
+      {id:'tail', d:'M98 36 L122 18 L126 54 L98 46 Z',l:'Tail'},
+      {id:'fin',  d:'M40 18 Q46 4 58 12 Q52 18 40 18 Z',l:'Dorsal fin'},
+      {id:'eye',  d:'M36 30 Q36 23 43 23 Q50 23 50 30 Q50 37 43 37 Q36 37 36 30 Z',l:'Eye'},
+    ]
+  },
+];
+const filled={};
+animals.forEach(a=>{filled[a.id]={};a.regions.forEach(r=>{filled[a.id][r.id]=null;});});
+
+function allFilled(id){ return Object.values(filled[id]).every(v=>v!==null); }
+
+function releaseAnimal(animalId){
+  const src=document.getElementById('pf-'+animalId);
+  if(!src) return;
+  const srcSvg=src.querySelector('svg');
+  if(!srcSvg) return;
+  const cl=srcSvg.cloneNode(true);
+  cl.style.width='72px'; cl.style.height='64px';
+  const wrap=document.createElement('div');
+  const anim = animalId==='fish'?'swim':animalId==='bird'?'bird-fly':'fan';
+  wrap.className='fan '+(animalId==='fish'?'swim':animalId==='bird'?'bird-fly':'');
+  wrap.style.cssText=`left:${10+Math.random()*70}%;top:${8+Math.random()*35}%;animation-delay:${Math.random()*2}s`;
+  wrap.appendChild(cl);
+  document.getElementById('floaters').appendChild(wrap);
+  tone(440+Math.random()*180,.5,'sine',.14);
+  setTimeout(()=>tone(550+Math.random()*160,.3,'sine',.09),220);
+}
+
+const paintingsEl=document.getElementById('paintings');
+if(paintingsEl) animals.forEach(animal=>{
+  const frame=document.createElement('div');
+  frame.className='pframe'; frame.id='pf-'+animal.id;
+
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('width',animal.w); svg.setAttribute('height',animal.h);
+  svg.setAttribute('viewBox',`0 0 ${animal.w} ${animal.h}`);
+  svg.setAttribute('role','img'); svg.setAttribute('aria-label',`Colourable painting of a ${animal.label}`);
+
+  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  bg.setAttribute('width','100%'); bg.setAttribute('height','100%');
+  bg.setAttribute('fill','rgba(184,50,40,.18)'); svg.appendChild(bg);
+
+  animal.regions.forEach(r=>{
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',r.d);
+    path.setAttribute('fill','rgba(255,210,170,.12)');
+    path.setAttribute('stroke','rgba(255,210,170,.75)');
+    path.setAttribute('stroke-width','1.5');
+    path.setAttribute('stroke-linejoin','round');
+    path.style.cursor='pointer';
+    path.setAttribute('role','button');
+    path.setAttribute('tabindex','0');
+    path.setAttribute('aria-label',`Paint ${r.l}`);
+    path.addEventListener('click',()=>{
+      path.setAttribute('fill',selColor);
+      filled[animal.id][r.id]=selColor;
+      tone(280+Math.random()*160,.2,'sine',.09);
+      if(allFilled(animal.id)) setTimeout(()=>releaseAnimal(animal.id),350);
+    });
+    path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();path.click();}});
+    svg.appendChild(path);
+  });
+
+  // Decorative eye dots
+  if(animal.id==='bird'){
+    const e=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    e.setAttribute('cx','52'); e.setAttribute('cy','40'); e.setAttribute('r','3');
+    e.setAttribute('fill','rgba(255,210,170,.9)'); e.style.pointerEvents='none';
+    svg.appendChild(e);
+  }
+
+  frame.appendChild(svg);
+  const lbl=document.createElement('div');
+  lbl.className='plabel'; lbl.textContent=animal.label;
+  frame.appendChild(lbl);
+  paintingsEl.appendChild(frame);
+});
+
+// ── STUDIO OPEN / CLOSE ────────────────────────────────
+function openStudio(){
+  const s=document.getElementById('studio');
+  s.classList.add('open'); s.focus();
+  document.body.style.overflow='hidden';
+}
+document.getElementById('openStudio')?.addEventListener('click', openStudio);
+document.getElementById('openStudio2')?.addEventListener('click', openStudio);
+document.getElementById('closeStudio')?.addEventListener('click',()=>{
+  document.getElementById('studio').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('openStudio2')?.focus();
+});
+document.getElementById('studio')?.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.getElementById('closeStudio')?.click();
+});
+
+// Keep focus inside studio when open
+document.getElementById('studio')?.addEventListener('keydown',e=>{
+  if(e.key!=='Tab') return;
+  const focusable=document.getElementById('studio').querySelectorAll('button,[tabindex="0"]');
+  const first=focusable[0], last=focusable[focusable.length-1];
+  if(e.shiftKey){ if(document.activeElement===first){e.preventDefault();last.focus();} }
+  else { if(document.activeElement===last){e.preventDefault();first.focus();} }
+});
+</script>
+</body>
+</html>
