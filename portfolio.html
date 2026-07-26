@@ -63,6 +63,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @keyframes brickIn{to{opacity:1;transform:none}}
 
 /* STATS */
+.work-section{padding:6rem 4rem;border-bottom:3px solid var(--black)}
+.work-grid-single{display:grid;grid-template-columns:1fr 6fr 1fr}
+.work-grid-single .case{grid-column:2}
+.case-desc.placeholder{opacity:.5;font-style:italic}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--black);border-bottom:3px solid var(--black)}
 .stat{padding:2rem;border-right:3px solid var(--black);text-align:center}
 .stat:last-child{border-right:none}
@@ -83,7 +87,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .disc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:2px solid var(--black)}
 
 /* WORK */
-#work{padding:6rem 4rem;border-bottom:3px solid var(--black)}
 .work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem}
 .case{padding:3rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden;cursor:pointer;transition:transform .2s var(--ease-b);outline:none}
 .case:hover{transform:scale(1.025);z-index:2}
@@ -225,8 +228,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
   .hero-right{display:none}
   .hero-left{padding:2.5rem 1.5rem}
   #about{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2rem}
-  #work{padding:3rem 1.5rem}
+  .work-section{padding:3rem 1.5rem}
   .work-grid{grid-template-columns:1fr}
+  .work-grid-single{grid-template-columns:1fr}
+  .work-grid-single .case{grid-column:1}
   .stats{grid-template-columns:1fr 1fr}
   .stat{border-bottom:3px solid var(--black)}
   .process-steps{grid-template-columns:1fr 1fr}
@@ -282,29 +287,11 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
 </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about" aria-labelledby="about-h">
-  <div class="about-text reveal">
-    <span class="section-label">Who I am</span>
-    <h2 class="section-title" id="about-h">I ask "why?" before I open Figma.</h2>
-    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do — and who it needs to not leave behind.</p>
-    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load — these are design problems, not compliance checkboxes.</p>
-    <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
-  </div>
-  <div class="disciplines" aria-label="Core disciplines">
-    <div class="disc-item" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
-    <div class="disc-item" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
-    <div class="disc-item" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
-    <div class="disc-item" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
-    <div class="disc-item" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work" aria-labelledby="work-h">
+<!-- WORK: INSURTECH -->
+<section id="work" class="work-section" aria-labelledby="work-h">
   <div class="reveal">
     <span class="section-label">Selected work</span>
-    <h2 class="section-title" id="work-h">Projects that mattered.</h2>
+    <h2 class="section-title" id="work-h">Projects. InsurTech</h2>
   </div>
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem" tabindex="0" aria-label="Case study: NHS Digital — Accessible Patient Forms">
@@ -335,6 +322,55 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
       <p class="case-desc">Audited and redesigned the step-free route planner used by wheelchair users and parents with pushchairs. Ran field research at 12 stations, then ran 3 rounds of testing with mobility-impaired users. Achieved WCAG 2.1 AA across the full journey flow.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Service Design</span></div>
     </article>
+  </div>
+</section>
+
+<!-- WORK: TAX ADMINISTRATION -->
+<section id="work-tax" class="work-section" aria-labelledby="work-tax-h">
+  <div class="reveal">
+    <span class="section-label">Selected work</span>
+    <h2 class="section-title" id="work-tax-h">Projects. Tax Administration</h2>
+  </div>
+  <div class="work-grid" role="list">
+    <article class="case c1 reveal" role="listitem" tabindex="0" aria-label="Case study: Tax deduction — redesigning solutions that serve the public">
+      <div class="case-n">Case 01</div>
+      <h3 class="case-title">Tax deduction — redesigning solutions that serve the public</h3>
+      <p class="case-desc placeholder">Write-up coming soon.</p>
+    </article>
+    <article class="case c3 reveal" role="listitem" tabindex="0" aria-label="Case study: Accessibility — design, testing and compliance">
+      <div class="case-n">Case 02</div>
+      <h3 class="case-title">Accessibility — design, testing and compliance</h3>
+      <p class="case-desc placeholder">Write-up coming soon.</p>
+    </article>
+  </div>
+</section>
+
+<!-- WORK: STUDENT -->
+<section id="work-student" class="work-section" aria-labelledby="work-student-h">
+  <div class="work-grid-single" role="list">
+    <article class="case c2 reveal" role="listitem" tabindex="0" aria-label="Student work: Helping healthcare professionals make Sundhedsplatformen make sense">
+      <div class="case-n">Student Project</div>
+      <h3 class="case-title" id="work-student-h">Student work. Helping healthcare professionals make sense of Sundhedsplatformen</h3>
+      <p class="case-desc placeholder">Write-up coming soon.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" aria-labelledby="about-h">
+  <div class="about-text reveal">
+    <span class="section-label">Who I am</span>
+    <h2 class="section-title" id="about-h">I ask "why?" before I open Figma.</h2>
+    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do — and who it needs to not leave behind.</p>
+    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load — these are design problems, not compliance checkboxes.</p>
+    <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
+  </div>
+  <div class="disciplines" aria-label="Core disciplines">
+    <div class="disc-item" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
+    <div class="disc-item" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
+    <div class="disc-item" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
+    <div class="disc-item" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
+    <div class="disc-item" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
   </div>
 </section>
 
