@@ -64,8 +64,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* STATS */
 .work-section{padding:6rem 4rem;border-bottom:3px solid var(--black)}
-.work-grid-single{display:grid;grid-template-columns:1fr 6fr 1fr}
-.work-grid-single .case{grid-column:2}
 .case-desc.placeholder{opacity:.5;font-style:italic}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--black);border-bottom:3px solid var(--black)}
 .stat{padding:2rem;border-right:3px solid var(--black);text-align:center}
@@ -230,8 +228,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
   #about{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2rem}
   .work-section{padding:3rem 1.5rem}
   .work-grid{grid-template-columns:1fr}
-  .work-grid-single{grid-template-columns:1fr}
-  .work-grid-single .case{grid-column:1}
   .stats{grid-template-columns:1fr 1fr}
   .stat{border-bottom:3px solid var(--black)}
   .process-steps{grid-template-columns:1fr 1fr}
@@ -351,7 +347,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
     <span class="section-label">Selected work</span>
     <h2 class="section-title" id="work-student-h">Student work. IT-specialist in hospitals</h2>
   </div>
-  <div class="work-grid-single" role="list">
+  <div class="work-grid" role="list">
     <article class="case c2 reveal" role="listitem" tabindex="0" aria-label="Student work: Helping healthcare professionals make Sundhedsplatformen make sense">
       <div class="case-n">Student Project</div>
       <h3 class="case-title">Student work. Helping healthcare professionals make sense of Sundhedsplatformen</h3>
