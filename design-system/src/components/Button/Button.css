@@ -1,0 +1,38 @@
+.ds-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-md);
+  padding: 0.875rem 2rem;
+  text-decoration: none;
+  border: var(--border-width-md) solid var(--color-black);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  cursor: pointer;
+  background: none;
+}
+
+.ds-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ds-btn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.ds-btn--red {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.ds-btn--white {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+.ds-btn--sm {
+  padding: 0.6rem 1.5rem;
+  font-size: var(--text-base);
+}

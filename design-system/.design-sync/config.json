@@ -1,0 +1,12 @@
+{
+  "projectId": "db572987-bb57-4867-a405-5dec7ff359ab",
+  "shape": "package",
+  "pkg": "design-system",
+  "srcDir": "src/components",
+  "cssEntry": "src/tokens/tokens.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "Modal": { "cardMode": "single", "viewport": "560x420" },
+    "Nav": { "cardMode": "column", "viewport": "1000x120" }
+  }
+}

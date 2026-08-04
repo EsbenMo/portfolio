@@ -1,0 +1,26 @@
+.ds-step {
+  padding: var(--space-9) 1.75rem;
+  border-right: var(--border-width-md) solid rgba(255, 255, 255, 0.15);
+}
+
+.ds-step:last-child {
+  border-right: none;
+}
+
+.ds-step-icon {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-6);
+}
+
+.ds-step-name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.ds-step-desc {
+  font-size: 0.85rem;
+  line-height: var(--leading-normal);
+  opacity: 0.65;
+}

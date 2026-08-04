@@ -1,0 +1,91 @@
+/*
+  Design tokens extracted from the portfolio (index.html).
+  Brutalist / neo-swiss language: flat color blocks, thick black borders,
+  hard offset shadows, tight mono labels, confident display type.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap');
+:root {
+  /* ── Color: brand accents ───────────────────────────── */
+  --color-red: #E3000B;
+  --color-yellow: #FFD700;
+  --color-blue: #006DB6;
+  --color-green: #007A3D;
+  --color-orange: #FF6B00;
+  --color-studio-red: #B83228;
+
+  /* ── Color: neutrals ────────────────────────────────── */
+  --color-white: #FFFFFF;
+  --color-black: #1A1A1A;
+  --color-ink-70: #444444;
+  --color-ink-60: #555555;
+  --color-ink-50: #666666;
+  --color-ink-30: #999999;
+  --color-ink-20: #BBBBBB;
+
+  /* ── Typography ─────────────────────────────────────── */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --text-2xs: 0.6rem;   /* case-org, plabel */
+  --text-xs: 0.65rem;   /* eyebrow, tags, labels */
+  --text-sm: 0.7rem;    /* nav links, badges */
+  --text-base: 0.75rem; /* small buttons */
+  --text-md: 0.875rem;  /* case-desc, small btn text */
+  --text-lg: 0.95rem;   /* disc-item */
+  --text-xl: 1rem;      /* body copy, step-name */
+  --text-2xl: 1.1rem;   /* nav-logo, info-card heading */
+  --text-3xl: 1.4rem;   /* case-title */
+  --text-display-sm: clamp(1.8rem, 3.5vw, 3rem);   /* section-title */
+  --text-display-md: clamp(1.5rem, 3vw, 2rem);     /* modal-title */
+  --text-display-lg: clamp(2.8rem, 5.5vw, 5.5rem); /* hero name */
+
+  --leading-tight: 1;
+  --leading-snug: 1.05;
+  --leading-normal: 1.65;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.03em;
+  --tracking-tighter: -0.02em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.15em;
+
+  /* ── Spacing scale ──────────────────────────────────── */
+  --space-1: 0.2rem;
+  --space-2: 0.4rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 1rem;
+  --space-6: 1.25rem;
+  --space-7: 1.5rem;
+  --space-8: 2rem;
+  --space-9: 2.5rem;
+  --space-10: 3rem;
+  --space-11: 4rem;
+  --space-12: 6rem;
+  --space-13: 8rem;
+
+  /* ── Borders & radius ───────────────────────────────── */
+  --border-width-sm: 2px;
+  --border-width-md: 3px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-full: 50%;
+
+  /* ── Shadows: signature hard offset ─────────────────── */
+  --shadow-sm: 4px 4px 0 var(--color-black);
+  --shadow-md: 5px 5px 0 var(--color-black);
+  --shadow-lg: 6px 6px 0 var(--color-black);
+
+  /* ── Motion ─────────────────────────────────────────── */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0, 0, 1);
+  --duration-fast: 0.15s;
+  --duration-base: 0.2s;
+  --duration-slow: 0.5s;
+
+  /* ── Focus ──────────────────────────────────────────── */
+  --focus-ring: 3px solid var(--color-blue);
+  --focus-ring-offset: 2px;
+}
