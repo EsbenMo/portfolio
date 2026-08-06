@@ -27,24 +27,32 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--f-body);color:var(--black);background:var(--white);overflow-x:hidden}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+a,button,[tabindex]{scroll-margin-top:80px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
 
 .skip{position:absolute;top:-100%;left:1rem;background:var(--black);color:var(--white);padding:.5rem 1rem;font-family:var(--f-mono);font-size:.75rem;z-index:9999;transition:top .2s}
 .skip:focus{top:1rem}
+.skip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--white);border-bottom:3px solid var(--black)}
-.nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em}
+.nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em;padding:.5rem 0;display:inline-block}
 .nav-logo span{color:var(--red)}
+.nav-logo:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
+.nav-toggle{display:none;font-family:var(--f-mono);font-size:1.4rem;line-height:1;background:none;border:2px solid var(--black);padding:.4rem .6rem;cursor:pointer}
+.nav-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--black);text-decoration:none;padding:.25rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
 .nav-links a:hover{border-color:var(--red)}
-.nav-links a:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:2px}
+.nav-links a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
 /* HERO */
 .hero-stats{position:relative}
 .hero-stats::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--black);transform:translateX(-1.5px);pointer-events:none;z-index:1}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:57px;overflow:hidden}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-h,57px);overflow:hidden}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 4rem}
 .eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1.5rem}
 .hero-name{font-family:var(--f-display);font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:1.25rem}
@@ -53,7 +61,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cta-row{display:flex;gap:1rem;flex-wrap:wrap}
 .btn{display:inline-block;font-family:var(--f-display);font-weight:600;font-size:.875rem;padding:.875rem 2rem;text-decoration:none;border:3px solid var(--black);box-shadow:4px 4px 0 var(--black);transition:transform .15s,box-shadow .15s;cursor:pointer}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
-.btn:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn:focus-visible{outline:none;box-shadow:4px 4px 0 var(--black),0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .btn-red{background:var(--red);color:var(--white)}
 .btn-white{background:var(--white);color:var(--black)}
 .hero-right{background:var(--yellow);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -64,12 +72,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* STATS */
 .work-section{padding:6rem 4rem;border-bottom:3px solid var(--black)}
-.case-desc.placeholder{opacity:.5;font-style:italic}
+.case-desc.placeholder{font-style:italic}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--black);border-bottom:3px solid var(--black)}
 .stat{padding:2rem;border-right:3px solid var(--black);text-align:center}
 .stat:last-child{border-right:none}
 .stat:nth-child(2){border-right:none}
 .stat-n{font-family:var(--f-display);font-size:2.8rem;font-weight:700;line-height:1;letter-spacing:-.03em}
+.stat-n--chip{background:var(--yellow);color:var(--black);display:inline-block;padding:0 .12em;border-radius:2px}
 .stat-l{font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:#666;margin-top:.4rem}
 
 /* SECTIONS shared */
@@ -87,10 +96,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* WORK */
 .work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem}
 .case{padding:3rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden}
-.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;opacity:.5;margin-bottom:1.5rem}
+.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:1.5rem}
 .case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.4rem}
-.case-org{font-family:var(--f-mono);font-size:.7rem;opacity:.65;margin-bottom:.75rem}
-.case-desc{font-size:.875rem;line-height:1.65;opacity:.85;margin-bottom:1.25rem}
+.case-org{font-family:var(--f-mono);font-size:.7rem;margin-bottom:.75rem}
+.case-desc{font-size:.875rem;line-height:1.65;margin-bottom:1.25rem}
 .case-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
 .case-view-btn{padding:.6rem 1.5rem;font-size:.75rem}
 .tag{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border:2px solid currentColor;border-radius:2px}
@@ -103,11 +112,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,26,.75);display:flex;align-items:center;justify-content:center;padding:1.5rem;z-index:2000;opacity:0;transition:opacity .25s var(--ease-s)}
 .modal-overlay[hidden]{display:none}
 .modal-overlay.open{opacity:1}
-.case-modal{background:var(--white);border:3px solid var(--black);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:3rem;position:relative;transform:translateY(12px);transition:transform .25s var(--ease-s);outline:none}
+.case-modal{background:var(--white);border:3px solid var(--black);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:3rem;position:relative;transform:translateY(12px);transition:transform .25s var(--ease-s)}
+.case-modal:focus{outline:3px solid var(--blue);outline-offset:-6px}
 .modal-overlay.open .case-modal{transform:none}
 .modal-close{position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border:2px solid var(--black);background:var(--white);color:var(--black);font-family:var(--f-display);font-size:1.25rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s}
 .modal-close:hover{background:var(--red);color:var(--white);border-color:var(--red)}
-.modal-close:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.modal-close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .modal-n{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;opacity:.6;margin-bottom:1rem}
 .modal-title{font-family:var(--f-display);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.5rem;padding-right:2.5rem}
 .modal-org{font-family:var(--f-mono);font-size:.75rem;opacity:.65;margin-bottom:1.25rem}
@@ -138,103 +148,47 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .a11y-card h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
 .a11y-card p{font-size:.875rem;line-height:1.7;color:#444}
 
+/* ACCESSIBILITY STATUS + REPORT */
+.a11y-status{background:var(--white);border:3px solid var(--black);padding:2rem;box-shadow:5px 5px 0 var(--black);margin-top:3rem;opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.a11y-status.on{opacity:1;transform:none}
+.a11y-status-date{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#666;margin:.5rem 0 1rem}
+.a11y-status h3{font-family:var(--f-display);font-size:1.3rem;font-weight:700;margin-bottom:.6rem}
+.a11y-status p{font-size:.95rem;line-height:1.65;color:#444;max-width:60ch}
+.a11y-status a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+.a11y-status a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
+
+.a11y-report{margin-top:1.5rem;border:3px solid var(--black);background:var(--white)}
+.a11y-report summary{cursor:pointer;padding:1.1rem 1.5rem;font-family:var(--f-display);font-weight:700;font-size:.95rem;list-style:none;display:flex;align-items:center;gap:.6rem;user-select:none}
+.a11y-report summary::-webkit-details-marker{display:none}
+.a11y-report summary::before{content:'+';font-family:var(--f-mono);font-size:1.2rem;line-height:1;width:1em;text-align:center}
+.a11y-report[open] summary::before{content:'–'}
+.a11y-report summary:focus-visible{outline:none;box-shadow:inset 0 0 0 3px var(--blue)}
+.a11y-report-list{margin:0;padding:0 1.5rem 1.5rem;border-top:3px solid var(--black);list-style:none}
+.a11y-report-list li{padding:1rem 0;border-bottom:1px solid rgba(0,0,0,.12);font-size:.85rem;line-height:1.65;color:#333}
+.a11y-report-list li:last-child{border-bottom:none}
+.a11y-report-list .sc{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red);display:block;margin-bottom:.35rem}
+.a11y-report-list strong{color:var(--black)}
+
 /* CONTACT */
 #contact{padding:8rem 4rem;text-align:center;border-bottom:3px solid var(--black)}
 #contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1.25rem}
 #contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2.5rem;line-height:1.7}
 
 /* DOOR */
-.door-section{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem 2rem;background:var(--white);border-bottom:3px solid var(--black);cursor:pointer;gap:1rem}
-.door-section:hover .door-svg{filter:drop-shadow(0 0 18px rgba(184,50,40,.35))}
-.door-section:hover .door-text{color:var(--studio-red)}
-.door-section:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-.door-svg{animation:doorGlow 5s ease-in-out infinite;transition:filter .4s}
+.door-section{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem 2rem;background:var(--white);border-bottom:3px solid var(--black);gap:1rem}
+.door-svg{animation:doorGlow 5s ease-in-out 1;transition:filter .4s}
 @keyframes doorGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(184,50,40,.15))}50%{filter:drop-shadow(0 0 14px rgba(184,50,40,.4))}}
-.door-text{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb;transition:color .4s}
+.door-text{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#666}
 
 /* FOOTER */
 footer{padding:1.75rem 4rem;display:flex;align-items:center;justify-content:space-between}
-footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
-.door-btn{font-family:var(--f-mono);font-size:.65rem;color:#bbb;background:none;border:none;cursor:pointer;padding:0;transition:color .4s;animation:doorPulse 4s ease-in-out infinite}
-.door-btn:hover{color:var(--studio-red)}
-.door-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
+.door-btn{font-family:var(--f-mono);font-size:.65rem;color:#666;animation:doorPulse 4s ease-in-out 1}
 @keyframes doorPulse{0%,100%{opacity:.5}50%{opacity:1}}
 
 /* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-s),transform .6s var(--ease-s)}
 .reveal.on{opacity:1;transform:none}
-
-/* =====================
-   THE RED STUDIO
-   ===================== */
-#studio{display:none;position:fixed;inset:0;z-index:1000;background:var(--studio-red);flex-direction:column;overflow:hidden}
-#studio.open{display:flex;animation:studioIn .7s var(--ease-s) both}
-@keyframes studioIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
-.studio-close{position:absolute;top:1rem;right:1.5rem;background:none;border:2px solid rgba(255,255,255,.5);color:rgba(255,255,255,.8);font-family:var(--f-mono);font-size:.65rem;padding:.45rem .9rem;cursor:pointer;z-index:10;transition:border-color .2s,color .2s;letter-spacing:.08em}
-.studio-close:hover{border-color:var(--white);color:var(--white)}
-.studio-close:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
-
-.studio-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2.5rem 1.5rem 0;overflow-y:auto;position:relative}
-.studio-heading{font-family:var(--f-display);font-size:.85rem;font-style:italic;color:rgba(255,220,180,.55);margin-bottom:1.2rem;letter-spacing:.04em;text-align:center}
-.studio-sub{font-family:var(--f-mono);font-size:.6rem;color:rgba(255,220,180,.4);margin-bottom:1.5rem;text-align:center;letter-spacing:.1em;text-transform:uppercase}
-
-/* COLOR PALETTE */
-.palette{display:flex;gap:8px;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
-.pal-swatch{width:26px;height:26px;border-radius:50%;border:3px solid rgba(0,0,0,.3);cursor:pointer;transition:transform .15s,border-color .15s}
-.pal-swatch:hover,.pal-swatch.active{transform:scale(1.35);border-color:var(--white)}
-.pal-swatch:focus-visible{outline:3px solid var(--white);outline-offset:2px}
-
-/* PAINTINGS ROW */
-.paintings-row{display:flex;gap:1.25rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
-.pframe{background:rgba(180,40,28,.35);border:3px solid rgba(255,210,160,.5);padding:10px;flex-shrink:0}
-.pframe svg{display:block;cursor:crosshair}
-.plabel{font-family:var(--f-mono);font-size:.55rem;color:rgba(255,210,160,.55);text-align:center;margin-top:5px;letter-spacing:.12em;text-transform:uppercase}
-
-/* FLOATING ANIMALS */
-#floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1001}
-.fan{position:absolute;pointer-events:none;animation:fanFloat 4s ease-in-out infinite}
-.fan.swim{animation:fanSwim 5s linear infinite}
-@keyframes fanFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(4deg)}}
-@keyframes fanSwim{0%{transform:translateX(0) scaleX(1)}49%{transform:translateX(80px) scaleX(1)}50%{transform:translateX(80px) scaleX(-1)}100%{transform:translateX(0) scaleX(-1)}}
-.fan.bird-fly{animation:fanBird 3s ease-in-out infinite}
-@keyframes fanBird{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-25px) rotate(5deg)}}
-
-/* INSTRUMENTS + KITCHEN STRIP */
-.studio-strip{display:flex;gap:2rem;justify-content:center;align-items:flex-end;padding:1rem 1rem 1.25rem;background:rgba(0,0,0,.25);border-top:2px solid rgba(255,255,255,.1);flex-wrap:wrap;flex-shrink:0}
-.instrument-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem}
-.inst-label{font-family:var(--f-mono);font-size:.55rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;text-align:center}
-
-/* PIANO */
-.piano-wrap{position:relative;height:90px;user-select:none}
-.pw-whites{display:flex;gap:1.5px}
-.pk-w{width:28px;height:90px;background:#f0ebe0;border:2px solid #444;border-radius:0 0 3px 3px;cursor:pointer;transition:background .05s,transform .1s;position:relative;flex-shrink:0}
-.pk-w:hover{background:#ddd8c8}
-.pk-w.pressed{background:var(--yellow);transform:scaleY(.97) translateY(2px)}
-.pk-w.dance{animation:keyDance .45s var(--ease-b)}
-@keyframes keyDance{0%{transform:translateY(0)}30%{transform:translateY(-12px) rotate(-4deg)}65%{transform:translateY(-5px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}
-.pw-blacks{position:absolute;top:0;left:0;right:0;pointer-events:none}
-.pk-b{position:absolute;width:19px;height:55px;background:#1a1a1a;border:2px solid #000;border-radius:0 0 3px 3px;cursor:pointer;z-index:2;transition:background .05s;pointer-events:all}
-.pk-b:hover{background:#333}
-.pk-b.pressed{background:var(--orange)}
-.pk-b.dance{animation:keyDance .45s var(--ease-b)}
-.satie-btn{background:none;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.65);font-family:var(--f-mono);font-size:.55rem;padding:.3rem .65rem;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:border-color .2s,color .2s;margin-top:.3rem}
-.satie-btn:hover{border-color:var(--white);color:var(--white)}
-
-/* BASS */
-.bass-str{stroke:#d4a853;cursor:pointer;transition:filter .1s}
-.bass-str:hover{filter:brightness(1.6)}
-.bass-str.vib{animation:strVib .7s ease-out}
-@keyframes strVib{0%,100%{filter:none}15%{filter:brightness(2.5) blur(.5px)}35%{filter:brightness(1.8) blur(.3px)}60%{filter:brightness(1.4)}80%{filter:brightness(1.1)}}
-
-/* KITCHEN */
-.veg{cursor:pointer;transition:transform .1s}
-.veg:hover{filter:brightness(1.15)}
-.veg.chopped{animation:chopAnim .35s ease-out forwards}
-@keyframes chopAnim{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(6deg)}70%{transform:scale(.9) translateY(4px)}100%{transform:scale(.95) translateY(2px)}}
-.bubble{animation:bub var(--bd,2s) ease-in infinite;animation-delay:var(--bdd,0s)}
-@keyframes bub{0%{transform:translateY(0) scale(1);opacity:.85}100%{transform:translateY(-22px) scale(.2);opacity:0}}
-.flame{animation:flm .3s ease-in-out infinite alternate}
-@keyframes flm{from{transform:scaleY(.85) translateY(2px);opacity:.75}to{transform:scaleY(1.15) translateY(-2px);opacity:1}}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -253,8 +207,12 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
   #accessibility{padding:3rem 1.5rem}
   #contact{padding:4rem 1.5rem}
   footer{padding:1.5rem;flex-direction:column;gap:.75rem;text-align:center}
-  .studio-strip{flex-direction:column;align-items:center}
+  .nav-toggle{display:block}
   .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:var(--white);border-bottom:3px solid var(--black);padding:.5rem 2rem 1rem}
+  .nav-links.open li{width:100%}
+  .nav-links.open a{display:block;padding:.75rem 0;border-bottom:1px solid rgba(0,0,0,.1)}
+  .nav-links.open li:last-child a{border-bottom:none}
 }
 </style>
 </head>
@@ -263,7 +221,8 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
 
 <nav role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo" aria-label="Esben — home">Esben<span>.</span></a>
-  <ul class="nav-links" role="list">
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+  <ul class="nav-links" id="navLinks" role="list">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#process">Process</a></li>
@@ -279,7 +238,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
 <section class="hero" aria-label="Introduction">
   <div class="hero-left">
     <p class="eyebrow">Senior UX/UI Designer · Copenhagen</p>
-    <h1 class="hero-name">Design that<br><em>works for everyone.</em></h1>
+    <h1 class="hero-name">Design that works<br><em>for everyone.</em></h1>
     <p class="hero-desc">8 years of research, workshops, and tested interfaces — built on the belief that accessible design is simply good design.</p>
     <div class="cta-row">
       <a href="#work" class="btn btn-red">View my work</a>
@@ -296,7 +255,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
   <div class="stat"><div class="stat-n" style="color:var(--red)">8</div><div class="stat-l">Years in practice</div></div>
   <div class="stat"><div class="stat-n" style="color:var(--blue)">40+</div><div class="stat-l">Projects shipped</div></div>
   <div class="stat"><div class="stat-n" style="color:var(--green);font-size:1.8rem">WCAG AA</div><div class="stat-l">Every project</div></div>
-  <div class="stat"><div class="stat-n" style="color:var(--yellow);-webkit-text-stroke:1.5px var(--black);text-stroke:1.5px var(--black)">200+</div><div class="stat-l">Users interviewed</div></div>
+  <div class="stat"><div class="stat-n stat-n--chip">200+</div><div class="stat-l">Users interviewed</div></div>
 </div>
 </div>
 
@@ -394,7 +353,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Design Tokens</span><span class="tag">React</span></div>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Turning this portfolio into a design system">View</button>
-        <a href="https://esbenmo.github.io/portfolio/design-system/dist/" class="btn btn-white case-view-btn" target="_blank" rel="noopener">Live design system →</a>
+        <a href="https://esbenmo.github.io/portfolio/design-system/dist/" class="btn btn-white case-view-btn" target="_blank" rel="noopener" aria-label="Live design system (opens in a new tab)">Live design system →</a>
       </div>
     </article>
   </div>
@@ -409,12 +368,12 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
     <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load — these are design problems, not compliance checkboxes.</p>
     <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
   </div>
-  <div class="disciplines" aria-label="Core disciplines">
-    <div class="disc-item" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
-    <div class="disc-item" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
-    <div class="disc-item" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
-    <div class="disc-item" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
-    <div class="disc-item" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
+  <div class="disciplines" role="list" aria-label="Core disciplines">
+    <div class="disc-item" role="listitem" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
+    <div class="disc-item" role="listitem" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
+    <div class="disc-item" role="listitem" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
+    <div class="disc-item" role="listitem" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
+    <div class="disc-item" role="listitem" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
   </div>
 </section>
 
@@ -445,6 +404,34 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
     <div class="a11y-card"><span class="wcag-badge">Screen readers</span><h3>Names that describe, not label</h3><p>Accessible names, landmark regions, live announcements. Tested with NVDA, JAWS, and VoiceOver before any prototype is done.</p></div>
     <div class="a11y-card"><span class="wcag-badge">Real users</span><h3>Disability is context, not edge case</h3><p>People with disabilities are included in every research round — not a separate study, but the same study as everyone else.</p></div>
   </div>
+
+  <div class="a11y-status">
+    <span class="wcag-badge">WCAG 2.2 AA</span>
+    <h3>Accessibility status: full audit completed, 15 issues fixed</h3>
+    <div class="a11y-status-date">Audited &amp; fixed 4 August 2026 · manual + automated · every component, state, and keyboard path tested</div>
+    <p>This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. 15 real issues were found — including a focus ring that was completely invisible on two case-study cards — and every one has been fixed. Nothing here is a claim without a receipt.</p>
+  </div>
+
+  <details class="a11y-report">
+    <summary>Full audit &amp; fix report (15 items)</summary>
+    <ol class="a11y-report-list">
+      <li><span class="sc">WCAG 1.4.11 · 2.4.7 — Non-text Contrast / Focus Visible</span><strong>Focus ring was invisible on 2 of 4 case-card colours.</strong> The keyboard focus outline used the same blue as the brand palette — on the blue card it matched the background exactly (1.00:1 contrast), and on the green card the two colours turned out to have near-identical luminance (also 1.00:1), despite looking different. Fixed with a white+black double ring that stays visible against every card colour.</li>
+      <li><span class="sc">WCAG 2.4.11 — Focus Not Obscured (new in 2.2)</span><strong>The fixed nav bar could completely cover a keyboard-focused button.</strong> Confirmed live: a "View" button scrolled to by Tab landed entirely underneath the opaque nav. Fixed by giving every focusable element enough scroll margin to clear the nav.</li>
+      <li><span class="sc">Predictability / 4.1.2</span><strong>The "Live design system" link also silently opened the case-study modal.</strong> It shared a CSS class with the modal-trigger buttons, so activating it opened a new tab and a dialog at the same time. Fixed by scoping the modal behaviour to buttons only.</li>
+      <li><span class="sc">WCAG 1.4.3 · 1.4.11 — Contrast (Minimum)</span><strong>The "200+" stat relied on a non-standard text-stroke to survive.</strong> The underlying text colour (yellow on white) was 1.40:1 — nowhere near the 3:1 minimum — and the stroke workaround isn't guaranteed to render everywhere. Replaced with a solid yellow chip and black text (12.41:1).</li>
+      <li><span class="sc">WCAG 1.4.3 — Contrast (Minimum)</span><strong>Case-card numbers, client names, and descriptions were dimmed with opacity, failing contrast on 3 of 4 card colours</strong> (as low as 1.91:1 against the red card). Worst case: "Write-up coming soon." — the only visible content on 3 case studies — failed contrast entirely. Removed the opacity; hierarchy now comes from type scale alone, and every combination passes 4.5:1+.</li>
+      <li><span class="sc">WCAG 1.4.3 — Contrast (Minimum)</span><strong>Footer copyright and the "Work in progress" door label were too faint</strong> (#999 → 2.85:1, #bbb → 1.92:1, both against white). Darkened both to a value already used elsewhere on the page (5.74:1).</li>
+      <li><span class="sc">WCAG 2.3.3 intent</span><strong>Reduced-motion preference didn't cover smooth scrolling.</strong> The page correctly zeroed out animations for users with a reduced-motion preference, but anchor-link clicks still smooth-scrolled regardless. Fixed.</li>
+      <li><span class="sc">WCAG 2.2.2 — Pause, Stop, Hide</span><strong>Two decorative animations (the door glow and the footer pulse) looped forever with no way to stop them.</strong> Capped both to a single play-through on load instead of an infinite loop.</li>
+      <li><span class="sc">WCAG 2.5.8 — Target Size, new in 2.2</span><strong>The logo's clickable area was 22px tall</strong>, 2px short of the 24×24px minimum. Added padding to bring it to 38px.</li>
+      <li><span class="sc">WCAG 2.4.7 — Focus Visible</span><strong>The case-study dialog had no visible focus indicator of its own</strong> when it took focus on open. Added an explicit, high-contrast focus outline.</li>
+      <li><span class="sc">WCAG 1.3.1 — Info and Relationships</span><strong>The "Core disciplines" list wasn't marked up as a list</strong> for assistive technology, unlike every other grid on the page. Added the matching list/listitem roles.</li>
+      <li><span class="sc">Reflow / keyboard reach</span><strong>All primary navigation disappeared below 900px width with no replacement</strong> — affecting phones, tablets, and anyone zoomed past ~140%. Built an accessible menu button (keyboard- and screen-reader-operable, closes on Escape or link selection) so navigation is never fully unreachable.</li>
+      <li><span class="sc">Best practice, 3.2.5-adjacent</span><strong>The external "Live design system" link gave no warning before opening a new tab.</strong> Added an accessible-name hint announcing the new tab.</li>
+      <li><span class="sc">Robustness</span><strong>The skip-to-content link had no explicit focus style</strong> of its own, relying on the browser default against its own black background. Gave it an explicit, verified-contrast outline.</li>
+      <li><span class="sc">WCAG 1.4.12 stress-tested</span><strong>The hero's spacing below the nav was a hardcoded guess (57px)</strong> that drifted out of sync under WCAG's text-spacing stress test (real nav height: up to 73px). Now measured from the actual rendered nav on load and resize.</li>
+    </ol>
+  </details>
 </section>
 
 <!-- CONTACT -->
@@ -458,7 +445,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
 </section>
 
 <!-- DOOR NUDGE -->
-<button class="door-section" id="openStudio2" aria-label="Enter the secret studio">
+<div class="door-section" aria-label="Work in progress">
   <svg class="door-svg" width="90" height="140" viewBox="0 0 90 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- Frame -->
     <rect x="4" y="4" width="82" height="132" rx="3" stroke="#1A1A1A" stroke-width="3" fill="none"/>
@@ -479,18 +466,15 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
     <!-- Light crack (ajar glow) -->
     <line x1="10" y1="10" x2="10" y2="136" stroke="rgba(184,50,40,.6)" stroke-width="1.5" stroke-dasharray="4 6"/>
   </svg>
-  <span class="door-text">something is on the other side</span>
-</button>
+  <span class="door-text">Work in progress</span>
+</div>
 
 </main>
 
 <footer>
   <small>© Esben 2024 · Copenhagen, Denmark</small>
-  <button class="door-btn" id="openStudio" aria-label="Open the secret studio">◆ the studio is ajar</button>
+  <span class="door-btn">◆ Work in progress</span>
 </footer>
-
-<!-- FLOATING ANIMALS (outside studio, fixed overlay) -->
-<div id="floaters" aria-hidden="true"></div>
 
 <!-- CASE STUDY MODAL -->
 <div class="modal-overlay" id="caseModalOverlay" hidden>
@@ -504,155 +488,40 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#999}
   </div>
 </div>
 
-<!-- THE RED STUDIO -->
-<div id="studio" role="dialog" aria-modal="true" aria-label="The Red Studio — Matisse's world, now yours">
-  <button class="studio-close" id="closeStudio">← Leave the studio</button>
-
-  <div class="studio-main">
-    <div class="studio-heading">Henri Matisse · The Red Studio, 1911 — step inside</div>
-    <div class="studio-sub">Choose a colour · click the paintings to fill them · when an animal is complete, it escapes</div>
-
-    <!-- PALETTE -->
-    <div class="palette" id="palette" role="toolbar" aria-label="Paint colours"></div>
-
-    <!-- PAINTINGS -->
-    <div class="paintings-row" id="paintings" aria-label="Paintings to colour"></div>
-  </div>
-
-  <!-- INSTRUMENTS + KITCHEN -->
-  <div class="studio-strip">
-
-    <!-- BASS -->
-    <div class="instrument-wrap">
-      <div class="inst-label">Bass — strum or pluck</div>
-      <svg width="150" height="200" viewBox="0 0 150 200" aria-label="Bass guitar — click strings to play">
-        <ellipse cx="75" cy="148" rx="52" ry="48" fill="#7A3B1E" stroke="#4a1e00" stroke-width="2"/>
-        <ellipse cx="75" cy="143" rx="40" ry="37" fill="#9B4F2A" stroke="#4a1e00" stroke-width="1"/>
-        <rect x="68" y="22" width="14" height="104" fill="#5A2D0C" stroke="#3a1500" stroke-width="1"/>
-        <rect x="61" y="10" width="28" height="22" rx="3" fill="#4a2200" stroke="#2a1000" stroke-width="1"/>
-        <circle cx="67" cy="16" r="3.5" fill="#C8A030"/><circle cx="75" cy="13" r="3.5" fill="#C8A030"/>
-        <circle cx="83" cy="16" r="3.5" fill="#C8A030"/><circle cx="75" cy="20" r="3.5" fill="#C8A030"/>
-        <circle cx="75" cy="150" r="13" fill="#3a1800" stroke="#2a1000" stroke-width="1"/>
-        <rect x="66" y="118" width="18" height="3" fill="#C8A030"/>
-        <line class="bass-str" x1="70" y1="22" x2="70" y2="115" stroke-width="3" data-freq="41.2"/>
-        <line class="bass-str" x1="74" y1="22" x2="74" y2="115" stroke-width="2.5" data-freq="55"/>
-        <line class="bass-str" x1="78" y1="22" x2="78" y2="115" stroke-width="2" data-freq="73.4"/>
-        <line class="bass-str" x1="82" y1="22" x2="82" y2="115" stroke-width="1.5" data-freq="98"/>
-      </svg>
-    </div>
-
-    <!-- PIANO -->
-    <div class="instrument-wrap">
-      <div class="inst-label">Satie's piano</div>
-      <div class="piano-wrap" id="piano">
-        <div class="pw-whites" id="pianoW"></div>
-        <div class="pw-blacks" id="pianoB"></div>
-      </div>
-      <button class="satie-btn" id="satieBtn">▶ Gymnopédie No.1</button>
-    </div>
-
-    <!-- KITCHEN -->
-    <div class="instrument-wrap">
-      <div class="inst-label">Kitchen — chop &amp; simmer</div>
-      <svg width="210" height="148" viewBox="0 0 210 148" aria-label="Kitchen with cutting board and soup pot">
-        <!-- TABLE -->
-        <rect x="4" y="96" width="202" height="48" rx="4" fill="#7A5C14" stroke="#4a3800" stroke-width="2"/>
-        <rect x="4" y="96" width="202" height="7" fill="#9A7820" rx="2"/>
-        <!-- CUTTING BOARD -->
-        <rect x="8" y="62" width="118" height="40" rx="3" fill="#C8941E" stroke="#7A5C14" stroke-width="2"/>
-        <line x1="28" y1="62" x2="28" y2="102" stroke="#B08010" stroke-width=".5"/>
-        <line x1="52" y1="62" x2="52" y2="102" stroke="#B08010" stroke-width=".5"/>
-        <line x1="76" y1="62" x2="76" y2="102" stroke="#B08010" stroke-width=".5"/>
-        <line x1="100" y1="62" x2="100" y2="102" stroke="#B08010" stroke-width=".5"/>
-        <!-- CARROT -->
-        <g class="veg" id="vc" data-c="0" role="button" tabindex="0" aria-label="Carrot — click to chop">
-          <ellipse cx="28" cy="82" rx="7" ry="13" fill="#FF6B00"/>
-          <path d="M26 70 Q28 63 30 70" fill="#007A3D"/>
-          <path d="M24 72 Q19 65 26 69" fill="#007A3D"/>
-        </g>
-        <!-- ONION -->
-        <g class="veg" id="vo" data-c="0" role="button" tabindex="0" aria-label="Onion — click to chop">
-          <ellipse cx="64" cy="83" rx="11" ry="11" fill="#DDB84A"/>
-          <ellipse cx="64" cy="79" rx="9" ry="7.5" fill="#EDD060" stroke="#C09030" stroke-width=".5"/>
-          <line x1="64" y1="72" x2="64" y2="68" stroke="#007A3D" stroke-width="2"/>
-        </g>
-        <!-- POTATO -->
-        <g class="veg" id="vp" data-c="0" role="button" tabindex="0" aria-label="Potato — click to chop">
-          <ellipse cx="100" cy="83" rx="13" ry="9" fill="#B89830" stroke="#8A7020" stroke-width="1"/>
-          <circle cx="94" cy="80" r="1.8" fill="#8A7020"/>
-          <circle cx="103" cy="86" r="1.8" fill="#8A7020"/>
-        </g>
-        <!-- KNIFE -->
-        <rect x="82" y="104" width="38" height="3.5" rx="1" fill="#c0c0c0" stroke="#aaa" stroke-width=".5"/>
-        <rect x="118" y="103" width="11" height="5.5" rx="1" fill="#7A3B1E"/>
-        <!-- STOVE BURNER -->
-        <circle cx="170" cy="82" r="24" fill="#2a2a2a" stroke="#1a1a1a" stroke-width="2"/>
-        <circle cx="170" cy="82" r="19" fill="#181818"/>
-        <circle cx="170" cy="82" r="5" fill="#383838"/>
-        <circle cx="170" cy="82" r="15" fill="none" stroke="#404040" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <!-- FLAMES -->
-        <ellipse cx="170" cy="74" rx="7" ry="9" fill="#FF4500" opacity=".7" class="flame"/>
-        <ellipse cx="170" cy="75" rx="4.5" ry="6.5" fill="#FFD700" opacity=".85" class="flame" style="animation-delay:.1s"/>
-        <!-- POT -->
-        <rect x="147" y="48" width="46" height="28" fill="#888" stroke="#666" stroke-width="2"/>
-        <ellipse cx="170" cy="48" rx="23" ry="6.5" fill="#999" stroke="#777" stroke-width="2"/>
-        <ellipse cx="170" cy="76" rx="23" ry="6.5" fill="#888" stroke="#666" stroke-width="2"/>
-        <rect x="141" y="51" width="8" height="6" rx="2" fill="#777"/>
-        <rect x="181" y="51" width="8" height="6" rx="2" fill="#777"/>
-        <!-- SOUP SURFACE -->
-        <ellipse cx="170" cy="48" rx="19" ry="5" fill="#C0622A" stroke="#9A4A1A" stroke-width="1"/>
-        <circle class="bubble" cx="164" cy="46" r="3" fill="#D07030" style="--bd:2s;--bdd:0s"/>
-        <circle class="bubble" cx="172" cy="44" r="2" fill="#D07030" style="--bd:1.5s;--bdd:.5s"/>
-        <circle class="bubble" cx="177" cy="47" r="2.5" fill="#D07030" style="--bd:2.5s;--bdd:.9s"/>
-        <circle class="bubble" cx="168" cy="47" r="1.5" fill="#D07030" style="--bd:1.8s;--bdd:.3s"/>
-      </svg>
-    </div>
-
-  </div>
-</div>
-
 <script>
-// ── AUDIO ──────────────────────────────────────────────
-let AC = null;
-function ac() {
-  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
-  if (AC.state === 'suspended') AC.resume();
-  return AC;
+// ── NAV HEIGHT (keeps hero padding in sync with the real, rendered nav) ──
+function setNavHeight(){
+  document.documentElement.style.setProperty('--nav-h', document.querySelector('nav').offsetHeight + 'px');
 }
-function tone(freq, dur=.8, type='triangle', vol=.28) {
-  const c = ac(), o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
-  f.type = 'lowpass'; f.frequency.value = 2200;
-  o.connect(f); f.connect(g); g.connect(c.destination);
-  o.type = type; o.frequency.value = freq;
-  g.gain.setValueAtTime(0, c.currentTime);
-  g.gain.linearRampToValueAtTime(vol, c.currentTime + .01);
-  g.gain.exponentialRampToValueAtTime(.001, c.currentTime + dur);
-  o.start(); o.stop(c.currentTime + dur);
-}
-function pianoTone(freq) {
-  const c = ac();
-  [['triangle', 1], ['sine', .5]].forEach(([t, m]) => {
-    const o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
-    f.type = 'lowpass'; f.frequency.value = 3500;
-    o.connect(f); f.connect(g); g.connect(c.destination);
-    o.type = t; o.frequency.value = freq * m;
-    g.gain.setValueAtTime(0, c.currentTime);
-    g.gain.linearRampToValueAtTime(.18, c.currentTime + .008);
-    g.gain.exponentialRampToValueAtTime(.08, c.currentTime + .12);
-    g.gain.exponentialRampToValueAtTime(.001, c.currentTime + 2.8);
-    o.start(); o.stop(c.currentTime + 2.8);
+setNavHeight();
+window.addEventListener('resize', setNavHeight);
+
+// ── MOBILE NAV TOGGLE ────────────────────────────────────
+(function(){
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  function closeMenu(){
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '☰';
+    toggle.setAttribute('aria-label', 'Open menu');
+  }
+  function openMenu(){
+    links.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.textContent = '✕';
+    toggle.setAttribute('aria-label', 'Close menu');
+  }
+  toggle.addEventListener('click', () => {
+    if (links.classList.contains('open')) closeMenu(); else openMenu();
   });
-}
-function bassTone(freq) {
-  const c = ac(), o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
-  f.type = 'lowpass'; f.frequency.value = 380; f.Q.value = 2;
-  o.connect(f); f.connect(g); g.connect(c.destination);
-  o.type = 'sawtooth'; o.frequency.value = freq;
-  g.gain.setValueAtTime(0, c.currentTime);
-  g.gain.linearRampToValueAtTime(.38, c.currentTime + .02);
-  g.gain.exponentialRampToValueAtTime(.001, c.currentTime + 1.8);
-  o.start(); o.stop(c.currentTime + 1.8);
-}
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('open')) { closeMenu(); toggle.focus(); }
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+})();
 
 // ── HERO BRICKS ────────────────────────────────────────
 const cols = ['#E3000B','#FFD700','#006DB6','#007A3D','#FF6B00'];
@@ -673,243 +542,7 @@ const io = new IntersectionObserver(entries => {
     io.unobserve(el);
   });
 }, { threshold: .12 });
-document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card').forEach(el => io.observe(el));
-
-// ── PIANO SETUP ────────────────────────────────────────
-const noteData = [
-  {n:'C4', f:261.63, t:'w'},{n:'C#4',f:277.18,t:'b',off:20},
-  {n:'D4', f:293.66, t:'w'},{n:'D#4',f:311.13,t:'b',off:50},
-  {n:'E4', f:329.63, t:'w'},
-  {n:'F4', f:349.23, t:'w'},{n:'F#4',f:369.99,t:'b',off:110},
-  {n:'G4', f:392.00, t:'w'},{n:'G#4',f:415.30,t:'b',off:140},
-  {n:'A4', f:440.00, t:'w'},{n:'A#4',f:466.16,t:'b',off:170},
-  {n:'B4', f:493.88, t:'w'},
-  {n:'C5', f:523.25, t:'w'},{n:'C#5',f:554.37,t:'b',off:228},
-  {n:'D5', f:587.33, t:'w'},{n:'D#5',f:622.25,t:'b',off:258},
-  {n:'E5', f:659.25, t:'w'},
-  {n:'F5', f:698.46, t:'w'},{n:'F#5',f:739.99,t:'b',off:318},
-  {n:'G5', f:783.99, t:'w'},{n:'G#5',f:830.61,t:'b',off:348},
-  {n:'A5', f:880.00, t:'w'},{n:'A#5',f:932.33,t:'b',off:378},
-  {n:'B5', f:987.77, t:'w'},
-];
-const pianoW = document.getElementById('pianoW'), pianoB = document.getElementById('pianoB');
-if (pianoW) {
-  noteData.filter(n=>n.t==='w').forEach(n => {
-    const k = document.createElement('div');
-    k.className='pk-w'; k.dataset.n=n.n; k.dataset.f=n.f;
-    k.setAttribute('role','button'); k.setAttribute('tabindex','0');
-    k.setAttribute('aria-label',`${n.n}`);
-    k.addEventListener('mousedown', ()=>hitKey(k,n.f));
-    k.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hitKey(k,n.f);}});
-    pianoW.appendChild(k);
-  });
-  noteData.filter(n=>n.t==='b').forEach(n => {
-    const k = document.createElement('div');
-    k.className='pk-b'; k.dataset.n=n.n; k.dataset.f=n.f;
-    k.style.left=n.off+'px';
-    k.setAttribute('role','button'); k.setAttribute('tabindex','0');
-    k.setAttribute('aria-label',`${n.n}`);
-    k.addEventListener('mousedown', e=>{e.stopPropagation();hitKey(k,n.f);});
-    k.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hitKey(k,n.f);}});
-    pianoB.appendChild(k);
-  });
-}
-function hitKey(el, freq) {
-  pianoTone(freq);
-  el.classList.add('pressed','dance');
-  setTimeout(()=>el.classList.remove('pressed'), 280);
-  setTimeout(()=>el.classList.remove('dance'), 480);
-}
-
-// Satie Gymnopédie No.1 — opening melody
-const satie = [
-  ['E5',1300],['D5',1300],['A4',650],['D5',650],['E5',1300],
-  ['F#5',1300],['G5',1300],['F#5',650],['E5',650],['D5',1300],
-  ['C#5',1300],['B4',650],['A4',1950],['B4',650],['C#5',650],['D5',1300],
-  ['E5',1300],['A4',650],['B4',650],['C#5',1950]
-];
-let satPlaying=false, satTimers=[];
-document.getElementById('satieBtn')?.addEventListener('click', ()=>{
-  if (satPlaying) {
-    satTimers.forEach(clearTimeout); satTimers=[];
-    satPlaying=false;
-    document.getElementById('satieBtn').textContent='▶ Gymnopédie No.1';
-    return;
-  }
-  satPlaying=true;
-  document.getElementById('satieBtn').textContent='■ Stop';
-  let t=0;
-  satie.forEach(([n,d])=>{
-    const id=setTimeout(()=>{
-      const nd=noteData.find(x=>x.n===n);
-      if(nd){ pianoTone(nd.f); const k=document.querySelector(`[data-n="${n}"]`); if(k)hitKey(k,nd.f); }
-    }, t);
-    satTimers.push(id); t+=d;
-  });
-  const end=setTimeout(()=>{satPlaying=false;document.getElementById('satieBtn').textContent='▶ Gymnopédie No.1';},t+200);
-  satTimers.push(end);
-});
-
-// ── BASS ───────────────────────────────────────────────
-let bassDrag=false;
-document.querySelectorAll('.bass-str').forEach(s=>{
-  s.addEventListener('click',()=>pluckString(s));
-  s.addEventListener('touchstart',()=>pluckString(s),{passive:true});
-  s.addEventListener('mouseenter',()=>{ if(bassDrag) pluckString(s); });
-});
-const bassSvg=document.querySelector('[aria-label="Bass guitar — click strings to play"]');
-if(bassSvg){
-  bassSvg.addEventListener('mousedown',()=>bassDrag=true);
-  bassSvg.addEventListener('mouseup',()=>bassDrag=false);
-  bassSvg.addEventListener('mouseleave',()=>bassDrag=false);
-}
-function pluckString(el){
-  bassTone(parseFloat(el.dataset.freq));
-  el.classList.remove('vib'); void el.offsetWidth; el.classList.add('vib');
-  setTimeout(()=>el.classList.remove('vib'),750);
-}
-
-// ── VEGETABLES ────────────────────────────────────────
-document.querySelectorAll('.veg').forEach(v=>{
-  v.addEventListener('click',()=>chop(v));
-  v.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chop(v);}});
-});
-function chop(el){
-  if(el.dataset.c==='1') return;
-  el.dataset.c='1';
-  tone(190+Math.random()*40,.12,'square',.18);
-  el.classList.add('chopped');
-  el.setAttribute('aria-label', el.getAttribute('aria-label').replace('click to chop','chopped'));
-}
-
-// ── MATISSE PAINTING GAME ──────────────────────────────
-const swatches=[
-  {n:'Red',h:'#C8372D'},{n:'Cobalt',h:'#1E3A8A'},{n:'Yellow',h:'#F5C518'},
-  {n:'Viridian',h:'#2D6A4F'},{n:'Ochre',h:'#C8892A'},{n:'Rose',h:'#E8446A'},
-  {n:'Cerulean',h:'#4A90D9'},{n:'Ivory',h:'#F0EDD0'},{n:'Orange',h:'#E8650A'},
-  {n:'Violet',h:'#7B4FBF'},
-];
-let selColor=swatches[0].h;
-const palEl=document.getElementById('palette');
-if(palEl) swatches.forEach((s,i)=>{
-  const b=document.createElement('button');
-  b.className='pal-swatch'+(i===0?' active':'');
-  b.style.background=s.h; b.title=s.n;
-  b.setAttribute('aria-label',`Choose ${s.n}`);
-  b.addEventListener('click',()=>{
-    selColor=s.h;
-    document.querySelectorAll('.pal-swatch').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-  });
-  palEl.appendChild(b);
-});
-
-const animals=[
-  { id:'dog', label:'Dog', w:130, h:110,
-    regions:[
-      {id:'body',d:'M22 58 Q22 36 44 36 Q68 36 76 50 Q84 64 78 80 Q68 92 48 92 Q26 92 22 76 Z',l:'Body'},
-      {id:'head',d:'M60 36 Q58 14 76 14 Q94 14 94 32 Q94 48 76 48 Q60 48 60 36 Z',l:'Head'},
-      {id:'ear', d:'M60 18 Q54 6 48 14 Q52 24 60 22 Z',l:'Ear'},
-      {id:'tail', d:'M22 60 Q4 44 8 32 Q14 26 18 38 Q20 52 22 58 Z',l:'Tail'},
-      {id:'fl',  d:'M32 92 L30 108 L40 108 L40 92 Z',l:'Front leg'},
-      {id:'rl',  d:'M56 92 L54 108 L64 108 L64 92 Z',l:'Rear leg'},
-    ]
-  },
-  { id:'bird', label:'Bird', w:110, h:95,
-    regions:[
-      {id:'body',d:'M22 48 Q22 28 46 26 Q70 24 76 42 Q82 58 64 68 Q40 72 26 60 Z',l:'Body'},
-      {id:'wing',d:'M26 48 Q10 36 8 18 Q18 22 28 36 Z',l:'Wing'},
-      {id:'beak',d:'M72 40 L88 36 L72 46 Z',l:'Beak'},
-      {id:'tail',d:'M26 60 Q10 68 8 80 Q20 72 28 64 Z',l:'Tail'},
-    ]
-  },
-  { id:'tree', label:'Tree', w:100, h:120,
-    regions:[
-      {id:'trunk', d:'M42 82 L42 115 L58 115 L58 82 Z',l:'Trunk'},
-      {id:'crown', d:'M50 8 Q22 24 28 54 Q50 66 72 54 Q78 24 50 8 Z',l:'Canopy top'},
-      {id:'mid',   d:'M50 38 Q18 56 24 82 Q50 94 76 82 Q82 56 50 38 Z',l:'Canopy mid'},
-    ]
-  },
-  { id:'fish', label:'Fish', w:130, h:82,
-    regions:[
-      {id:'body', d:'M18 41 Q18 20 52 18 Q88 16 98 36 Q108 52 84 60 Q50 66 18 52 Z',l:'Body'},
-      {id:'tail', d:'M98 36 L122 18 L126 54 L98 46 Z',l:'Tail'},
-      {id:'fin',  d:'M40 18 Q46 4 58 12 Q52 18 40 18 Z',l:'Dorsal fin'},
-      {id:'eye',  d:'M36 30 Q36 23 43 23 Q50 23 50 30 Q50 37 43 37 Q36 37 36 30 Z',l:'Eye'},
-    ]
-  },
-];
-const filled={};
-animals.forEach(a=>{filled[a.id]={};a.regions.forEach(r=>{filled[a.id][r.id]=null;});});
-
-function allFilled(id){ return Object.values(filled[id]).every(v=>v!==null); }
-
-function releaseAnimal(animalId){
-  const src=document.getElementById('pf-'+animalId);
-  if(!src) return;
-  const srcSvg=src.querySelector('svg');
-  if(!srcSvg) return;
-  const cl=srcSvg.cloneNode(true);
-  cl.style.width='72px'; cl.style.height='64px';
-  const wrap=document.createElement('div');
-  const anim = animalId==='fish'?'swim':animalId==='bird'?'bird-fly':'fan';
-  wrap.className='fan '+(animalId==='fish'?'swim':animalId==='bird'?'bird-fly':'');
-  wrap.style.cssText=`left:${10+Math.random()*70}%;top:${8+Math.random()*35}%;animation-delay:${Math.random()*2}s`;
-  wrap.appendChild(cl);
-  document.getElementById('floaters').appendChild(wrap);
-  tone(440+Math.random()*180,.5,'sine',.14);
-  setTimeout(()=>tone(550+Math.random()*160,.3,'sine',.09),220);
-}
-
-const paintingsEl=document.getElementById('paintings');
-if(paintingsEl) animals.forEach(animal=>{
-  const frame=document.createElement('div');
-  frame.className='pframe'; frame.id='pf-'+animal.id;
-
-  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  svg.setAttribute('width',animal.w); svg.setAttribute('height',animal.h);
-  svg.setAttribute('viewBox',`0 0 ${animal.w} ${animal.h}`);
-  svg.setAttribute('role','img'); svg.setAttribute('aria-label',`Colourable painting of a ${animal.label}`);
-
-  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
-  bg.setAttribute('width','100%'); bg.setAttribute('height','100%');
-  bg.setAttribute('fill','rgba(184,50,40,.18)'); svg.appendChild(bg);
-
-  animal.regions.forEach(r=>{
-    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d',r.d);
-    path.setAttribute('fill','rgba(255,210,170,.12)');
-    path.setAttribute('stroke','rgba(255,210,170,.75)');
-    path.setAttribute('stroke-width','1.5');
-    path.setAttribute('stroke-linejoin','round');
-    path.style.cursor='pointer';
-    path.setAttribute('role','button');
-    path.setAttribute('tabindex','0');
-    path.setAttribute('aria-label',`Paint ${r.l}`);
-    path.addEventListener('click',()=>{
-      path.setAttribute('fill',selColor);
-      filled[animal.id][r.id]=selColor;
-      tone(280+Math.random()*160,.2,'sine',.09);
-      if(allFilled(animal.id)) setTimeout(()=>releaseAnimal(animal.id),350);
-    });
-    path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();path.click();}});
-    svg.appendChild(path);
-  });
-
-  // Decorative eye dots
-  if(animal.id==='bird'){
-    const e=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    e.setAttribute('cx','52'); e.setAttribute('cy','40'); e.setAttribute('r','3');
-    e.setAttribute('fill','rgba(255,210,170,.9)'); e.style.pointerEvents='none';
-    svg.appendChild(e);
-  }
-
-  frame.appendChild(svg);
-  const lbl=document.createElement('div');
-  lbl.className='plabel'; lbl.textContent=animal.label;
-  frame.appendChild(lbl);
-  paintingsEl.appendChild(frame);
-});
+document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').forEach(el => io.observe(el));
 
 // ── CASE STUDY MODAL ────────────────────────────────────
 (function(){
@@ -962,7 +595,7 @@ if(paintingsEl) animals.forEach(animal=>{
     lastTrigger?.focus();
   }
 
-  document.querySelectorAll('.case-view-btn').forEach(btn=>{
+  document.querySelectorAll('button.case-view-btn').forEach(btn=>{
     btn.addEventListener('click',()=>openCaseModal(btn));
   });
   closeBtn?.addEventListener('click', closeCaseModal);
@@ -977,31 +610,6 @@ if(paintingsEl) animals.forEach(animal=>{
   });
 })();
 
-// ── STUDIO OPEN / CLOSE ────────────────────────────────
-function openStudio(){
-  const s=document.getElementById('studio');
-  s.classList.add('open'); s.focus();
-  document.body.style.overflow='hidden';
-}
-document.getElementById('openStudio')?.addEventListener('click', openStudio);
-document.getElementById('openStudio2')?.addEventListener('click', openStudio);
-document.getElementById('closeStudio')?.addEventListener('click',()=>{
-  document.getElementById('studio').classList.remove('open');
-  document.body.style.overflow='';
-  document.getElementById('openStudio2')?.focus();
-});
-document.getElementById('studio')?.addEventListener('keydown',e=>{
-  if(e.key==='Escape') document.getElementById('closeStudio')?.click();
-});
-
-// Keep focus inside studio when open
-document.getElementById('studio')?.addEventListener('keydown',e=>{
-  if(e.key!=='Tab') return;
-  const focusable=document.getElementById('studio').querySelectorAll('button,[tabindex="0"]');
-  const first=focusable[0], last=focusable[focusable.length-1];
-  if(e.shiftKey){ if(document.activeElement===first){e.preventDefault();last.focus();} }
-  else { if(document.activeElement===last){e.preventDefault();first.focus();} }
-});
 </script>
 </body>
 </html>
