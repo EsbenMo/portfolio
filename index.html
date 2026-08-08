@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Senior UX/UI Designer — 8 years of accessibility-first design, user research, and workshops.">
-<title>Esben — UX/UI Designer</title>
+<meta name="description" content="Senior UX/UI Designer with 8 years of accessibility-first design, user research, and workshops.">
+<title>Esben. UX/UI Designer</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,6 @@
   --f-display: 'Space Grotesk', sans-serif;
   --f-body: 'DM Sans', sans-serif;
   --f-mono: 'Space Mono', monospace;
-  --ease-b: cubic-bezier(0.34,1.56,0.64,1);
   --ease-s: cubic-bezier(0.25,0,0,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -66,10 +65,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .btn-red{background:var(--red);color:var(--white)}
 .btn-white{background:var(--white);color:var(--black)}
 .hero-right{background:var(--yellow);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.brick-grid{display:grid;grid-template-columns:repeat(5,60px);grid-template-rows:repeat(6,60px);gap:6px;padding:2rem}
-.brick{border:3px solid var(--black);border-radius:3px;position:relative;opacity:0;transform:translateY(16px);animation:brickIn .4s var(--ease-b) forwards}
-.brick::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:22px;height:22px;background:rgba(255,255,255,.25);border:2px solid rgba(0,0,0,.15);border-radius:50%}
-@keyframes brickIn{to{opacity:1;transform:none}}
+.shape-stage{position:relative;width:260px;height:300px}
+.shape-blk{position:absolute;top:0;left:0;width:32px;height:32px;border:3px solid var(--black);opacity:0;transition:transform .8s var(--ease-s),opacity .8s var(--ease-s)}
+.shape-blk.circle{border-radius:50%}
+.shape-blk.pill{border-radius:999px}
+.shape-blk.tri{background:var(--black);border:none;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+.shape-blk.tri i{content:'';position:absolute;inset:3px;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+.shape-blk.tri-down{background:var(--black);border:none;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
+.shape-blk.tri-down i{content:'';position:absolute;inset:3px;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
+.shape-toggle{position:absolute;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border:3px solid var(--black);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.shape-toggle:hover{background:#f5f5f5}
+.shape-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
+.shape-toggle-icon{width:14px;height:14px;position:relative}
+.shape-toggle-icon::before,.shape-toggle-icon::after{content:'';position:absolute;top:0;bottom:0;width:4px;background:var(--black)}
+.shape-toggle-icon::before{left:2px}
+.shape-toggle-icon::after{right:2px}
+.shape-toggle.paused .shape-toggle-icon{width:0;height:0;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--black)}
+.shape-toggle.paused .shape-toggle-icon::before,.shape-toggle.paused .shape-toggle-icon::after{content:none}
+@keyframes eyeBlink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}
+@media (prefers-reduced-motion:reduce){.shape-blk{transition:none}}
 
 /* STATS */
 .work-section{padding:6rem 4rem;border-bottom:3px solid var(--black)}
@@ -221,7 +235,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <a href="#main" class="skip">Skip to main content</a>
 
 <nav role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="Esben — home">Esben<span>.</span></a>
+  <a href="#" class="nav-logo" aria-label="Esben, home">Esben<span>.</span></a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
   <ul class="nav-links" id="navLinks" role="list">
     <li><a href="#about">About</a></li>
@@ -240,14 +254,15 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   <div class="hero-left">
     <p class="eyebrow">Senior UX/UI Designer · Copenhagen</p>
     <h1 class="hero-name">Design that works<br><em>for everyone.</em></h1>
-    <p class="hero-desc">8 years of research, workshops, and tested interfaces — built on the belief that accessible design is simply good design.</p>
+    <p class="hero-desc">8 years of research, workshops, and tested interfaces, built on the belief that accessible design is simply good design.</p>
     <div class="cta-row">
       <a href="#work" class="btn btn-red">View my work</a>
       <a href="#contact" class="btn btn-white">Get in touch</a>
     </div>
   </div>
-  <div class="hero-right" aria-hidden="true">
-    <div class="brick-grid" id="brickGrid"></div>
+  <div class="hero-right">
+    <div class="shape-stage" id="shapeStage" aria-hidden="true"></div>
+    <button type="button" class="shape-toggle" id="shapeToggle" aria-label="Pause animation"><span class="shape-toggle-icon" aria-hidden="true"></span></button>
   </div>
 </section>
 
@@ -271,9 +286,9 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="case-n">Case 01</div>
       <h3 class="case-title">Accessible Patient Forms</h3>
       <div class="case-org">NHS Digital · 2023</div>
-      <p class="case-desc">Redesigned the patient registration and referral forms used by 4M people annually. 18 research sessions with users including those with low literacy, motor impairments, and screen reader dependency — leading to a 34% drop in form abandonment.</p>
+      <p class="case-desc">Redesigned the patient registration and referral forms used by 4M people annually. 18 research sessions with users including those with low literacy, motor impairments, and screen reader dependency, leading to a 34% drop in form abandonment.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Testing</span></div>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: NHS Digital — Accessible Patient Forms">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: NHS Digital – Accessible Patient Forms">View</button>
     </article>
     <article class="case c2 reveal" role="listitem">
       <div class="case-n">Case 02</div>
@@ -281,15 +296,15 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="case-org">IKEA Digital · 2022</div>
       <p class="case-desc">Led a 3-day co-design workshop with cross-functional teams across 6 markets to untangle a navigation structure that had grown over 12 years. Prototyped 4 directions, tested with 60 users, shipped to 180M monthly visitors.</p>
       <div class="case-tags"><span class="tag">UX Design</span><span class="tag">Workshops</span><span class="tag">Prototyping</span></div>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: IKEA — Mobile Navigation Redesign">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: IKEA – Mobile Navigation Redesign">View</button>
     </article>
     <article class="case c3 reveal" role="listitem">
       <div class="case-n">Case 03</div>
       <h3 class="case-title">Podcast Discovery Interface</h3>
       <div class="case-org">Spotify · 2021</div>
-      <p class="case-desc">Investigated why podcast listeners weren't exploring beyond their first show. Diary studies with 24 participants uncovered the real barrier — social proof, not search. Redesigned discovery around listener behaviour, validated with A/B test across 2M users.</p>
+      <p class="case-desc">Investigated why podcast listeners weren't exploring beyond their first show. Diary studies with 24 participants uncovered the real barrier: social proof, not search. Redesigned discovery around listener behaviour, validated with A/B test across 2M users.</p>
       <div class="case-tags"><span class="tag">Research</span><span class="tag">UI Design</span><span class="tag">A/B Testing</span></div>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Spotify — Podcast Discovery Interface">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Spotify – Podcast Discovery Interface">View</button>
     </article>
     <article class="case c4 reveal" role="listitem">
       <div class="case-n">Case 04</div>
@@ -297,7 +312,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="case-org">Transport for London · 2020</div>
       <p class="case-desc">Audited and redesigned the step-free route planner used by wheelchair users and parents with pushchairs. Ran field research at 12 stations, then ran 3 rounds of testing with mobility-impaired users. Achieved WCAG 2.1 AA across the full journey flow.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Service Design</span></div>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Transport for London — Journey Planner Accessibility">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Transport for London – Journey Planner Accessibility">View</button>
     </article>
   </div>
 </section>
@@ -311,15 +326,15 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem">
       <div class="case-n">Case 01</div>
-      <h3 class="case-title">Tax deduction — redesigning solutions that serve the public</h3>
+      <h3 class="case-title">Tax deduction: redesigning solutions that serve the public</h3>
       <p class="case-desc placeholder">Write-up coming soon.</p>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Tax deduction — redesigning solutions that serve the public">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Tax deduction, redesigning solutions that serve the public">View</button>
     </article>
     <article class="case c3 reveal" role="listitem">
       <div class="case-n">Case 02</div>
-      <h3 class="case-title">Accessibility — design, testing and compliance</h3>
+      <h3 class="case-title">Accessibility: design, testing and compliance</h3>
       <p class="case-desc placeholder">Write-up coming soon.</p>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Accessibility — design, testing and compliance">View</button>
+      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Accessibility, design, testing and compliance">View</button>
     </article>
   </div>
 </section>
@@ -350,7 +365,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     <article class="case c4 reveal" role="listitem">
       <div class="case-n">Personal Project</div>
       <h3 class="case-title">Turning this portfolio into a design system</h3>
-      <p class="case-desc">Audited this site's own brutalist visual language — flat color blocks, thick borders, hard offset shadows, the Space Grotesk/DM Sans/Space Mono type trio — and formalized it into a documented token scale and a reusable React component library. Every component is verified with an automated render-check and visual QA pipeline before shipping.</p>
+      <p class="case-desc">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Space Grotesk/DM Sans/Space Mono type trio) and formalized it into a documented token scale and a reusable React component library. Every component is verified with an automated render-check and visual QA pipeline before shipping.</p>
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Design Tokens</span><span class="tag">React</span></div>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Turning this portfolio into a design system">View</button>
@@ -365,8 +380,8 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   <div class="about-text reveal">
     <span class="section-label">Who I am</span>
     <h2 class="section-title" id="about-h">I ask "why?" before I open Figma.</h2>
-    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do — and who it needs to not leave behind.</p>
-    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load — these are design problems, not compliance checkboxes.</p>
+    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do, and who it needs to not leave behind.</p>
+    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load: these are design problems, not compliance checkboxes.</p>
     <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
   </div>
   <div class="disciplines" role="list" aria-label="Core disciplines">
@@ -401,33 +416,33 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
   <div class="a11y-grid">
     <div class="a11y-card"><span class="wcag-badge">WCAG 2.1 AA</span><h3>Colour isn't the only signal</h3><p>Every piece of information conveyed through colour also exists in text, pattern, or shape. Contrast is a baseline, not a finish line.</p></div>
-    <div class="a11y-card"><span class="wcag-badge">Keyboard</span><h3>If you can't tab through it, it's broken</h3><p>Every interactive element has a visible focus state. Skip links, logical tab order — not extras, but the interface itself.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">Keyboard</span><h3>If you can't tab through it, it's broken</h3><p>Every interactive element has a visible focus state. Skip links, logical tab order: not extras, but the interface itself.</p></div>
     <div class="a11y-card"><span class="wcag-badge">Screen readers</span><h3>Names that describe, not label</h3><p>Accessible names, landmark regions, live announcements. Tested with NVDA, JAWS, and VoiceOver before any prototype is done.</p></div>
-    <div class="a11y-card"><span class="wcag-badge">Real users</span><h3>Disability is context, not edge case</h3><p>People with disabilities are included in every research round — not a separate study, but the same study as everyone else.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">Real users</span><h3>Disability is context, not edge case</h3><p>People with disabilities are included in every research round: not a separate study, but the same study as everyone else.</p></div>
   </div>
 
   <div class="a11y-status">
     <span class="wcag-badge">WCAG 2.2 AA</span>
     <h3>Accessibility status: full audit completed, 15 issues fixed</h3>
     <div class="a11y-status-date">Audited &amp; fixed 4 August 2026 · manual + automated · every component, state, and keyboard path tested</div>
-    <p>This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. 15 real issues were found — including a focus ring that was completely invisible on two case-study cards — and every one has been fixed. Nothing here is a claim without a receipt.</p>
+    <p>This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. 15 real issues were found (including a focus ring that was completely invisible on two case-study cards), and every one has been fixed. Nothing here is a claim without a receipt.</p>
   </div>
 
   <details class="a11y-report">
     <summary>Full audit &amp; fix report (15 items)</summary>
     <ol class="a11y-report-list">
-      <li><span class="sc">WCAG 1.4.11 · 2.4.7 — Non-text Contrast / Focus Visible</span><strong>Focus ring was invisible on 2 of 4 case-card colours.</strong> The keyboard focus outline used the same blue as the brand palette — on the blue card it matched the background exactly (1.00:1 contrast), and on the green card the two colours turned out to have near-identical luminance (also 1.00:1), despite looking different. Fixed with a white+black double ring that stays visible against every card colour.</li>
-      <li><span class="sc">WCAG 2.4.11 — Focus Not Obscured (new in 2.2)</span><strong>The fixed nav bar could completely cover a keyboard-focused button.</strong> Confirmed live: a "View" button scrolled to by Tab landed entirely underneath the opaque nav. Fixed by giving every focusable element enough scroll margin to clear the nav.</li>
+      <li><span class="sc">WCAG 1.4.11 · 2.4.7 – Non-text Contrast / Focus Visible</span><strong>Focus ring was invisible on 2 of 4 case-card colours.</strong> The keyboard focus outline used the same blue as the brand palette: on the blue card it matched the background exactly (1.00:1 contrast), and on the green card the two colours turned out to have near-identical luminance (also 1.00:1), despite looking different. Fixed with a white+black double ring that stays visible against every card colour.</li>
+      <li><span class="sc">WCAG 2.4.11 – Focus Not Obscured (new in 2.2)</span><strong>The fixed nav bar could completely cover a keyboard-focused button.</strong> Confirmed live: a "View" button scrolled to by Tab landed entirely underneath the opaque nav. Fixed by giving every focusable element enough scroll margin to clear the nav.</li>
       <li><span class="sc">Predictability / 4.1.2</span><strong>The "Live design system" link also silently opened the case-study modal.</strong> It shared a CSS class with the modal-trigger buttons, so activating it opened a new tab and a dialog at the same time. Fixed by scoping the modal behaviour to buttons only.</li>
-      <li><span class="sc">WCAG 1.4.3 · 1.4.11 — Contrast (Minimum)</span><strong>The "200+" stat relied on a non-standard text-stroke to survive.</strong> The underlying text colour (yellow on white) was 1.40:1 — nowhere near the 3:1 minimum — and the stroke workaround isn't guaranteed to render everywhere. Replaced with a solid yellow chip and black text (12.41:1).</li>
-      <li><span class="sc">WCAG 1.4.3 — Contrast (Minimum)</span><strong>Case-card numbers, client names, and descriptions were dimmed with opacity, failing contrast on 3 of 4 card colours</strong> (as low as 1.91:1 against the red card). Worst case: "Write-up coming soon." — the only visible content on 3 case studies — failed contrast entirely. Removed the opacity; hierarchy now comes from type scale alone, and every combination passes 4.5:1+.</li>
-      <li><span class="sc">WCAG 1.4.3 — Contrast (Minimum)</span><strong>Footer copyright and the "Work in progress" door label were too faint</strong> (#999 → 2.85:1, #bbb → 1.92:1, both against white). Darkened both to a value already used elsewhere on the page (5.74:1).</li>
+      <li><span class="sc">WCAG 1.4.3 · 1.4.11 – Contrast (Minimum)</span><strong>The "200+" stat relied on a non-standard text-stroke to survive.</strong> The underlying text colour (yellow on white) was 1.40:1, nowhere near the 3:1 minimum, and the stroke workaround isn't guaranteed to render everywhere. Replaced with a solid yellow chip and black text (12.41:1).</li>
+      <li><span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>Case-card numbers, client names, and descriptions were dimmed with opacity, failing contrast on 3 of 4 card colours</strong> (as low as 1.91:1 against the red card). Worst case: "Write-up coming soon." (the only visible content on 3 case studies) failed contrast entirely. Removed the opacity; hierarchy now comes from type scale alone, and every combination passes 4.5:1+.</li>
+      <li><span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>Footer copyright and the "Work in progress" door label were too faint</strong> (#999 → 2.85:1, #bbb → 1.92:1, both against white). Darkened both to a value already used elsewhere on the page (5.74:1).</li>
       <li><span class="sc">WCAG 2.3.3 intent</span><strong>Reduced-motion preference didn't cover smooth scrolling.</strong> The page correctly zeroed out animations for users with a reduced-motion preference, but anchor-link clicks still smooth-scrolled regardless. Fixed.</li>
-      <li><span class="sc">WCAG 2.2.2 — Pause, Stop, Hide</span><strong>Two decorative animations (the door glow and the footer pulse) looped forever with no way to stop them.</strong> Capped both to a single play-through on load instead of an infinite loop.</li>
-      <li><span class="sc">WCAG 2.5.8 — Target Size, new in 2.2</span><strong>The logo's clickable area was 22px tall</strong>, 2px short of the 24×24px minimum. Added padding to bring it to 38px.</li>
-      <li><span class="sc">WCAG 2.4.7 — Focus Visible</span><strong>The case-study dialog had no visible focus indicator of its own</strong> when it took focus on open. Added an explicit, high-contrast focus outline.</li>
-      <li><span class="sc">WCAG 1.3.1 — Info and Relationships</span><strong>The "Core disciplines" list wasn't marked up as a list</strong> for assistive technology, unlike every other grid on the page. Added the matching list/listitem roles.</li>
-      <li><span class="sc">Reflow / keyboard reach</span><strong>All primary navigation disappeared below 900px width with no replacement</strong> — affecting phones, tablets, and anyone zoomed past ~140%. Built an accessible menu button (keyboard- and screen-reader-operable, closes on Escape or link selection) so navigation is never fully unreachable.</li>
+      <li><span class="sc">WCAG 2.2.2 – Pause, Stop, Hide</span><strong>Two decorative animations (the door glow and the footer pulse) looped forever with no way to stop them.</strong> Capped both to a single play-through on load instead of an infinite loop.</li>
+      <li><span class="sc">WCAG 2.5.8 – Target Size, new in 2.2</span><strong>The logo's clickable area was 22px tall</strong>, 2px short of the 24×24px minimum. Added padding to bring it to 38px.</li>
+      <li><span class="sc">WCAG 2.4.7 – Focus Visible</span><strong>The case-study dialog had no visible focus indicator of its own</strong> when it took focus on open. Added an explicit, high-contrast focus outline.</li>
+      <li><span class="sc">WCAG 1.3.1 – Info and Relationships</span><strong>The "Core disciplines" list wasn't marked up as a list</strong> for assistive technology, unlike every other grid on the page. Added the matching list/listitem roles.</li>
+      <li><span class="sc">Reflow / keyboard reach</span><strong>All primary navigation disappeared below 900px width with no replacement</strong>, affecting phones, tablets, and anyone zoomed past ~140%. Built an accessible menu button (keyboard- and screen-reader-operable, closes on Escape or link selection) so navigation is never fully unreachable.</li>
       <li><span class="sc">Best practice, 3.2.5-adjacent</span><strong>The external "Live design system" link gave no warning before opening a new tab.</strong> Added an accessible-name hint announcing the new tab.</li>
       <li><span class="sc">Robustness</span><strong>The skip-to-content link had no explicit focus style</strong> of its own, relying on the browser default against its own black background. Gave it an explicit, verified-contrast outline.</li>
       <li><span class="sc">WCAG 1.4.12 stress-tested</span><strong>The hero's spacing below the nav was a hardcoded guess (57px)</strong> that drifted out of sync under WCAG's text-spacing stress test (real nav height: up to 73px). Now measured from the actual rendered nav on load and resize.</li>
@@ -440,7 +455,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   <div class="reveal">
     <span class="section-label">Let's talk</span>
     <h2 class="section-title" id="contact-h">I'm available for the right project.</h2>
-    <p>If you're building something that matters to people who've been left out of the design conversation — I want to hear from you.</p>
+    <p>If you're building something that matters to people who've been left out of the design conversation, I want to hear from you.</p>
     <a href="mailto:hello@esben.design" class="btn btn-red">Send me a message</a>
   </div>
 </section>
@@ -524,15 +539,194 @@ window.addEventListener('resize', setNavHeight);
   window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
 })();
 
-// ── HERO BRICKS ────────────────────────────────────────
-const cols = ['#E3000B','#FFD700','#006DB6','#007A3D','#FF6B00'];
-const grid = document.getElementById('brickGrid');
-if (grid) for (let i = 0; i < 30; i++) {
-  const b = document.createElement('div');
-  b.className = 'brick';
-  b.style.cssText = `background:${cols[i % 5]};animation-delay:${i * .05}s`;
-  grid.appendChild(b);
-}
+// ── HERO SHAPES: blocks assemble into D E S I G N, on repeat ──────────
+(function(){
+  const stage = document.getElementById('shapeStage');
+  const toggle = document.getElementById('shapeToggle');
+  if (!stage) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cols = ['#E3000B','#FFD700','#006DB6','#007A3D','#FF6B00'];
+  const shapeTypes = ['square','circle','tri','pill'];
+  const CELL = 32, GAP = 6, STEP = CELL + GAP;
+  const STAGE_W = 260, STAGE_H = 300;
+
+  // 5-col x 5-row blocky letterforms (1 = filled cell)
+  const LETTERS = {
+    D: [[1,1,1,1,0],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,0]],
+    E: [[1,1,1,1,1],[1,0,0,0,0],[1,1,1,0,0],[1,0,0,0,0],[1,1,1,1,1]],
+    S: [[0,1,1,1,1],[1,0,0,0,0],[0,1,1,1,0],[0,0,0,0,1],[1,1,1,1,0]],
+    I: [[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[1,1,1,1,1]],
+    G: [[0,1,1,1,1],[1,0,0,0,0],[1,0,1,1,1],[1,0,0,0,1],[0,1,1,1,0]],
+    N: [[1,0,0,0,1],[1,1,0,0,1],[1,0,1,0,1],[1,0,0,1,1],[1,0,0,0,1]]
+  };
+  const WORD = ['D','E','S','I','G','N','SMILEY'];
+
+  function cellsFor(letter){
+    const out = [];
+    LETTERS[letter].forEach((row,r) => row.forEach((on,c) => { if (on) out.push({ c, r }); }));
+    return out;
+  }
+  const letterMaxCells = Math.max(...Object.keys(LETTERS).map(l => cellsFor(l).length));
+
+  const patternW = 5*STEP - GAP, patternH = 5*STEP - GAP;
+  const originX = (STAGE_W - patternW)/2, originY = (STAGE_H - patternH)/2;
+
+  // smiley: a ring of circles plus eyes/nose/mouth, laid out with real geometry (not the letter grid)
+  const RING_N = 16, RING_R = 105;
+  const SMILEY_N = RING_N + 2 + 1 + 5;
+  const BLINK_EYE_INDEX = RING_N + 1;
+  function smileyLayout(){
+    const cx = STAGE_W/2, cy = STAGE_H/2;
+    const items = [];
+    for (let k = 0; k < RING_N; k++){
+      const ang = -Math.PI/2 + k*(2*Math.PI/RING_N);
+      items.push({ x: cx + RING_R*Math.cos(ang) - CELL/2, y: cy + RING_R*Math.sin(ang) - CELL/2, type: 'circle', color: '#FF6B00' });
+    }
+    items.push({ x: cx - 35 - CELL/2, y: cy - 28 - CELL/2, type: 'eye', color: '#007A3D' });
+    items.push({ x: cx + 35 - CELL/2, y: cy - 28 - CELL/2, type: 'eye', color: '#007A3D' });
+    items.push({ x: cx - CELL/2, y: cy - CELL/2, type: 'tri-down', color: '#E3000B' });
+    [[-53,23],[-26,38],[0,43],[26,38],[53,23]].forEach(([dx,dy]) => {
+      items.push({ x: cx + dx - CELL/2, y: cy + dy - CELL/2, type: 'circle', color: '#FFD700', hollow: true });
+    });
+    return items;
+  }
+
+  const maxCells = Math.max(letterMaxCells, SMILEY_N);
+
+  // final resting arrangement: a tidy grid using every block
+  const restCols = 5;
+  const restW = restCols*STEP - GAP, restH = Math.ceil(maxCells/restCols)*STEP - GAP;
+  const restX = (STAGE_W - restW)/2, restY = (STAGE_H - restH)/2;
+  function restCell(i){ return { c: i % restCols, r: Math.floor(i/restCols) }; }
+
+  function applyAppearance(b, type, color, hollow){
+    const inner = b.firstElementChild;
+    if (type === 'eye') {
+      // visuals live on the inner element so its own transform (the blink squish)
+      // stays independent of the outer element's position transform
+      b.className = 'shape-blk';
+      b.style.background = 'transparent';
+      b.style.border = 'none';
+      inner.style.position = 'absolute';
+      inner.style.inset = '0';
+      inner.style.borderRadius = '50%';
+      inner.style.background = color;
+      inner.style.border = '3px solid var(--black)';
+      inner.style.animation = '';
+      inner.style.transform = '';
+      return;
+    }
+    b.style.border = '';
+    b.style.borderColor = '';
+    inner.style.position = '';
+    inner.style.inset = '';
+    inner.style.borderRadius = '';
+    inner.style.border = '';
+    inner.style.animation = '';
+    inner.style.transform = '';
+    b.className = 'shape-blk ' + type;
+    if (type === 'tri' || type === 'tri-down') {
+      inner.style.background = color;
+      b.style.background = '';
+    } else if (hollow) {
+      b.style.background = 'transparent';
+      inner.style.background = '';
+    } else {
+      b.style.background = color;
+      inner.style.background = '';
+    }
+  }
+
+  const blocks = [];
+  for (let i = 0; i < maxCells; i++) {
+    const type = shapeTypes[i % shapeTypes.length];
+    const color = cols[i % cols.length];
+    const b = document.createElement('div');
+    b.appendChild(document.createElement('i'));
+    b.dataset.defType = type;
+    b.dataset.defColor = color;
+    applyAppearance(b, type, color);
+    stage.appendChild(b);
+    blocks.push(b);
+  }
+
+  function place(b, x, y, visible){
+    b.style.transform = `translate(${x}px,${y}px)`;
+    b.style.opacity = visible ? '1' : '0';
+  }
+  function showLetter(letter){
+    if (letter === 'SMILEY') {
+      const items = smileyLayout();
+      blocks.forEach((b,i) => {
+        if (i < items.length) {
+          applyAppearance(b, items[i].type, items[i].color, items[i].hollow);
+          place(b, items[i].x, items[i].y, true);
+        } else {
+          applyAppearance(b, b.dataset.defType, b.dataset.defColor);
+          place(b, STAGE_W/2 - CELL/2, originY - 40, false);
+        }
+      });
+      return;
+    }
+    const cells = cellsFor(letter);
+    blocks.forEach((b,i) => {
+      applyAppearance(b, b.dataset.defType, b.dataset.defColor);
+      if (i < cells.length) place(b, originX + cells[i].c*STEP, originY + cells[i].r*STEP, true);
+      else place(b, STAGE_W/2 - CELL/2, originY - 40, false);
+    });
+  }
+  function showRest(){
+    blocks.forEach((b,i) => {
+      const { c, r } = restCell(i);
+      place(b, restX + c*STEP, restY + r*STEP, true);
+    });
+  }
+
+  if (reduce) {
+    showRest();
+    if (toggle) toggle.hidden = true;
+    return;
+  }
+
+  blocks.forEach(b => place(b, STAGE_W/2 - CELL/2, originY - 120, false));
+
+  let idx = 0;
+  let timer = null;
+  let paused = false;
+
+  function blinkEye(){
+    const eye = blocks[BLINK_EYE_INDEX];
+    if (!eye) return;
+    const inner = eye.firstElementChild;
+    inner.style.animation = 'eyeBlink 1s ease-in-out';
+    setTimeout(() => { inner.style.animation = ''; }, 1000);
+  }
+  function step(){
+    const letter = WORD[idx];
+    showLetter(letter);
+    idx = (idx + 1) % WORD.length;
+    if (letter === 'SMILEY') {
+      setTimeout(blinkEye, 1000);
+      timer = setTimeout(step, 2200);
+    } else {
+      timer = setTimeout(step, 1100);
+    }
+  }
+  timer = setTimeout(step, 350);
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      paused = !paused;
+      toggle.classList.toggle('paused', paused);
+      toggle.setAttribute('aria-label', paused ? 'Play animation' : 'Pause animation');
+      if (paused) {
+        clearTimeout(timer);
+      } else {
+        timer = setTimeout(step, 400);
+      }
+    });
+  }
+})();
 
 // ── SCROLL REVEAL ──────────────────────────────────────
 const io = new IntersectionObserver(entries => {
