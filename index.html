@@ -37,8 +37,11 @@ a,button,[tabindex]{scroll-margin-top:80px}
 .skip:focus{top:1rem}
 .skip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 
+/* WIP BANNER */
+.wip-banner{position:fixed;top:0;left:0;right:0;z-index:101;background:var(--yellow);color:var(--black);text-align:center;padding:.5rem 1rem;font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-bottom:3px solid var(--black)}
+
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--white);border-bottom:3px solid var(--black)}
+nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--white);border-bottom:3px solid var(--black)}
 .nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em;padding:.5rem 0;display:inline-block}
 .nav-logo span{color:var(--red)}
 .nav-logo:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
@@ -101,12 +104,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .section-title{font-family:var(--f-display);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
 
 /* ABOUT */
-#about{padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;border-bottom:3px solid var(--black);align-items:start}
-.about-text p{font-size:1rem;line-height:1.75;color:#444;margin-top:1.25rem}
-.disciplines{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
-.disc-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:3px solid var(--black);font-family:var(--f-display);font-weight:500;font-size:.95rem;opacity:0;transform:translateX(24px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
-.disc-item.on{opacity:1;transform:none}
-.disc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:2px solid var(--black)}
 
 /* WORK */
 .work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem}
@@ -144,16 +141,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .modal-gallery[hidden]{display:none}
 .modal-gallery-track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;margin:0 -.5px}
 .modal-gallery-track img{height:200px;width:auto;flex:0 0 auto;border:3px solid var(--black);scroll-snap-align:start}
+.modal-nda{background:#F1EFE8;border:2px solid var(--black);padding:1rem 1.25rem;margin-bottom:1.5rem}
+.modal-nda[hidden]{display:none}
+.modal-nda p{margin:0;font-size:.9rem;line-height:1.6;font-style:italic}
 .modal-section{margin-bottom:1.5rem}
 .modal-section:last-child{margin-bottom:0}
 .modal-section p{font-size:.95rem;line-height:1.65}
 .modal-label{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.5rem}
-.modal-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:.5rem}
-.modal-step{border:2px solid var(--black);padding:.75rem .85rem}
-.modal-step-icon{font-size:1.1rem;display:block;margin-bottom:.4rem}
-.modal-step-name{font-family:var(--f-display);font-weight:700;font-size:.75rem;display:block;margin-bottom:.25rem}
-.modal-step-desc{font-size:.72rem;line-height:1.5;color:#555;display:block}
-@media(max-width:480px){.modal-steps{grid-template-columns:1fr}}
+.modal-steps{display:flex;flex-direction:column;margin-top:.5rem}
+.modal-step{display:flex;gap:.85rem;padding:.85rem 0;border-top:2px solid var(--black)}
+.modal-step:last-child{padding-bottom:0}
+.modal-step-num{font-family:var(--f-display);font-weight:700;font-size:.8rem;width:1.5rem;flex-shrink:0;padding-top:.1rem}
+.modal-step-name{font-family:var(--f-display);font-weight:700;font-size:.8rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.modal-step-desc{font-size:.78rem;line-height:1.55;color:#555;display:block}
+.modal-step-badge{font-family:var(--f-mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.05em;background:var(--yellow);color:var(--black);padding:.15rem .45rem;border:2px solid var(--black)}
 @media(max-width:600px){.case-modal{padding:2.5rem 1.5rem}}
 
 /* PROCESS */
@@ -185,6 +186,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .a11y-status p{font-size:.95rem;line-height:1.65;color:#444;max-width:60ch}
 .a11y-status a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
 .a11y-status a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
+.a11y-tested{margin-top:1.25rem}
+.a11y-tested-label{font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#666;display:block;margin-bottom:.6rem}
+.a11y-tested-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 
 .a11y-report{margin-top:1.5rem;border:3px solid var(--black);background:var(--white)}
 .a11y-report summary{cursor:pointer;padding:1.1rem 1.5rem;font-family:var(--f-display);font-weight:700;font-size:.95rem;list-style:none;display:flex;align-items:center;gap:.6rem;user-select:none}
@@ -202,6 +206,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 #contact{padding:8rem 4rem;text-align:center;border-bottom:3px solid var(--black)}
 #contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1.25rem}
 #contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2.5rem;line-height:1.7}
+#contact p.contact-email{font-family:var(--f-mono);font-size:.9rem;color:var(--black);margin:-1.5rem auto 2rem}
+.contact-email a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+.contact-email a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
 /* DOOR */
 .door-section{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem 2rem;background:var(--white);border-bottom:3px solid var(--black);gap:1rem}
@@ -222,10 +229,9 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 /* RESPONSIVE */
 @media(max-width:900px){
   .hero-stats::before{display:none}
-  .hero{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;min-height:auto}
   .hero-right{display:none}
-  .hero-left{padding:2.5rem 1.5rem}
-  #about{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2rem}
+  .hero-left{padding:1.5rem 1.5rem 2.5rem;justify-content:flex-start}
   .work-section{padding:3rem 1.5rem}
   .work-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
@@ -248,11 +254,12 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <body>
 <a href="#main" class="skip">Skip to main content</a>
 
+<div class="wip-banner">Portfolio under construction · some case studies are still being finalized</div>
+
 <nav role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo" aria-label="Esben, home">Esben<span>.</span></a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
   <ul class="nav-links" id="navLinks" role="list">
-    <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#accessibility">Accessibility</a></li>
@@ -298,49 +305,52 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem">
       <div class="case-n">Case 01</div>
-      <h3 class="case-title">Accessible Patient Forms</h3>
-      <div class="case-org">NHS Digital · 2023</div>
-      <p class="case-desc">Redesigned the patient registration and referral forms used by 4M people annually. 18 research sessions with users including those with low literacy, motor impairments, and screen reader dependency, leading to a 34% drop in form abandonment.</p>
-      <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">Research</span><span class="tag">Testing</span></div>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: NHS Digital – Accessible Patient Forms">View</button>
-    </article>
-    <article class="case c2 reveal" role="listitem">
-      <div class="case-n">Case 02</div>
       <h3 class="case-title">Underwriting platform</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc">End-to-end ownership of the company's first core-agnostic product, reworking how underwriters handle cases.</p>
-      <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span></div>
-      <script type="application/json" class="case-process">{"context":"End-to-end ownership of the company's first core-agnostic product: reworking how underwriters handle cases and documentation across markets.","steps":["Multi-country research into how underwriters handle cases","Iterated prototypes with engineering and QA around case handling and documentation","Owned the product end-to-end from discovery through to build","Refined the flow against real case-handling scenarios"],"outcome":"Reworked complex case handling into a more flexible flow.","learning":"Underestimated the implications of a core-agnostic premise, which made balancing UX against feasibility harder once the ground kept shifting."}</script>
-      <script type="application/json" class="case-product">{"screenshots":["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 1%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 2%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 3%3C/text%3E%3C/svg%3E"]}</script>
+      <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span><span class="tag">NDA</span></div>
+      <script type="application/json" class="case-process">{"context":"End-to-end ownership of the company's first core-agnostic product: reworking how underwriters handle cases and documentation across markets.","systemsThinkingStep":2,"steps":[{"name":"Framing","desc":"Aligned with the business on goals, known limitations and deadlines before starting"},{"name":"Research","desc":"Talked to underwriters, SMEs and engineering across markets, and reviewed existing case data"},{"name":"Sketch and scope-check","desc":"Sketched directions to test with stakeholders, checking whether existing patterns covered the flow before proposing anything new"},{"name":"Workshop and align","desc":"Ran a collab session with users and stakeholders, then wrote up findings so everyone shared the same hypotheses"},{"name":"Prototype and document","desc":"Built annotated prototypes with clear rules and patterns, with questions prepared for engineering and QA review"},{"name":"Iterate and handover","desc":"Refined through review cycles, then handed over in Figma with documentation for build"}],"outcome":"Reworked complex case handling into a more flexible flow.","learning":"Underestimated the implications of a core-agnostic premise, which made balancing UX against feasibility harder once the ground kept shifting."}</script>
+      <script type="application/json" class="case-product">{"nda":true,"ndaNote":"The underwriting platform was built under NDA at Tia / Sapiens, so I can't share screenshots or exact product details here."}</script>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Underwriting platform">The product</button>
         <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Underwriting platform">The process</button>
       </div>
     </article>
-    <article class="case c3 reveal" role="listitem">
-      <div class="case-n">Case 03</div>
+    <article class="case c2 reveal" role="listitem">
+      <div class="case-n">Case 02</div>
       <h3 class="case-title">Product configuration</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc">A high-complexity configuration product handling business rules, versioning, and traceability.</p>
-      <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span></div>
-      <script type="application/json" class="case-process">{"context":"Designed a high-complexity configuration product handling business rules, versioning, and traceability, working closely with an SME and product owner.","steps":["Worked with SME and PO to map business rules and versioning needs","Prototyped configuration flows end to end","Onboarded a junior designer to take over prototyping and continue the handoff","Checked flows against edge cases in versioning and traceability"],"outcome":"Improved error handling and speed.","learning":"Followed user needs too literally at points, which led to information overload."}</script>
-      <script type="application/json" class="case-product">{"screenshots":["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 1%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 2%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 3%3C/text%3E%3C/svg%3E"]}</script>
+      <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span><span class="tag">NDA</span></div>
+      <script type="application/json" class="case-process">{"context":"Designed a high-complexity configuration product handling business rules, versioning, and traceability, working closely with an SME and product owner.","systemsThinkingStep":2,"steps":[{"name":"Framing","desc":"Aligned with the SME and PO on the business rules, versioning and traceability the product needed to support"},{"name":"Research","desc":"Reviewed existing configuration flows and past traceability challenges with the SME and PO"},{"name":"Sketch and scope-check","desc":"Sketched configuration flows, checking whether existing patterns could carry the complexity before designing new ones"},{"name":"Workshop and align","desc":"Walked through hypotheses and direction with the SME and PO before committing to a flow"},{"name":"Prototype and document","desc":"Prototyped configuration flows end to end, then handed prototyping over to a junior designer to continue"},{"name":"Iterate and handover","desc":"Iterated on feedback and documented patterns so the work could continue past the handoff"}],"outcome":"Improved error handling and speed.","learning":"Followed user needs too literally at points, which led to information overload."}</script>
+      <script type="application/json" class="case-product">{"nda":true,"ndaNote":"The configuration product was built under NDA at Tia / Sapiens, so I can't share screenshots or exact product details here."}</script>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Product configuration">The product</button>
         <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Product configuration">The process</button>
       </div>
     </article>
-    <article class="case c4 reveal" role="listitem">
-      <div class="case-n">Case 04</div>
+    <article class="case c3 reveal" role="listitem">
+      <div class="case-n">Case 03</div>
       <h3 class="case-title">Administration platform</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc">Authorization, server status, and communication services spanning multiple enterprise user types.</p>
-      <div class="case-tags"><span class="tag">End-to-end Design</span><span class="tag">Enterprise SaaS</span><span class="tag">Discovery</span></div>
-      <script type="application/json" class="case-process">{"context":"Designed authorization, server status, and communication services across multiple user types, defining scalable interaction patterns for onboarding enterprise clients.","steps":["Mapped redundant steps and risk points across user types","Defined scalable interaction patterns to cut clicks and repetition","Worked with dev and architects to bring patterns into the platform","Checked patterns held up across different enterprise client setups"],"outcome":"Centralized navigation reduced operational friction.","learning":"Stakeholder alignment on what to centralize was limited, which shaped how far the consolidation could go."}</script>
-      <script type="application/json" class="case-product">{"screenshots":["data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 1%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 2%3C/text%3E%3C/svg%3E","data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23F1EFE8'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='16' fill='%231A1A1A' text-anchor='middle' dy='.3em'%3EScreenshot 3%3C/text%3E%3C/svg%3E"]}</script>
+      <div class="case-tags"><span class="tag">End-to-end Design</span><span class="tag">Enterprise SaaS</span><span class="tag">Discovery</span><span class="tag">NDA</span></div>
+      <script type="application/json" class="case-process">{"context":"Designed authorization, server status, and communication services across multiple user types, defining scalable interaction patterns for onboarding enterprise clients.","systemsThinkingStep":2,"steps":[{"name":"Framing","desc":"Aligned on the goal of cutting redundancy, clicks and risk when onboarding enterprise clients"},{"name":"Research","desc":"Mapped authorization, server status and communication needs, and redundant steps, across user types"},{"name":"Sketch and scope-check","desc":"Sketched interaction patterns, checking whether existing navigation could be reused before defining new ones"},{"name":"Workshop and align","desc":"Aligned with dev and architects on which patterns were worth centralizing"},{"name":"Prototype and document","desc":"Prototyped scalable interaction patterns with documentation for engineering and architects"},{"name":"Iterate and handover","desc":"Iterated with stakeholders, then handed over patterns for build across the platform"}],"outcome":"Centralized navigation reduced operational friction.","learning":"Stakeholder alignment on what to centralize was limited, which shaped how far the consolidation could go."}</script>
+      <script type="application/json" class="case-product">{"nda":true,"ndaNote":"The administration platform was built under NDA at Tia / Sapiens, so I can't share screenshots or exact product details here."}</script>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Administration platform">The product</button>
         <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Administration platform">The process</button>
+      </div>
+    </article>
+    <article class="case c4 reveal" role="listitem">
+      <div class="case-n">Case 04</div>
+      <h3 class="case-title">Accessibility SME</h3>
+      <div class="case-org">Tia / Sapiens · Insurtech</div>
+      <p class="case-desc">Embedded WCAG 2.2 AA as a system-level practice: wrote internal strategy and coached teams to build compliance into their process.</p>
+      <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG 2.2 AA</span><span class="tag">Coaching</span></div>
+      <script type="application/json" class="case-process">{"context":"Proactively pushed accessibility as standard practice at Tia / Sapiens, then used the upcoming European Accessibility Act as the moment to make WCAG 2.2 AA the org-wide standard.","systemsThinkingStep":0,"steps":[{"name":"Baseline practice","desc":"Looked for accessibility low-hanging fruit whenever deciding on new components, iterating existing ones, or setting up patterns and flows"},{"name":"Flag the moment","desc":"Flagged the upcoming European Accessibility Act, enforceable from June 2025, to product and UX management and legal, and pushed to start an analysis"},{"name":"Analysis","desc":"Found the team wasn't directly bound by the enforcement, but should still act: training for developers, writers, designers and testers"},{"name":"Build the case","desc":"Built presentations for each role, arguing from both a user and business perspective to make the case for WCAG 2.2 AA"},{"name":"Get buy-in","desc":"Convinced stakeholders to adopt WCAG 2.2 AA as the standard across every step of development and testing"},{"name":"Coach","desc":"Taught fellow designers the new process, the tools to master, and how it supports a more inclusive experience for customers and back-office users"}],"outcome":"WCAG 2.2 AA became the shared standard across development and testing, not just a design concern.","learning":"Getting stakeholder buy-in was one step. Changing how designers actually worked day to day, the tools and habits, took a separate, ongoing effort."}</script>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Accessibility SME">The process</button>
       </div>
     </article>
   </div>
@@ -354,10 +364,17 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem">
-      <div class="case-n">Case 01</div>
-      <h3 class="case-title">Tax deduction: redesigning solutions that serve the public</h3>
-      <p class="case-desc placeholder">Write-up coming soon.</p>
-      <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Tax deduction, redesigning solutions that serve the public">View</button>
+      <div class="case-n">Case 01 · Example of deduction designs</div>
+      <h3 class="case-title">Kørselsfradrag: commute deduction calculator</h3>
+      <div class="case-org">Udviklings- og Forenklingsstyrelsen · Danish Tax Administration</div>
+      <p class="case-desc">A self-service calculator citizens use to claim their commute tax deduction, prototyped end-to-end from discovery to developer handoff.</p>
+      <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Public Sector</span></div>
+      <script type="application/json" class="case-process">{"context":"Designed the self-service flow citizens use to calculate and claim their commute tax deduction (Kørselsfradrag), from discovery through to developer handoff.","systemsThinkingStep":2,"steps":[{"name":"Framing","desc":"Aligned with BAs and domain experts on what citizens, companies and tax professionals needed from the calculator"},{"name":"Research","desc":"Used evidence-based design and Design Thinking within an agile/Scrum framework to understand how people handle commute deductions today"},{"name":"Sketch and scope-check","desc":"Sketched the flow across hi/lo-fidelity prototypes, checking against existing self-service patterns before introducing new ones"},{"name":"Workshop and align","desc":"Worked alongside frontend, backend, BAs and domain experts to align on scope within the Scrum framework"},{"name":"Prototype and document","desc":"Prototyped the calculator end-to-end, from period and address input through to days-with-commute entry and route distance"},{"name":"Iterate and handover","desc":"Iterated through sprints and handed over to developers for build"}],"outcome":"Citizens can calculate their commute deduction and transfer it directly into their preliminary tax assessment, without manual paperwork.","learning":"A regulated, rules-heavy domain made it hard to keep the flow feeling like self-service rather than a tax form."}</script>
+      <script type="application/json" class="case-product">{"screenshots":["images/tax-deduction/1-period-addresses.png","images/tax-deduction/2-days-with-commute.png","images/tax-deduction/3-days-total.png","images/tax-deduction/4-route.png","images/tax-deduction/5-result.png"]}</script>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Kørselsfradrag">The product</button>
+        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Kørselsfradrag">The process</button>
+      </div>
     </article>
     <article class="case c3 reveal" role="listitem">
       <div class="case-n">Case 02</div>
@@ -405,23 +422,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 </section>
 
 <!-- ABOUT -->
-<section id="about" aria-labelledby="about-h">
-  <div class="about-text reveal">
-    <span class="section-label">Who I am</span>
-    <h2 class="section-title" id="about-h">I ask "why?" before I open Figma.</h2>
-    <p>My work starts before the screen. User research, stakeholder workshops, and rounds of real-user testing shape everything I make. By the time I'm drawing, I already know what it needs to do, and who it needs to not leave behind.</p>
-    <p>Accessibility is the constraint that makes the work stronger. Colour contrast, keyboard navigation, screen reader logic, cognitive load: these are design problems, not compliance checkboxes.</p>
-    <a href="#work" class="btn btn-red" style="margin-top:1.75rem;display:inline-block">See the work →</a>
-  </div>
-  <div class="disciplines" role="list" aria-label="Core disciplines">
-    <div class="disc-item" role="listitem" data-d="0.05"><span class="disc-dot" style="background:var(--red)" aria-hidden="true"></span>User Research</div>
-    <div class="disc-item" role="listitem" data-d="0.15"><span class="disc-dot" style="background:var(--blue)" aria-hidden="true"></span>Workshops &amp; Co-design</div>
-    <div class="disc-item" role="listitem" data-d="0.25"><span class="disc-dot" style="background:var(--green)" aria-hidden="true"></span>Prototyping</div>
-    <div class="disc-item" role="listitem" data-d="0.35"><span class="disc-dot" style="background:var(--yellow);border:2px solid var(--black)" aria-hidden="true"></span>Usability Testing</div>
-    <div class="disc-item" role="listitem" data-d="0.45"><span class="disc-dot" style="background:var(--orange)" aria-hidden="true"></span>Accessibility Auditing</div>
-  </div>
-</section>
-
 <!-- PROCESS -->
 <section id="process" aria-labelledby="process-h">
   <div class="reveal">
@@ -455,6 +455,19 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     <h3>Accessibility status: full audit completed, 15 issues fixed</h3>
     <div class="a11y-status-date">Audited &amp; fixed 4 August 2026 · manual + automated · every component, state, and keyboard path tested</div>
     <p>This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. 15 real issues were found (including a focus ring that was completely invisible on two case-study cards), and every one has been fixed. Nothing here is a claim without a receipt.</p>
+    <div class="a11y-tested">
+      <span class="a11y-tested-label">What was tested</span>
+      <div class="a11y-tested-tags">
+        <span class="tag">Markup &amp; ARIA</span>
+        <span class="tag">Colour contrast</span>
+        <span class="tag">Focus visibility</span>
+        <span class="tag">Keyboard navigation</span>
+        <span class="tag">Target size</span>
+        <span class="tag">Reduced motion</span>
+        <span class="tag">Predictability</span>
+        <span class="tag">Reflow</span>
+      </div>
+    </div>
   </div>
 
   <details class="a11y-report">
@@ -485,7 +498,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     <span class="section-label">Let's talk</span>
     <h2 class="section-title" id="contact-h">I'm available for the right project.</h2>
     <p>If you're building something that matters to people who've been left out of the design conversation, I want to hear from you.</p>
-    <a href="mailto:hello@esben.design" class="btn btn-red">Send me a message</a>
+    <p class="contact-email">E-mail: <a href="mailto:esbenkm92@gmail.com">esbenkm92@gmail.com</a></p>
   </div>
 </section>
 
@@ -529,6 +542,9 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     <h2 class="modal-title" id="modalTitle"></h2>
     <div class="modal-org" id="modalOrg" hidden></div>
     <div id="modalSimple">
+      <div class="modal-nda" id="modalNda" hidden>
+        <p id="modalNdaText"></p>
+      </div>
       <div class="modal-gallery" id="modalGallery" hidden>
         <div class="modal-gallery-track" id="modalGalleryTrack"></div>
       </div>
@@ -547,7 +563,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <script>
 // ── NAV HEIGHT (keeps hero padding in sync with the real, rendered nav) ──
 function setNavHeight(){
-  document.documentElement.style.setProperty('--nav-h', document.querySelector('nav').offsetHeight + 'px');
+  const banner=document.querySelector('.wip-banner');
+  const bannerH=banner?banner.offsetHeight:0;
+  document.documentElement.style.setProperty('--banner-h', bannerH + 'px');
+  document.documentElement.style.setProperty('--nav-h', (bannerH + document.querySelector('nav').offsetHeight) + 'px');
 }
 setNavHeight();
 window.addEventListener('resize', setNavHeight);
@@ -777,7 +796,7 @@ const io = new IntersectionObserver(entries => {
     io.unobserve(el);
   });
 }, { threshold: .12 });
-document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').forEach(el => io.observe(el));
+document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el => io.observe(el));
 
 // ── CASE STUDY MODAL ────────────────────────────────────
 (function(){
@@ -787,6 +806,8 @@ document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').fo
   const modalTitle=document.getElementById('modalTitle');
   const modalOrg=document.getElementById('modalOrg');
   const modalSimple=document.getElementById('modalSimple');
+  const modalNda=document.getElementById('modalNda');
+  const modalNdaText=document.getElementById('modalNdaText');
   const modalGallery=document.getElementById('modalGallery');
   const modalGalleryTrack=document.getElementById('modalGalleryTrack');
   const modalDesc=document.getElementById('modalDesc');
@@ -800,8 +821,6 @@ document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').fo
   const inertTargets=[document.querySelector('nav'),document.getElementById('main'),document.querySelector('footer')].filter(Boolean);
   if(!overlay||!modal) return;
   let lastTrigger=null;
-  const STEP_NAMES=['Discovery','Ideation','Dev handover','Testing'];
-  const STEP_ICONS=['🔍','💡','🤝','🧪'];
 
   function openCaseModal(trigger){
     const card=trigger.closest('.case');
@@ -823,20 +842,27 @@ document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').fo
       modalOutcome.textContent=data.outcome;
       modalLearning.textContent=data.learning;
       modalSteps.innerHTML='';
-      data.steps.forEach((desc,i)=>{
+      data.steps.forEach((step_,i)=>{
         const step=document.createElement('div');
         step.className='modal-step';
-        const icon=document.createElement('span');
-        icon.className='modal-step-icon';
-        icon.setAttribute('aria-hidden','true');
-        icon.textContent=STEP_ICONS[i];
-        const name=document.createElement('span');
+        const num=document.createElement('span');
+        num.className='modal-step-num';
+        num.textContent=String(i+1).padStart(2,'0');
+        const content=document.createElement('div');
+        const name=document.createElement('div');
         name.className='modal-step-name';
-        name.textContent=STEP_NAMES[i];
-        const desc_=document.createElement('span');
+        name.append(step_.name);
+        if(i===data.systemsThinkingStep){
+          const badge=document.createElement('span');
+          badge.className='modal-step-badge';
+          badge.textContent='Systems thinking';
+          name.appendChild(badge);
+        }
+        const desc_=document.createElement('div');
         desc_.className='modal-step-desc';
-        desc_.textContent=desc;
-        step.append(icon,name,desc_);
+        desc_.textContent=step_.desc;
+        content.append(name,desc_);
+        step.append(num,content);
         modalSteps.appendChild(step);
       });
     } else {
@@ -854,16 +880,25 @@ document.querySelectorAll('.reveal,.disc-item,.step,.a11y-card,.a11y-status').fo
       modalTags.hidden=tags.length===0;
 
       const productEl=card.querySelector('.case-product');
-      const shots=productEl?JSON.parse(productEl.textContent).screenshots||[]:[];
-      modalGalleryTrack.innerHTML='';
-      shots.forEach((src,i)=>{
-        const img=document.createElement('img');
-        img.src=src;
-        img.alt=`${modalTitle.textContent} screenshot ${i+1}`;
-        img.loading='lazy';
-        modalGalleryTrack.appendChild(img);
-      });
-      modalGallery.hidden=shots.length===0;
+      const productData=productEl?JSON.parse(productEl.textContent):null;
+
+      if(productData&&productData.nda){
+        modalGallery.hidden=true;
+        modalNda.hidden=false;
+        modalNdaText.textContent=productData.ndaNote||"This product is under NDA, so I can't share screenshots or exact details here.";
+      } else {
+        modalNda.hidden=true;
+        const shots=(productData&&productData.screenshots)||[];
+        modalGalleryTrack.innerHTML='';
+        shots.forEach((src,i)=>{
+          const img=document.createElement('img');
+          img.src=src;
+          img.alt=`${modalTitle.textContent} screenshot ${i+1}`;
+          img.loading='lazy';
+          modalGalleryTrack.appendChild(img);
+        });
+        modalGallery.hidden=shots.length===0;
+      }
     }
 
     overlay.hidden=false;
