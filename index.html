@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
 <style>
 :root {
   --red: #E3000B;
@@ -18,11 +19,16 @@
   --orange: #FF6B00;
   --white: #FFFFFF;
   --black: #1A1A1A;
-  --studio-red: #B83228;
   --f-display: 'Archivo', sans-serif;
   --f-body: 'DM Sans', sans-serif;
   --f-mono: 'Space Mono', monospace;
   --ease-s: cubic-bezier(0.25,0,0,1);
+  /* 4pt spacing scale */
+  --space-2xs:.25rem; --space-xs:.5rem; --space-sm:.75rem; --space-md:1rem;
+  --space-lg:1.5rem; --space-xl:2rem; --space-2xl:3rem; --space-3xl:4rem;
+  /* fluid section rhythm: replaces per-breakpoint padding overrides */
+  --section-y:clamp(2.75rem,6vw,4.5rem);
+  --section-x:clamp(1.25rem,4vw,3rem);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -38,13 +44,13 @@ a,button,[tabindex]{scroll-margin-top:80px}
 .skip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 
 /* NAV */
-nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.875rem 2rem;background:var(--white);border-bottom:3px solid var(--black)}
-.nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em;padding:.5rem 0;display:inline-block}
+nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.875rem var(--section-x);background:var(--white);border-bottom:3px solid var(--black)}
+.nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em;padding:.75rem .25rem;display:inline-block}
 .nav-logo span{color:var(--red)}
 .nav-logo:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 .lang-switch{position:relative}
-.lang-toggle{display:flex;align-items:center;gap:.35rem;background:none;color:var(--black);border:none;padding:.3rem .5rem;cursor:pointer;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
+.lang-toggle{display:flex;align-items:center;gap:.35rem;background:none;color:var(--black);border:none;padding:.85rem .5rem;cursor:pointer;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
 .lang-toggle:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--red)}
 .lang-label{color:#595959}
 .lang-chevron{flex-shrink:0;transition:transform .15s var(--ease-s)}
@@ -58,16 +64,17 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .nav-toggle{display:none;font-family:var(--f-mono);font-size:1.4rem;line-height:1;background:none;border:2px solid var(--black);padding:.4rem .6rem;cursor:pointer}
 .nav-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--black);text-decoration:none;padding:.25rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
+.nav-links a{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--black);text-decoration:none;padding:.85rem 0;border-bottom:2px solid transparent;transition:border-color .2s}
 .nav-links a:hover{border-color:var(--red)}
+.nav-links a[aria-current="location"]{border-color:var(--red)}
 .nav-links a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-h,57px);overflow:hidden;border-bottom:3px solid var(--black)}
 .hero::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--black);transform:translateX(-1.5px);pointer-events:none;z-index:1}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem 3rem 3rem}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:var(--space-2xl) var(--space-xl) var(--space-2xl) var(--section-x)}
 .eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1.15rem}
-.hero-name{font-family:var(--f-display);font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-name{font-family:var(--f-display);font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:var(--space-md);text-wrap:balance}
 .hero-name em{font-style:normal;color:var(--red)}
 .hero-desc{font-size:1.05rem;line-height:1.65;color:#555;max-width:38ch;margin-bottom:1.85rem}
 .cta-row{display:flex;gap:1rem;flex-wrap:wrap}
@@ -85,7 +92,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .shape-blk.tri i{content:'';position:absolute;inset:3px;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
 .shape-blk.tri-down{background:var(--black);border:none;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
 .shape-blk.tri-down i{content:'';position:absolute;inset:3px;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
-.shape-toggle{position:absolute;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border:3px solid var(--black);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.shape-toggle{position:absolute;bottom:1.5rem;right:1.5rem;width:44px;height:44px;border:3px solid var(--black);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .shape-toggle:hover{background:#f5f5f5}
 .shape-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .shape-toggle-icon{width:14px;height:14px;position:relative}
@@ -97,31 +104,41 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 @keyframes eyeBlink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}
 @media (prefers-reduced-motion:reduce){.shape-blk{transition:none}}
 
-.work-section{padding:4rem 3rem;border-bottom:3px solid var(--black)}
-.case-desc.placeholder{font-style:italic}
+.work-section{padding:var(--section-y) var(--section-x);border-bottom:3px solid var(--black)}
 
 /* SECTIONS shared */
-.section-label{font-family:var(--f-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--red);display:block;margin-bottom:1rem}
-.section-title{font-family:var(--f-display);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
+.section-title{font-family:var(--f-display);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.05;letter-spacing:-.03em;text-wrap:balance;max-width:24ch}
 
 /* ABOUT */
 
 /* WORK */
-.work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:2rem}
-#work-student .work-grid{grid-template-columns:1fr}
-.case{padding:2rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden}
-.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:1rem}
-.case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
-.case-org{font-family:var(--f-mono);font-size:.7rem;margin-bottom:.65rem}
-.case-desc{font-size:.875rem;line-height:1.6;margin-bottom:1rem}
-.case-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.15rem}
-.case-view-btn{padding:.6rem 1.5rem;font-size:.75rem}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:var(--space-xl)}
+/* a lone card fills the row instead of orphaning half of it */
+.work-grid:has(> .case:only-child){grid-template-columns:1fr}
+.case{padding:var(--space-xl);border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden}
+.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:var(--space-md)}
+.case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:var(--space-2xs);text-wrap:balance}
+.case-org{font-family:var(--f-mono);font-size:.7rem;margin-bottom:var(--space-sm)}
+.case-desc{font-size:.875rem;line-height:1.6;margin-bottom:var(--space-md);max-width:62ch;text-wrap:pretty}
+.case-tags{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-lg)}
+
+/* FEATURED CASE: breaks the uniform grid so the lead work outranks the rest */
+.case--feature{grid-column:1 / -1}
+.case--feature .case-title{font-size:clamp(1.6rem,3vw,2.1rem)}
+.case--feature .case-desc{font-size:1rem}
+.case-media{border:3px solid var(--black);background:var(--white);overflow:hidden;margin-bottom:var(--space-lg)}
+.case-media img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center}
+@media(min-width:901px){
+  .case--feature:has(.case-media){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-xl);align-items:center}
+  .case--feature .case-media{margin-bottom:0}
+}
+.case-view-btn{padding:.8rem 1.5rem;font-size:.75rem}
 .tag{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border:2px solid currentColor;border-radius:2px}
 .c1{background:var(--red);color:var(--white)}
 .c2{background:var(--yellow);color:var(--black)}
 .c3{background:var(--blue);color:var(--white)}
 .c4{background:var(--green);color:var(--white)}
-.c5{background:var(--orange);color:var(--white)}
+.c5{background:var(--orange);color:var(--black)}
 
 /* CASE MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,26,.75);display:flex;align-items:center;justify-content:center;padding:1.5rem;z-index:2000;opacity:0;transition:opacity .25s var(--ease-s)}
@@ -130,7 +147,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .case-modal{background:var(--white);border:3px solid var(--black);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:2.25rem;position:relative;transform:translateY(12px);transition:transform .25s var(--ease-s)}
 .case-modal:focus{outline:3px solid var(--blue);outline-offset:-6px}
 .modal-overlay.open .case-modal{transform:none}
-.modal-close{position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border:2px solid var(--black);background:var(--white);color:var(--black);font-family:var(--f-display);font-size:1.25rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s}
+.modal-close{position:absolute;top:1rem;right:1rem;width:2.75rem;height:2.75rem;border:2px solid var(--black);background:var(--white);color:var(--black);font-family:var(--f-display);font-size:1.25rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s}
 .modal-close:hover{background:var(--red);color:var(--white);border-color:var(--red)}
 .modal-close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
 .modal-n{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;opacity:.6;margin-bottom:1rem}
@@ -161,29 +178,25 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 @media(max-width:600px){.case-modal{padding:2.5rem 1.5rem}}
 
 /* PROCESS */
-#process{padding:4rem 3rem;border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
-#process .section-label{color:var(--yellow)}
+#process{padding:var(--section-y) var(--section-x);border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
 #process .section-title{color:var(--white)}
 .process-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:2.5rem;border:3px solid rgba(255,255,255,.15)}
-.step{padding:1.75rem 1.25rem;border-right:3px solid rgba(255,255,255,.15);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.step{padding:var(--space-lg) var(--space-md);border-right:3px solid rgba(255,255,255,.15)}
 .step:last-child{border-right:none}
-.step.on{opacity:1;transform:none}
 .step-icon{font-size:1.6rem;margin-bottom:.9rem}
 .step-name{font-family:var(--f-display);font-size:1rem;font-weight:600;margin-bottom:.5rem}
 .step-desc{font-size:.85rem;line-height:1.65;opacity:.65}
 
 /* ACCESSIBILITY */
-#accessibility{padding:4rem 3rem;border-bottom:3px solid var(--black);background:var(--yellow)}
+#accessibility{padding:var(--section-y) var(--section-x);border-bottom:3px solid var(--black);background:var(--yellow)}
 .a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
-.a11y-card{background:var(--white);border:3px solid var(--black);padding:1.5rem;box-shadow:5px 5px 0 var(--black);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
-.a11y-card.on{opacity:1;transform:none}
+.a11y-card{background:var(--white);border:3px solid var(--black);padding:var(--space-lg);box-shadow:5px 5px 0 var(--black)}
 .wcag-badge{display:inline-block;background:var(--green);color:var(--white);font-family:var(--f-mono);font-size:.65rem;padding:.2rem .5rem;margin-bottom:.75rem;border:2px solid var(--black)}
 .a11y-card h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
 .a11y-card p{font-size:.875rem;line-height:1.7;color:#444}
 
 /* ACCESSIBILITY STATUS + REPORT */
-.a11y-status{background:var(--white);border:3px solid var(--black);padding:1.5rem;box-shadow:5px 5px 0 var(--black);margin-top:2rem;opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
-.a11y-status.on{opacity:1;transform:none}
+.a11y-status{background:var(--white);border:3px solid var(--black);padding:var(--space-lg);box-shadow:5px 5px 0 var(--black);margin-top:var(--space-xl)}
 .a11y-status-date{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#666;margin:.5rem 0 1rem}
 .a11y-status h3{font-family:var(--f-display);font-size:1.3rem;font-weight:700;margin-bottom:.6rem}
 .a11y-status p{font-size:.95rem;line-height:1.65;color:#444;max-width:60ch}
@@ -203,7 +216,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .modal-overview[hidden]{display:none}
 .modal-overview p{font-size:.95rem;line-height:1.7;color:#333;margin-bottom:1rem}
 .modal-overview p:last-child{margin-bottom:0}
-.modal-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+.modal-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;padding:.6rem .25rem;font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
 .modal-link[hidden]{display:none}
 .modal-link:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 .modal-link .ext{font-family:var(--f-mono);font-size:.7rem;color:#595959}
@@ -213,20 +226,30 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .a11y-report-list strong{color:var(--black)}
 
 /* CONTACT */
-#contact{padding:5rem 3rem;text-align:center;border-bottom:3px solid var(--black)}
-#contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1rem}
+#contact{padding:calc(var(--section-y) * 1.4) var(--section-x);text-align:center;border-bottom:3px solid var(--black)}
+#contact .section-title{font-size:clamp(2rem,5vw,4rem);margin:0 auto var(--space-lg)}
 #contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2rem;line-height:1.65}
-#contact p.contact-email{font-family:var(--f-mono);font-size:.9rem;color:var(--black);margin:-1.5rem auto 2rem}
-.contact-email a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+#contact p.contact-email{font-family:var(--f-mono);font-size:.9rem;color:var(--black);margin:0 auto}
+.contact-email a{display:inline-block;padding:.65rem .25rem;color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
 .contact-email a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
 /* FOOTER */
-footer{padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+footer{padding:var(--space-lg) var(--section-x);display:flex;align-items:center;justify-content:space-between}
 footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 
-/* SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-s),transform .6s var(--ease-s)}
-.reveal.on{opacity:1;transform:none}
+/* SCROLL REVEAL
+   Content is visible by default. The hidden state is applied only once JS has
+   confirmed it can run (html.js), so the page never ships blank to no-JS
+   readers, printers, or headless renderers where IntersectionObserver never fires. */
+.reveal,.step,.a11y-card,.a11y-status{opacity:1;transform:none}
+.js .reveal,.js .step,.js .a11y-card,.js .a11y-status{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-s),transform .6s var(--ease-s)}
+.js .reveal.on,.js .step.on,.js .a11y-card.on,.js .a11y-status.on{opacity:1;transform:none}
+@media print{
+  .js .reveal,.js .step,.js .a11y-card,.js .a11y-status{opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .js .reveal,.js .step,.js .a11y-card,.js .a11y-status{opacity:1;transform:none}
+}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -234,15 +257,11 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-right{display:none}
   .hero-left{padding:1.5rem 1.5rem 2.5rem;justify-content:flex-start}
-  .work-section{padding:2.5rem 1.25rem}
   .work-grid{grid-template-columns:1fr}
-  .case{padding:1.5rem}
+  .case{padding:var(--space-lg)}
   .process-steps{grid-template-columns:1fr 1fr}
-  #process{padding:2.5rem 1.25rem}
   .a11y-grid{grid-template-columns:1fr}
-  #accessibility{padding:2.5rem 1.25rem}
-  #contact{padding:3rem 1.25rem}
-  footer{padding:1.5rem;flex-direction:column;gap:.75rem;text-align:center}
+  footer{padding:var(--space-lg);flex-direction:column;gap:var(--space-sm);text-align:center}
   .nav-toggle{display:block}
   .nav-links{display:none}
   .nav-links.open{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:var(--white);border-bottom:3px solid var(--black);padding:.5rem 2rem 1rem}
@@ -302,16 +321,14 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- WORK: INSURTECH -->
 <section id="work" class="work-section" aria-labelledby="work-h">
   <div class="reveal">
-    <span class="section-label" data-da="Udvalgt arbejde">Selected work</span>
     <h2 class="section-title" id="work-h">TIA/Sapiens | InsurTech</h2>
   </div>
   <div class="work-grid" role="list">
-    <article class="case c1 reveal" role="listitem">
+    <article class="case c1 case--feature reveal" role="listitem">
       <h3 class="case-title" data-da="Underwriting-platform">Underwriting platform</h3>
-      <div class="case-org">Tia / Sapiens · Insurtech</div>
-      <p class="case-desc" data-da="Fuldt ejerskab af virksomhedens første coreagnostiske produkt, hvor jeg omlagde den måde underwritere håndterer sager på.">End-to-end ownership of the company's first core-agnostic product, reworking how underwriters handle cases.</p>
+      <p class="case-desc" data-da="Fuldt ejerskab af virksomhedens første produkt af sin slags, hvor jeg omlagde den måde underwritere håndterer sager på.">End-to-end ownership of the company's first product of its kind, reworking how underwriters handle cases.</p>
       <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span><span class="tag">NDA</span></div>
-      <script type="application/json" class="case-process">{"context":{"en":"End-to-end ownership of the company's first core-agnostic product: reworking how underwriters handle cases and documentation across markets.","da":"Fuldt ejerskab af virksomhedens første coreagnostiske produkt: en omlægning af den måde underwritere håndterer sager og dokumentation på tværs af markeder."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with the business on goals, known limitations and deadlines before starting","da":"Afstemte mål, kendte begrænsninger og deadlines med forretningen, inden arbejdet gik i gang"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Talked to underwriters, SMEs and engineering across markets, and reviewed existing case data","da":"Talte med underwritere, fageksperter og udvikling på tværs af markeder, og gennemgik eksisterende sagsdata"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched directions to test with stakeholders, checking whether existing patterns covered the flow before proposing anything new","da":"Skitserede retninger til at teste med stakeholders, og undersøgte om eksisterende mønstre dækkede flowet, før noget nyt blev foreslået"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Ran a collab session with users and stakeholders, then wrote up findings so everyone shared the same hypotheses","da":"Afholdt en fælles session med brugere og stakeholders, og skrev fund op bagefter, så alle delte de samme hypoteser"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Built annotated prototypes with clear rules and patterns, with questions prepared for engineering and QA review","da":"Byggede annoterede prototyper med tydelige regler og mønstre, med spørgsmål forberedt til gennemgang med udvikling og QA"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Refined through review cycles, then handed over in Figma with documentation for build","da":"Blev finpudset gennem flere reviewrunder, og overleveret i Figma med dokumentation til udvikling"}}],"outcome":{"en":"Reworked complex case handling into a more flexible flow.","da":"Omlagde en kompleks sagsbehandling til et mere fleksibelt flow."},"learning":{"en":"Underestimated the implications of a core-agnostic premise, which made balancing UX against feasibility harder once the ground kept shifting.","da":"Undervurderede konsekvenserne af en coreagnostisk præmis, hvilket gjorde det sværere at balancere UX mod gennemførlighed, når grundlaget hele tiden flyttede sig."}}</script>
+      <script type="application/json" class="case-process">{"context":{"en":"End-to-end ownership of the company's first product of its kind: reworking how underwriters handle cases and documentation across markets.","da":"Fuldt ejerskab af virksomhedens første produkt af sin slags: en omlægning af den måde underwritere håndterer sager og dokumentation på tværs af markeder."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with the business on goals, known limitations and deadlines before starting","da":"Afstemte mål, kendte begrænsninger og deadlines med forretningen, inden arbejdet gik i gang"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Talked to underwriters, SMEs and engineering across markets, and reviewed existing case data","da":"Talte med underwritere, fageksperter og udvikling på tværs af markeder, og gennemgik eksisterende sagsdata"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched directions to test with stakeholders, checking whether existing patterns covered the flow before proposing anything new","da":"Skitserede retninger til at teste med stakeholders, og undersøgte om eksisterende mønstre dækkede flowet, før noget nyt blev foreslået"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Ran a collab session with users and stakeholders, then wrote up findings so everyone shared the same hypotheses","da":"Afholdt en fælles session med brugere og stakeholders, og skrev fund op bagefter, så alle delte de samme hypoteser"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Built annotated prototypes with clear rules and patterns, with questions prepared for engineering and QA review","da":"Byggede annoterede prototyper med tydelige regler og mønstre, med spørgsmål forberedt til gennemgang med udvikling og QA"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Refined through review cycles, then handed over in Figma with documentation for build","da":"Blev finpudset gennem flere reviewrunder, og overleveret i Figma med dokumentation til udvikling"}}],"outcome":{"en":"Reworked complex case handling into a more flexible flow.","da":"Omlagde en kompleks sagsbehandling til et mere fleksibelt flow."},"learning":{"en":"Underestimated how much the technical foundation would keep shifting underneath the design, which made balancing UX against feasibility harder.","da":"Undervurderede hvor meget det tekniske grundlag ville flytte sig under designet, hvilket gjorde det sværere at balancere UX mod gennemførlighed."}}</script>
       <script type="application/json" class="case-product">{"nda":true,"ndaNote":{"en":"The underwriting platform was built under NDA at Tia / Sapiens, so I can't share screenshots or exact product details here.","da":"Underwriting-platformen blev bygget under NDA hos Tia / Sapiens, så jeg kan ikke dele skærmbilleder eller præcise produktdetaljer her."}}</script>
       <div class="cta-row">
         <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Underwriting platform" data-da-aria="Se produktet: Underwriting-platform" data-da="Produktet">The product</button>
@@ -320,7 +337,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     </article>
     <article class="case c2 reveal" role="listitem">
       <h3 class="case-title" data-da="Produktkonfiguration">Product configuration</h3>
-      <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Et komplekst konfigurationsprodukt til håndtering af forretningsregler, versionering og sporbarhed.">A high-complexity configuration product handling business rules, versioning, and traceability.</p>
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span><span class="tag">NDA</span></div>
       <script type="application/json" class="case-process">{"context":{"en":"Designed a high-complexity configuration product handling business rules, versioning, and traceability, working closely with an SME and product owner.","da":"Designede et komplekst konfigurationsprodukt til håndtering af forretningsregler, versionering og sporbarhed, i tæt samarbejde med en fagekspert og en product owner."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with the SME and PO on the business rules, versioning and traceability the product needed to support","da":"Afstemte med fageksperten og product owneren, hvilke forretningsregler, versionering og sporbarhed produktet skulle understøtte"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Reviewed existing configuration flows and past traceability challenges with the SME and PO","da":"Gennemgik eksisterende konfigurationsflows og tidligere udfordringer med sporbarhed sammen med fageksperten og product owneren"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched configuration flows, checking whether existing patterns could carry the complexity before designing new ones","da":"Skitserede konfigurationsflows, og undersøgte om eksisterende mønstre kunne bære kompleksiteten, før nye blev designet"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Walked through hypotheses and direction with the SME and PO before committing to a flow","da":"Gennemgik hypoteser og retning med fageksperten og product owneren, før flowet blev endeligt fastlagt"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped configuration flows end to end, then handed prototyping over to a junior designer to continue","da":"Byggede konfigurationsflows som prototype fra ende til anden, og overdrog derefter prototypearbejdet til en junior designer"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated on feedback and documented patterns so the work could continue past the handoff","da":"Itererede på feedback og dokumenterede mønstrene, så arbejdet kunne fortsætte efter overleveringen"}}],"outcome":{"en":"Improved error handling and speed.","da":"Forbedrede fejlhåndtering og hastighed."},"learning":{"en":"Followed user needs too literally at points, which led to information overload.","da":"Fulgte til tider brugerbehov for bogstaveligt, hvilket førte til informationsoverload."}}</script>
@@ -331,9 +347,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       </div>
     </article>
     <article class="case c5 reveal" role="listitem">
-      <div class="case-n" data-da="Første produkt hos Tia · Offentligt">First product at Tia · Public</div>
       <h3 class="case-title">Customer Service Workbench</h3>
-      <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Et sagsoprettelsesflow til kundeservicemedarbejdere: en modal, hvor felterne tilpasser sig hvilken type sag der oprettes, fra en skadesanmeldelse (FNOL) til en erhvervskundes policeanmodning.">A case-creation flow for customer service reps: a modal that adapts its fields to what kind of case is being opened, from a First Notice of Loss to an enterprise policy request.</p>
       <div class="case-tags"><span class="tag">Case Creation</span><span class="tag">Enterprise SaaS</span><span class="tag">Public</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["The first product I contributed to at Tia, before taking end-to-end ownership of the platforms above. Customer service reps use it to open a case on a customer or household, and the fields shown adapt to what the case actually is: policyholder details, policy ID, address, home type, family members and history for a claim, or a narrower set of fields for an enterprise policy request. Anything that needed a case created to be managed and documented ran through this flow.","Shipped as Tia's Customer Service Workbench – publicly announced, unlike the rest of the Tia work on this page."],"da":["Det første produkt jeg bidrog til hos Tia, før jeg fik fuldt ejerskab af platformene ovenfor. Kundeservicemedarbejdere bruger det til at oprette en sag på en kunde eller husstand, og de viste felter tilpasser sig, hvad sagen reelt handler om: policeindehaverens oplysninger, police-ID, adresse, boligtype, husstandsmedlemmer og historik ved en skade, eller et mindre sæt felter ved en erhvervskundes policeanmodning. Alt, der krævede en sag oprettet for at kunne håndteres og dokumenteres, gik gennem dette flow.","Lanceret som Tias Customer Service Workbench – offentligt annonceret, i modsætning til resten af Tia-arbejdet på denne side."]},"link":{"href":"https://www.linkedin.com/posts/tia-technology_customer-service-workbench-activity-6879728927531700224-q4R8","label":{"en":"Watch the launch video on LinkedIn","da":"Se lanceringsvideoen på LinkedIn"}}}</script>
@@ -343,7 +357,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     </article>
     <article class="case c3 reveal" role="listitem">
       <h3 class="case-title" data-da="Administrationsplatform">Administration platform</h3>
-      <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Autorisation, serverstatus og kommunikationsservices på tværs af flere erhvervsbrugertyper.">Authorization, server status, and communication services spanning multiple enterprise user types.</p>
       <div class="case-tags"><span class="tag">End-to-end Design</span><span class="tag">Enterprise SaaS</span><span class="tag">Discovery</span><span class="tag">NDA</span></div>
       <script type="application/json" class="case-process">{"context":{"en":"Designed authorization, server status, and communication services across multiple user types, defining scalable interaction patterns for onboarding enterprise clients.","da":"Designede autorisation, serverstatus og kommunikationsservices på tværs af flere brugertyper, og definerede skalerbare interaktionsmønstre til onboarding af erhvervskunder."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned on the goal of cutting redundancy, clicks and risk when onboarding enterprise clients","da":"Afstemte målet om at reducere redundans, klik og risiko ved onboarding af erhvervskunder"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Mapped authorization, server status and communication needs, and redundant steps, across user types","da":"Kortlagde behov for autorisation, serverstatus og kommunikation samt overflødige trin på tværs af brugertyper"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched interaction patterns, checking whether existing navigation could be reused before defining new ones","da":"Skitserede interaktionsmønstre, og undersøgte om eksisterende navigation kunne genbruges, før nye blev defineret"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Aligned with dev and architects on which patterns were worth centralizing","da":"Afstemte med udvikling og arkitekter, hvilke mønstre der var værd at centralisere"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped scalable interaction patterns with documentation for engineering and architects","da":"Byggede skalerbare interaktionsmønstre som prototype, med dokumentation til udvikling og arkitekter"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated with stakeholders, then handed over patterns for build across the platform","da":"Itererede med stakeholders, og overleverede derefter mønstrene til udvikling på tværs af platformen"}}],"outcome":{"en":"Centralized navigation reduced operational friction.","da":"Centraliseret navigation reducerede driftsmæssig friktion."},"learning":{"en":"Stakeholder alignment on what to centralize was limited, which shaped how far the consolidation could go.","da":"Afstemningen med stakeholders om, hvad der skulle centraliseres, var begrænset, hvilket satte grænsen for, hvor langt konsolideringen kunne nå."}}</script>
@@ -355,7 +368,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     </article>
     <article class="case c4 reveal" role="listitem">
       <h3 class="case-title" data-da="Tilgængeligheds-SME">Accessibility SME</h3>
-      <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Forankrede WCAG 2.2 AA som systemniveau-praksis: skrev intern strategi og coachede teams i at bygge compliance ind i deres proces.">Embedded WCAG 2.2 AA as a system-level practice: wrote internal strategy and coached teams to build compliance into their process.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG 2.2 AA</span><span class="tag">Coaching</span></div>
       <script type="application/json" class="case-process">{"context":{"en":"Proactively pushed accessibility as standard practice at Tia / Sapiens, then used the upcoming European Accessibility Act as the moment to make WCAG 2.2 AA the org-wide standard.","da":"Skubbede proaktivt på for at gøre tilgængelighed til standardpraksis hos Tia / Sapiens, og brugede derefter det kommende European Accessibility Act som anledning til at gøre WCAG 2.2 AA til den organisationsdækkende standard."},"systemsThinkingStep":0,"steps":[{"name":{"en":"Baseline practice","da":"Grundlæggende praksis"},"desc":{"en":"Looked for accessibility low-hanging fruit whenever deciding on new components, iterating existing ones, or setting up patterns and flows","da":"Holdt øje med lavthængende frugter inden for tilgængelighed, hver gang nye komponenter blev besluttet, eksisterende blev videreudviklet, eller mønstre og flows blev sat op"}},{"name":{"en":"Flag the moment","da":"Flagede momentet"},"desc":{"en":"Flagged the upcoming European Accessibility Act, enforceable from June 2025, to product and UX management and legal, and pushed to start an analysis","da":"Gjorde produkt- og UX-ledelsen samt jura opmærksom på det kommende European Accessibility Act, som træder i kraft juni 2025, og skubbede på for at igangsætte en analyse"}},{"name":{"en":"Analysis","da":"Analyse"},"desc":{"en":"Found the team wasn't directly bound by the enforcement, but should still act: training for developers, writers, designers and testers","da":"Fandt frem til at teamet ikke var direkte omfattet af lovkravet, men alligevel burde handle: træning til udviklere, tekstforfattere, designere og testere"}},{"name":{"en":"Build the case","da":"Byggede argumentet"},"desc":{"en":"Built presentations for each role, arguing from both a user and business perspective to make the case for WCAG 2.2 AA","da":"Byggede præsentationer til hver rolle, med argumenter fra både et bruger- og forretningsperspektiv for at gøre en sag for WCAG 2.2 AA"}},{"name":{"en":"Get buy-in","da":"Fik opbakning"},"desc":{"en":"Convinced stakeholders to adopt WCAG 2.2 AA as the standard across every step of development and testing","da":"Overbeviste stakeholders om at gøre WCAG 2.2 AA til standarden i alle trin af udvikling og test"}},{"name":{"en":"Coach","da":"Coaching"},"desc":{"en":"Taught fellow designers the new process, the tools to master, and how it supports a more inclusive experience for customers and back-office users","da":"Undervist andre designere i den nye proces, værktøjerne der skulle mestres, og hvordan det understøtter en mere inkluderende oplevelse for kunder og back office-brugere"}}],"outcome":{"en":"WCAG 2.2 AA became the shared standard across development and testing, not just a design concern.","da":"WCAG 2.2 AA blev den fælles standard på tværs af udvikling og test – ikke kun et designanliggende."},"learning":{"en":"Getting stakeholder buy-in was one step. Changing how designers actually worked day to day, the tools and habits, took a separate, ongoing effort.","da":"At få opbakning fra stakeholders var ét skridt. At ændre hvordan designere reelt arbejdede i hverdagen – værktøjerne og vanerne – krævede en separat, vedvarende indsats."}}</script>
@@ -369,14 +381,17 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- WORK: TAX ADMINISTRATION -->
 <section id="work-tax" class="work-section" aria-labelledby="work-tax-h">
   <div class="reveal">
-    <span class="section-label" data-da="Udvalgt arbejde">Selected work</span>
-    <h2 class="section-title" id="work-tax-h" data-da="Udviklings- og Forenklingsstyrelsen">The IT and Development Agency of the Danish Ministry of Taxation</h2>
+    <h2 class="section-title" id="work-tax-h" data-da="Skatteministeriet">Danish Ministry of Taxation</h2>
   </div>
   <div class="work-grid" role="list">
-    <article class="case c1 reveal" role="listitem">
-      <div class="case-n" data-da="Eksempel på fradragsdesign">Example of deduction designs</div>
+    <article class="case c1 case--feature reveal" role="listitem">
+      <div class="case-media">
+        <img src="images/tax-deduction/1-period-addresses.png" width="1200" height="750" loading="lazy" decoding="async" alt="The commute deduction calculator's first step, asking for the deduction period and the citizen's home and work addresses." data-da-alt="Kørselsfradragsberegnerens første trin, hvor borgeren angiver fradragsperiode samt hjem- og arbejdsadresse.">
+      </div>
+      <div class="case-body">
+      <div class="case-n" data-da="Eksempel på skattefradragsdesign">Example of tax deduction designs</div>
       <h3 class="case-title" data-da="Beregner til kørselsfradrag">Kørselsfradrag: commute deduction calculator</h3>
-      <div class="case-org" data-da="Udviklings- og Forenklingsstyrelsen · Skatteforvaltningen">Udviklings- og Forenklingsstyrelsen · Danish Tax Administration</div>
+      <div class="case-org">Udviklings- og Forenklingsstyrelsen</div>
       <p class="case-desc" data-da="En selvbetjeningsberegner, som borgere bruger til at søge om kørselsfradrag, prototypet fra ende til anden – fra research til udviklerovergivelse.">A self-service calculator citizens use to claim their commute tax deduction, prototyped end-to-end from discovery to developer handoff.</p>
       <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Public Sector</span></div>
       <script type="application/json" class="case-process">{"context":{"en":"Designed the self-service flow citizens use to calculate and claim their commute tax deduction (Kørselsfradrag), from discovery through to developer handoff.","da":"Designede det selvbetjeningsflow, borgere bruger til at beregne og søge om kørselsfradrag, fra research til udviklerovergivelse."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with BAs and domain experts on what citizens, companies and tax professionals needed from the calculator","da":"Afstemte med forretningsanalytikere og fageksperter, hvad borgere, virksomheder og skatterådgivere havde brug for fra beregneren"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Used evidence-based design and Design Thinking within an agile/Scrum framework to understand how people handle commute deductions today","da":"Brugte evidensbaseret design og Design Thinking inden for en agil/Scrum-ramme til at forstå, hvordan folk håndterer kørselsfradrag i dag"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched the flow across hi/lo-fidelity prototypes, checking against existing self-service patterns before introducing new ones","da":"Skitserede flowet gennem både low- og high-fidelity-prototyper, og holdt det op mod eksisterende selvbetjeningsmønstre, før nye blev introduceret"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Worked alongside frontend, backend, BAs and domain experts to align on scope within the Scrum framework","da":"Arbejdede sammen med frontend, backend, forretningsanalytikere og fageksperter om at afstemme scope inden for Scrum-rammen"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped the calculator end-to-end, from period and address input through to days-with-commute entry and route distance","da":"Byggede beregneren som prototype fra ende til anden, fra periode- og adresseindtastning til registrering af kørselsdage og rutedistance"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated through sprints and handed over to developers for build","da":"Itererede gennem sprints og overleverede til udviklerne til bygning"}}],"outcome":{"en":"Citizens can calculate their commute deduction and transfer it directly into their preliminary tax assessment, without manual paperwork.","da":"Borgere kan beregne deres kørselsfradrag og overføre det direkte til deres forskudsopgørelse, uden manuelt papirarbejde."},"learning":{"en":"A regulated, rules-heavy domain made it hard to keep the flow feeling like self-service rather than a tax form.","da":"Et reguleret, regeltungt domæne gjorde det svært at få flowet til at føles som selvbetjening frem for en skatteblanket."}}</script>
@@ -385,10 +400,11 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
         <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Kørselsfradrag" data-da-aria="Se produktet: Kørselsfradrag" data-da="Produktet">The product</button>
         <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Kørselsfradrag" data-da-aria="Se processen: Kørselsfradrag" data-da="Processen">The process</button>
       </div>
+      </div>
     </article>
     <article class="case c3 reveal" role="listitem">
       <h3 class="case-title" data-da="Tilgængelighed: design, test og compliance">Accessibility: design, testing and compliance</h3>
-      <div class="case-org" data-da="Udviklings- og Forenklingsstyrelsen · Skatteforvaltningen">Udviklings- og Forenklingsstyrelsen · Danish Tax Administration</div>
+      <div class="case-org">Udviklings- og Forenklingsstyrelsen</div>
       <p class="case-desc" data-da="Testede samtlige sider under Skatteministeriets paraply sammen med en kollega, og rapporterede på tilgængelighedscompliance på tværs af ministeriets styrelser, samt fungerede som tilgængelighedens stemme i gennemgangen af komponenter til det fælles komponentbibliotek.">Tested every page under the Danish Tax Ministry umbrella with a colleague, reporting on accessibility compliance across the ministry's governing agencies, and served as the accessibility voice reviewing components for the shared component library.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG</span><span class="tag">Component Library</span><span class="tag">Public Sector</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["With a colleague, tested every page across the sites under the Danish Tax Ministry umbrella, so compliance status could be reported on across the ministry's governing agencies rather than agency by agency.","Separately, acted as the accessibility voice in review of the shared component library: checking existing components and vetting new ones before they shipped, so accessibility got caught at the component level instead of being re-found on every page that used it."],"da":["Testede sammen med en kollega samtlige sider på tværs af de websites, der hører under Skatteministeriet, så compliance-status kunne rapporteres på tværs af ministeriets styrelser frem for styrelse for styrelse.","Fungerede derudover som tilgængelighedens stemme i gennemgangen af det fælles komponentbibliotek: tjekkede eksisterende komponenter og kvalitetssikrede nye, før de blev lanceret, så tilgængelighedsproblemer blev fanget på komponentniveau i stedet for at skulle genfindes på hver eneste side, der brugte dem."]}}</script>
@@ -402,14 +418,11 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- WORK: STUDENT -->
 <section id="work-student" class="work-section" aria-labelledby="work-student-h">
   <div class="reveal">
-    <span class="section-label" data-da="Udvalgt arbejde">Selected work</span>
-    <h2 class="section-title" id="work-student-h" data-da="Studiejob. IT-specialist på hospitaler">Student work. IT-specialist in hospitals</h2>
+    <h2 class="section-title" id="work-student-h" data-da="Rigshospitalet | Studiejob">Rigshospitalet | Student work</h2>
   </div>
   <div class="work-grid" role="list">
     <article class="case c2 reveal" role="listitem">
-      <div class="case-n" data-da="Studieprojekt">Student Project</div>
       <h3 class="case-title" data-da="Hjælper sundhedsprofessionelle med at forstå Sundhedsplatformen">Helping healthcare professionals make sense of Sundhedsplatformen</h3>
-      <div class="case-org" data-da="Rigshospitalet · Københavns Universitetshospital">Rigshospitalet · Copenhagen University Hospital</div>
       <p class="case-desc" data-da="Trænede sygeplejersker i Sundhedsplatformen og analyserede lægers arbejdsgange for at reducere tid brugt på patientdataindtastning, så der blev frigjort mere tid til patientkontakt.">Trained nurses on Sundhedsplatformen and analysed doctors' workflows to cut down time spent on patient data entry, freeing up more face-to-face time with patients.</p>
       <div class="case-tags"><span class="tag">Research</span><span class="tag">Training</span><span class="tag">Workflow Analysis</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["Supported the rollout of Sundhedsplatformen at Rigshospitalet. Used go-native observation and think-aloud sessions to see how doctors and nurses actually used the system day to day, down to how doctors wrote notes and ordered medicine and procedures. Trained nurse students on the system, and reported errors to a joint staff-engineering team. The aim throughout was to cut down time spent on PC-based data entry, so staff had more time with patients and less risk of handling patient data incorrectly.","Core professionals often want every interaction and piece of information on one big page, and it's important to listen to users who know their field. But in the end they're not designers: simpler interfaces turned out to help staff focus on the task at hand."],"da":["Understøttede udrulningen af Sundhedsplatformen på Rigshospitalet. Brugte go-native-observation og think-aloud-sessioner til at se, hvordan læger og sygeplejersker reelt brugte systemet i hverdagen, helt ned til hvordan læger skrev notater og bestilte medicin og procedurer. Trænede sygeplejerskestuderende i systemet, og rapporterede fejl til et fælles team af medarbejdere og udviklere. Målet var hele vejen igennem at reducere tid brugt på pc-baseret dataindtastning, så personalet fik mere tid med patienterne og mindre risiko for at håndtere patientdata forkert.","Fagprofessionelle vil ofte gerne have hver eneste interaktion og informationsbid på én stor side, og det er vigtigt at lytte til brugere, der kender deres felt. Men i sidste ende er de ikke designere: enklere grænseflader viste sig at hjælpe personalet med at fokusere på opgaven foran dem."]}}</script>
@@ -423,12 +436,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- WORK: DESIGN SYSTEM -->
 <section id="work-design-system" class="work-section" aria-labelledby="work-design-system-h">
   <div class="reveal">
-    <span class="section-label" data-da="Personligt projekt">Personal project</span>
     <h2 class="section-title" id="work-design-system-h" data-da="At bygge et designsystem">Building a design system</h2>
   </div>
   <div class="work-grid" role="list">
     <article class="case c4 reveal" role="listitem">
-      <div class="case-n" data-da="Personligt projekt">Personal Project</div>
       <h3 class="case-title" data-da="At gøre denne portfolio til et designsystem">Turning this portfolio into a design system</h3>
       <p class="case-desc" data-da="Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, type-trioen Archivo/DM Sans/Space Mono) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Archivo/DM Sans/Space Mono type trio) and formalized it into a documented token scale and a reusable React component library.</p>
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Design Tokens</span><span class="tag">React</span></div>
@@ -444,7 +455,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- PROCESS -->
 <section id="process" aria-labelledby="process-h">
   <div class="reveal">
-    <span class="section-label" data-da="Sådan arbejder jeg">How I work</span>
     <h2 class="section-title" id="process-h" data-da="Research først. Altid.">Research first. Always.</h2>
   </div>
   <div class="process-steps" role="list">
@@ -459,7 +469,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- ACCESSIBILITY -->
 <section id="accessibility" aria-labelledby="a11y-h">
   <div class="reveal">
-    <span class="section-label" data-da="Mit engagement">My commitment</span>
     <h2 class="section-title" id="a11y-h" data-da="Bygget til alle, som designprincip.">Built for everyone, by design.</h2>
   </div>
   <div class="a11y-grid">
@@ -471,9 +480,9 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 
   <div class="a11y-status">
     <span class="wcag-badge">WCAG 2.2 AA</span>
-    <h3 data-da="Tilgængelighedsstatus: fuld audit gennemført, 20 problemer rettet">Accessibility status: full audit completed, 20 issues fixed</h3>
+    <h3 data-da="Tilgængelighedsstatus: fuld audit gennemført, 22 problemer rettet">Accessibility status: full audit completed, 22 issues fixed</h3>
     <div class="a11y-status-date" data-da="Auditeret og rettet 4. august 2026 · genauditeret 14. august 2026 mod NN/g's 10 heuristikker · manuelt + automatisk">Audited &amp; fixed 4 August 2026 · re-audited 14 August 2026 against NN/g's 10 usability heuristics · manual + automated</div>
-    <p data-da="Denne side er testet mod WCAG 2.2: markup, ARIA, farvekontrast (inklusiv fokusindikatorer mod deres faktiske baggrunde), tastaturnavigation, målstørrelser og adfærd ved reduceret bevægelse. En anden runde holdt siden op mod Nielsen Norman Groups 10 brugbarhedsheuristikker og fandt fem problemer mere, heriblandt en overskrift, som skærmlæsere læste op som ét sammenhængende ord. I alt 20 reelle problemer er fundet og rettet. Intet her er en påstand uden dokumentation.">This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. A second pass measured the page against Nielsen Norman Group's 10 usability heuristics and found five more issues, including a heading that screen readers announced as one run-together word. 20 real issues found and fixed in total. Nothing here is a claim without a receipt.</p>
+    <p data-da="Denne side er testet mod WCAG 2.2: markup, ARIA, farvekontrast (inklusiv fokusindikatorer mod deres faktiske baggrunde), tastaturnavigation, målstørrelser og adfærd ved reduceret bevægelse. En anden runde holdt siden op mod Nielsen Norman Groups 10 brugbarhedsheuristikker og fandt syv problemer mere, heriblandt en overskrift, som skærmlæsere læste op som ét sammenhængende ord, et case-kort med hvid tekst på orange der faldt igennem på kontrast, og alle sektioner under hero-sektionen som blev gengivet tomme uden JavaScript. I alt 22 reelle problemer er fundet og rettet. Intet her er en påstand uden dokumentation.">This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. A second pass measured the page against Nielsen Norman Group's 10 usability heuristics and found seven more issues, including a heading that screen readers announced as one run-together word, a case card whose white-on-orange text failed contrast, and every section below the hero rendering blank without JavaScript. 22 real issues found and fixed in total. Nothing here is a claim without a receipt.</p>
     <div class="a11y-tested">
       <span class="a11y-tested-label" data-da="Hvad blev testet">What was tested</span>
       <div class="a11y-tested-tags">
@@ -490,8 +499,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
 
   <details class="a11y-report">
-    <summary data-da="Fuld audit- og rettelsesrapport (20 punkter)">Full audit &amp; fix report (20 items)</summary>
+    <summary data-da="Fuld audit- og rettelsesrapport (22 punkter)">Full audit &amp; fix report (22 items)</summary>
     <ol class="a11y-report-list">
+      <li data-da-html='<span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>Det orange case-kort havde hvid tekst på 2,86:1 og faldt igennem.</strong> Kortet blev tilføjet efter den forrige runde og arvede den hvide tekstfarve fra de mørkere kort, men orange (#FF6B00) er for lys til hvid tekst: 2,86:1 mod kravet på 4,5:1. Fanget ved at måle alle ni kort igen frem for at stole på den tidligere rapport. Skiftet til sort tekst, som giver 7,43:1 på samme baggrund.'><span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>The orange case card shipped white text at 2.86:1 and failed.</strong> The card was added after the previous audit and inherited the white text colour from the darker cards, but orange (#FF6B00) is too light to carry white type: 2.86:1 against a 4.5:1 requirement. Caught by re-measuring all nine cards rather than trusting the earlier report. Switched to black text, which measures 7.43:1 on the same background.</li>
+      <li data-da-html='<span class="sc">Robusthed · gengivelse uden JavaScript</span><strong>Alt indhold under hero-sektionen var skjult, indtil JavaScript afslørede det.</strong> 26 elementer havde <code>opacity:0</code> som udgangspunkt i CSS, og kun en IntersectionObserver kunne vise dem. Uden JavaScript, ved print, og i renderere uden observer blev siden derfor tom under hero-sektionen. Verificeret: elementer inde i viewporten forblev usynlige, når observeren ikke kørte. Indholdet er nu synligt som standard, og først når JavaScript bekræfter at det kan køre, lægges den skjulte starttilstand på. Print og reduceret bevægelse tvinger fuld synlighed.'><span class="sc">Robustness · no-JavaScript rendering</span><strong>Every section below the hero was hidden until JavaScript revealed it.</strong> 26 elements defaulted to <code>opacity:0</code> in CSS, with only an IntersectionObserver able to show them. Without JavaScript, in print, and in renderers where the observer never runs, the page below the hero rendered blank. Verified: elements sitting inside the viewport stayed invisible whenever the observer did not fire. Content is now visible by default, and the hidden starting state is applied only once JavaScript confirms it can run. Print and reduced-motion force full visibility.</li>
       <li data-da-html='<span class="sc">Skærmlæsertekst · 1.3.1</span><strong>Hovedoverskriften blev læst op som ét sammenhængende ord.</strong> Overskriften var delt over to linjer med et &lt;br&gt;, men uden mellemrum omkring det. Et linjeskift indsætter ikke et tekstmæssigt mellemrum, så NVDA, JAWS og VoiceOver annoncerede "Design der virkerfor alle" i stedet for "Design der virker for alle". Verificeret direkte i browseren via elementets tekstindhold. Rettet med et eksplicit mellemrum før linjeskiftet i begge sprogversioner.'><span class="sc">Screen-reader text · 1.3.1</span><strong>The main heading was announced as one run-together word.</strong> The headline was split across two lines with a &lt;br&gt; and no surrounding space. A line break inserts no text-level space, so NVDA, JAWS and VoiceOver read "Design that worksfor everyone" instead of "Design that works for everyone". Verified directly in-browser against the element's text content. Fixed with an explicit space before the break, in both language versions.</li>
       <li data-da-html='<span class="sc">WCAG 3.2.4 – Consistent Identification</span><strong>Identisk udseende kort opførte sig på fire forskellige måder.</strong> Nogle kort åbnede en dialog med to knapper, nogle med én, nogle foldede et panel ud på siden, og nogle var eksterne links forklædt som knapper – uden nogen visuel forskel, der kunne forudsige udfaldet før klikket. Målt op mod NN/g-heuristik 4 (konsistens og standarder). Alle kort åbner nu den samme dialog gennem den samme type kontrol.'><span class="sc">WCAG 3.2.4 – Consistent Identification</span><strong>Identical-looking cards behaved in four different ways.</strong> Some opened a dialog with two buttons, some with one, some expanded an inline panel, and some were external links styled as buttons — with no visual difference to predict the outcome before clicking. Measured against NN/g heuristic 4 (Consistency and Standards). Every card now opens the same dialog through the same kind of control.</li>
       <li data-da-html='<span class="sc">WCAG 2.5.3 – Label in Name</span><strong>Sprogskifteren var mærket med et bart chevron og et skjult navn, der ikke matchede.</strong> Kontrollen viste kun "English ⌄", mens dens tilgængelige navn lød "Change language, current: English" – så talestyring, der siger den synlige tekst, ikke nødvendigvis rammer knappen. Kontrollen bærer nu en synlig "Sprog:"-etiket, og det skjulte navn er fjernet, så det tilgængelige navn er præcis den synlige tekst.'><span class="sc">WCAG 2.5.3 – Label in Name</span><strong>The language switcher was labelled with a bare chevron and a hidden name that did not match it.</strong> The control showed only "English ⌄" while its accessible name read "Change language, current: English" — so speech-input users saying the visible text would not reliably hit the button. The control now carries a visible "Language:" label and the hidden name is gone, making the accessible name exactly the visible text.</li>
@@ -519,9 +530,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-h">
   <div class="reveal">
-    <span class="section-label" data-da="Lad os tale sammen">Let's talk</span>
     <h2 class="section-title" id="contact-h" data-da="Jeg er tilgængelig til det rette projekt.">I'm available for the right project.</h2>
-    <p data-da="Hvis du bygger noget, der betyder noget for mennesker, som er blevet overset i designsamtalen, vil jeg gerne høre fra dig.">If you're building something that matters to people who've been left out of the design conversation, I want to hear from you.</p>
     <p class="contact-email" data-da-html='E-mail: <a href="mailto:hello@esben.design">hello@esben.design</a>'>E-mail: <a href="mailto:hello@esben.design">hello@esben.design</a></p>
   </div>
 </section>
@@ -595,6 +604,10 @@ const SHAPE_LABELS = { en: { play: 'Play animation', pause: 'Pause animation' },
     document.querySelectorAll('[data-da-aria]').forEach(el=>{
       if(el.dataset.enAria===undefined) el.dataset.enAria = el.getAttribute('aria-label')||'';
       el.setAttribute('aria-label', lang==='da' ? el.dataset.daAria : el.dataset.enAria);
+    });
+    document.querySelectorAll('[data-da-alt]').forEach(el=>{
+      if(el.dataset.enAlt===undefined) el.dataset.enAlt = el.getAttribute('alt')||'';
+      el.setAttribute('alt', lang==='da' ? el.dataset.daAlt : el.dataset.enAlt);
     });
     root.setAttribute('lang', lang);
     document.title = titles[lang];
@@ -888,6 +901,41 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: .12 });
 document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el => io.observe(el));
+
+// ── CURRENT SECTION (scrollspy) ────────────────────────
+(function(){
+  const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const targets = links
+    .map(a => ({ link: a, section: document.querySelector(a.getAttribute('href')) }))
+    .filter(t => t.section);
+  // the other work sections have no nav link of their own; keep "Work" current across all of them
+  const workLink = links.find(a => a.getAttribute('href') === '#work');
+  if (workLink) {
+    document.querySelectorAll('.work-section').forEach(section => {
+      if (!targets.some(t => t.section === section)) targets.push({ link: workLink, section });
+    });
+  }
+  if (!targets.length) return;
+  let current = null;
+  function setCurrent(link){
+    if (link === current) return;
+    targets.forEach(t => t.link.removeAttribute('aria-current'));
+    if (link) link.setAttribute('aria-current', 'location');
+    current = link;
+  }
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const hit = targets.find(t => t.section === e.target);
+      if (hit) setCurrent(hit.link);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  targets.forEach(t => spy.observe(t.section));
+  // clear the marker when scrolled back above the first tracked section
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 80) setCurrent(null);
+  }, { passive: true });
+})();
 
 // ── CASE STUDY MODAL ────────────────────────────────────
 (function(){
