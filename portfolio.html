@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --red: #E3000B;
@@ -19,7 +19,7 @@
   --white: #FFFFFF;
   --black: #1A1A1A;
   --studio-red: #B83228;
-  --f-display: 'Space Grotesk', sans-serif;
+  --f-display: 'Archivo', sans-serif;
   --f-body: 'DM Sans', sans-serif;
   --f-mono: 'Space Mono', monospace;
   --ease-s: cubic-bezier(0.25,0,0,1);
@@ -38,14 +38,15 @@ a,button,[tabindex]{scroll-margin-top:80px}
 .skip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 
 /* NAV */
-nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--white);border-bottom:3px solid var(--black)}
+nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.875rem 2rem;background:var(--white);border-bottom:3px solid var(--black)}
 .nav-logo{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--black);text-decoration:none;letter-spacing:-.02em;padding:.5rem 0;display:inline-block}
 .nav-logo span{color:var(--red)}
 .nav-logo:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 .lang-switch{position:relative}
-.lang-toggle{display:flex;align-items:center;gap:.4rem;background:none;color:var(--black);border:none;padding:.3rem .6rem;cursor:pointer;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
+.lang-toggle{display:flex;align-items:center;gap:.35rem;background:none;color:var(--black);border:none;padding:.3rem .5rem;cursor:pointer;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
 .lang-toggle:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--red)}
+.lang-label{color:#595959}
 .lang-chevron{flex-shrink:0;transition:transform .15s var(--ease-s)}
 .lang-toggle[aria-expanded="true"] .lang-chevron{transform:rotate(180deg)}
 .lang-menu{position:absolute;top:calc(100% + .4rem);right:0;margin:0;padding:0;list-style:none;background:var(--white);border:2px solid var(--black);min-width:100%;box-shadow:3px 3px 0 var(--black);z-index:50}
@@ -64,11 +65,11 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 /* HERO */
 .hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-h,57px);overflow:hidden;border-bottom:3px solid var(--black)}
 .hero::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--black);transform:translateX(-1.5px);pointer-events:none;z-index:1}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem 4rem 4rem}
-.eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1.5rem}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem 3rem 3rem}
+.eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1.15rem}
 .hero-name{font-family:var(--f-display);font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:1.25rem}
 .hero-name em{font-style:normal;color:var(--red)}
-.hero-desc{font-size:1.05rem;line-height:1.7;color:#555;max-width:38ch;margin-bottom:2.5rem}
+.hero-desc{font-size:1.05rem;line-height:1.65;color:#555;max-width:38ch;margin-bottom:1.85rem}
 .cta-row{display:flex;gap:1rem;flex-wrap:wrap}
 .btn{display:inline-block;font-family:var(--f-display);font-weight:600;font-size:.875rem;padding:.875rem 2rem;text-decoration:none;border:3px solid var(--black);box-shadow:4px 4px 0 var(--black);transition:transform .15s,box-shadow .15s;cursor:pointer}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
@@ -96,7 +97,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 @keyframes eyeBlink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}
 @media (prefers-reduced-motion:reduce){.shape-blk{transition:none}}
 
-.work-section{padding:6rem 4rem;border-bottom:3px solid var(--black)}
+.work-section{padding:4rem 3rem;border-bottom:3px solid var(--black)}
 .case-desc.placeholder{font-style:italic}
 
 /* SECTIONS shared */
@@ -106,14 +107,14 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 /* ABOUT */
 
 /* WORK */
-.work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:2rem}
 #work-student .work-grid{grid-template-columns:1fr}
-.case{padding:3rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden}
-.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:1.5rem}
-.case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.4rem}
-.case-org{font-family:var(--f-mono);font-size:.7rem;margin-bottom:.75rem}
-.case-desc{font-size:.875rem;line-height:1.65;margin-bottom:1.25rem}
-.case-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.case{padding:2rem;border:3px solid var(--black);margin:-1.5px;position:relative;overflow:hidden}
+.case-n{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;margin-bottom:1rem}
+.case-title{font-family:var(--f-display);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+.case-org{font-family:var(--f-mono);font-size:.7rem;margin-bottom:.65rem}
+.case-desc{font-size:.875rem;line-height:1.6;margin-bottom:1rem}
+.case-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.15rem}
 .case-view-btn{padding:.6rem 1.5rem;font-size:.75rem}
 .tag{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border:2px solid currentColor;border-radius:2px}
 .c1{background:var(--red);color:var(--white)}
@@ -126,7 +127,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,26,.75);display:flex;align-items:center;justify-content:center;padding:1.5rem;z-index:2000;opacity:0;transition:opacity .25s var(--ease-s)}
 .modal-overlay[hidden]{display:none}
 .modal-overlay.open{opacity:1}
-.case-modal{background:var(--white);border:3px solid var(--black);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:3rem;position:relative;transform:translateY(12px);transition:transform .25s var(--ease-s)}
+.case-modal{background:var(--white);border:3px solid var(--black);max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:2.25rem;position:relative;transform:translateY(12px);transition:transform .25s var(--ease-s)}
 .case-modal:focus{outline:3px solid var(--blue);outline-offset:-6px}
 .modal-overlay.open .case-modal{transform:none}
 .modal-close{position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border:2px solid var(--black);background:var(--white);color:var(--black);font-family:var(--f-display);font-size:1.25rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s,border-color .15s}
@@ -160,28 +161,28 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 @media(max-width:600px){.case-modal{padding:2.5rem 1.5rem}}
 
 /* PROCESS */
-#process{padding:6rem 4rem;border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
+#process{padding:4rem 3rem;border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
 #process .section-label{color:var(--yellow)}
 #process .section-title{color:var(--white)}
-.process-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:4rem;border:3px solid rgba(255,255,255,.15)}
-.step{padding:2.5rem 1.75rem;border-right:3px solid rgba(255,255,255,.15);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:2.5rem;border:3px solid rgba(255,255,255,.15)}
+.step{padding:1.75rem 1.25rem;border-right:3px solid rgba(255,255,255,.15);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
 .step:last-child{border-right:none}
 .step.on{opacity:1;transform:none}
-.step-icon{font-size:1.6rem;margin-bottom:1.25rem}
-.step-name{font-family:var(--f-display);font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.step-icon{font-size:1.6rem;margin-bottom:.9rem}
+.step-name{font-family:var(--f-display);font-size:1rem;font-weight:600;margin-bottom:.5rem}
 .step-desc{font-size:.85rem;line-height:1.65;opacity:.65}
 
 /* ACCESSIBILITY */
-#accessibility{padding:6rem 4rem;border-bottom:3px solid var(--black);background:var(--yellow)}
-.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
-.a11y-card{background:var(--white);border:3px solid var(--black);padding:2rem;box-shadow:5px 5px 0 var(--black);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+#accessibility{padding:4rem 3rem;border-bottom:3px solid var(--black);background:var(--yellow)}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
+.a11y-card{background:var(--white);border:3px solid var(--black);padding:1.5rem;box-shadow:5px 5px 0 var(--black);opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
 .a11y-card.on{opacity:1;transform:none}
 .wcag-badge{display:inline-block;background:var(--green);color:var(--white);font-family:var(--f-mono);font-size:.65rem;padding:.2rem .5rem;margin-bottom:.75rem;border:2px solid var(--black)}
 .a11y-card h3{font-family:var(--f-display);font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
 .a11y-card p{font-size:.875rem;line-height:1.7;color:#444}
 
 /* ACCESSIBILITY STATUS + REPORT */
-.a11y-status{background:var(--white);border:3px solid var(--black);padding:2rem;box-shadow:5px 5px 0 var(--black);margin-top:3rem;opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
+.a11y-status{background:var(--white);border:3px solid var(--black);padding:1.5rem;box-shadow:5px 5px 0 var(--black);margin-top:2rem;opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease-s),transform .5s var(--ease-s)}
 .a11y-status.on{opacity:1;transform:none}
 .a11y-status-date{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#666;margin:.5rem 0 1rem}
 .a11y-status h3{font-family:var(--f-display);font-size:1.3rem;font-weight:700;margin-bottom:.6rem}
@@ -199,26 +200,28 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .a11y-report[open] summary::before{content:'–'}
 .a11y-report summary:focus-visible{outline:none;box-shadow:inset 0 0 0 3px var(--blue)}
 .a11y-report-list{margin:0;padding:0 1.5rem 1.5rem;border-top:3px solid var(--black);list-style:none}
-.case-overview{margin-top:1.5rem;margin-bottom:1rem;background:var(--white);color:var(--black)}
-.case-overview summary{padding:.5rem 1.5rem}
-.case-overview-body{padding:1.5rem;border-top:3px solid var(--black)}
-.case-overview-body p{max-width:70ch;color:#333;font-size:.95rem;line-height:1.7;margin-bottom:1rem}
-.case-overview-body p:last-child{margin-bottom:0}
+.modal-overview[hidden]{display:none}
+.modal-overview p{font-size:.95rem;line-height:1.7;color:#333;margin-bottom:1rem}
+.modal-overview p:last-child{margin-bottom:0}
+.modal-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+.modal-link[hidden]{display:none}
+.modal-link:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
+.modal-link .ext{font-family:var(--f-mono);font-size:.7rem;color:#595959}
 .a11y-report-list li{padding:1rem 0;border-bottom:1px solid rgba(0,0,0,.12);font-size:.85rem;line-height:1.65;color:#333}
 .a11y-report-list li:last-child{border-bottom:none}
 .a11y-report-list .sc{font-family:var(--f-mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--red);display:block;margin-bottom:.35rem}
 .a11y-report-list strong{color:var(--black)}
 
 /* CONTACT */
-#contact{padding:8rem 4rem;text-align:center;border-bottom:3px solid var(--black)}
-#contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1.25rem}
-#contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2.5rem;line-height:1.7}
+#contact{padding:5rem 3rem;text-align:center;border-bottom:3px solid var(--black)}
+#contact .section-title{font-size:clamp(2rem,5vw,4rem);margin-bottom:1rem}
+#contact p{font-size:1rem;color:#555;max-width:46ch;margin:0 auto 2rem;line-height:1.65}
 #contact p.contact-email{font-family:var(--f-mono);font-size:.9rem;color:var(--black);margin:-1.5rem auto 2rem}
 .contact-email a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
 .contact-email a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
 /* FOOTER */
-footer{padding:1.75rem 4rem;display:flex;align-items:center;justify-content:space-between}
+footer{padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
 footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 
 /* SCROLL REVEAL */
@@ -231,13 +234,14 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-right{display:none}
   .hero-left{padding:1.5rem 1.5rem 2.5rem;justify-content:flex-start}
-  .work-section{padding:3rem 1.5rem}
+  .work-section{padding:2.5rem 1.25rem}
   .work-grid{grid-template-columns:1fr}
+  .case{padding:1.5rem}
   .process-steps{grid-template-columns:1fr 1fr}
-  #process{padding:3rem 1.5rem}
+  #process{padding:2.5rem 1.25rem}
   .a11y-grid{grid-template-columns:1fr}
-  #accessibility{padding:3rem 1.5rem}
-  #contact{padding:4rem 1.5rem}
+  #accessibility{padding:2.5rem 1.25rem}
+  #contact{padding:3rem 1.25rem}
   footer{padding:1.5rem;flex-direction:column;gap:.75rem;text-align:center}
   .nav-toggle{display:block}
   .nav-links{display:none}
@@ -264,6 +268,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     </ul>
     <div class="lang-switch">
       <button type="button" class="lang-toggle" id="langToggle" aria-expanded="false" aria-controls="langMenu">
+        <span class="lang-label" data-da="Sprog:">Language:</span>
         <span id="langCurrentLabel">English</span>
         <svg class="lang-chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -281,7 +286,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 <section class="hero" aria-label="Introduction" data-da-aria="Introduktion">
   <div class="hero-left">
     <p class="eyebrow" data-da="Senior UX/UI-designer · København">Senior UX/UI Designer · Copenhagen</p>
-    <h1 class="hero-name" data-da-html="Design der virker<br><em>for alle.</em>">Design that works<br><em>for everyone.</em></h1>
+    <h1 class="hero-name" data-da-html="Design der virker <br><em>for alle.</em>">Design that works <br><em>for everyone.</em></h1>
     <p class="hero-desc" data-da="8 års research, workshops og testede grænseflader, bygget på troen om at tilgængeligt design ganske enkelt er godt design.">8 years of research, workshops, and tested interfaces, built on the belief that accessible design is simply good design.</p>
     <div class="cta-row">
       <a href="#work" class="btn btn-red" data-da="Se mit arbejde">View my work</a>
@@ -302,7 +307,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem">
-      <div class="case-n">Case 01</div>
       <h3 class="case-title" data-da="Underwriting-platform">Underwriting platform</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Fuldt ejerskab af virksomhedens første coreagnostiske produkt, hvor jeg omlagde den måde underwritere håndterer sager på.">End-to-end ownership of the company's first core-agnostic product, reworking how underwriters handle cases.</p>
@@ -315,7 +319,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       </div>
     </article>
     <article class="case c2 reveal" role="listitem">
-      <div class="case-n">Case 02</div>
       <h3 class="case-title" data-da="Produktkonfiguration">Product configuration</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Et komplekst konfigurationsprodukt til håndtering af forretningsregler, versionering og sporbarhed.">A high-complexity configuration product handling business rules, versioning, and traceability.</p>
@@ -333,19 +336,12 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Et sagsoprettelsesflow til kundeservicemedarbejdere: en modal, hvor felterne tilpasser sig hvilken type sag der oprettes, fra en skadesanmeldelse (FNOL) til en erhvervskundes policeanmodning.">A case-creation flow for customer service reps: a modal that adapts its fields to what kind of case is being opened, from a First Notice of Loss to an enterprise policy request.</p>
       <div class="case-tags"><span class="tag">Case Creation</span><span class="tag">Enterprise SaaS</span><span class="tag">Public</span></div>
-      <details class="a11y-report case-overview">
-        <summary data-da="Overblik">Overview</summary>
-        <div class="case-overview-body">
-          <p data-da="Det første produkt jeg bidrog til hos Tia, før jeg fik fuldt ejerskab af platformene ovenfor. Kundeservicemedarbejdere bruger det til at oprette en sag på en kunde eller husstand, og de viste felter tilpasser sig, hvad sagen reelt handler om: policeindehaverens oplysninger, police-ID, adresse, boligtype, husstandsmedlemmer og historik ved en skade, eller et mindre sæt felter ved en erhvervskundes policeanmodning. Alt, der krævede en sag oprettet for at kunne håndteres og dokumenteres, gik gennem dette flow.">The first product I contributed to at Tia, before taking end-to-end ownership of the platforms above. Customer service reps use it to open a case on a customer or household, and the fields shown adapt to what the case actually is: policyholder details, policy ID, address, home type, family members and history for a claim, or a narrower set of fields for an enterprise policy request. Anything that needed a case created to be managed and documented ran through this flow.</p>
-          <p data-da="Lanceret som Tias Customer Service Workbench – offentligt annonceret, i modsætning til resten af Tia-arbejdet på denne side.">Shipped as Tia's Customer Service Workbench – publicly announced, unlike the rest of the Tia work on this page.</p>
-        </div>
-      </details>
+      <script type="application/json" class="case-overview">{"paragraphs":{"en":["The first product I contributed to at Tia, before taking end-to-end ownership of the platforms above. Customer service reps use it to open a case on a customer or household, and the fields shown adapt to what the case actually is: policyholder details, policy ID, address, home type, family members and history for a claim, or a narrower set of fields for an enterprise policy request. Anything that needed a case created to be managed and documented ran through this flow.","Shipped as Tia's Customer Service Workbench – publicly announced, unlike the rest of the Tia work on this page."],"da":["Det første produkt jeg bidrog til hos Tia, før jeg fik fuldt ejerskab af platformene ovenfor. Kundeservicemedarbejdere bruger det til at oprette en sag på en kunde eller husstand, og de viste felter tilpasser sig, hvad sagen reelt handler om: policeindehaverens oplysninger, police-ID, adresse, boligtype, husstandsmedlemmer og historik ved en skade, eller et mindre sæt felter ved en erhvervskundes policeanmodning. Alt, der krævede en sag oprettet for at kunne håndteres og dokumenteres, gik gennem dette flow.","Lanceret som Tias Customer Service Workbench – offentligt annonceret, i modsætning til resten af Tia-arbejdet på denne side."]},"link":{"href":"https://www.linkedin.com/posts/tia-technology_customer-service-workbench-activity-6879728927531700224-q4R8","label":{"en":"Watch the launch video on LinkedIn","da":"Se lanceringsvideoen på LinkedIn"}}}</script>
       <div class="cta-row">
-        <a href="https://www.linkedin.com/posts/tia-technology_customer-service-workbench-activity-6879728927531700224-q4R8" class="btn btn-white case-view-btn" target="_blank" rel="noopener" aria-label="Watch the Customer Service Workbench launch video on LinkedIn (opens in a new tab)" data-da-aria="Se lanceringsvideoen for Customer Service Workbench på LinkedIn (åbner i en ny fane)">LinkedIn demo</a>
+        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the case: Customer Service Workbench" data-da-aria="Se casen: Customer Service Workbench" data-da="Casen">The case</button>
       </div>
     </article>
     <article class="case c3 reveal" role="listitem">
-      <div class="case-n">Case 03</div>
       <h3 class="case-title" data-da="Administrationsplatform">Administration platform</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Autorisation, serverstatus og kommunikationsservices på tværs af flere erhvervsbrugertyper.">Authorization, server status, and communication services spanning multiple enterprise user types.</p>
@@ -358,7 +354,6 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       </div>
     </article>
     <article class="case c4 reveal" role="listitem">
-      <div class="case-n">Case 04</div>
       <h3 class="case-title" data-da="Tilgængeligheds-SME">Accessibility SME</h3>
       <div class="case-org">Tia / Sapiens · Insurtech</div>
       <p class="case-desc" data-da="Forankrede WCAG 2.2 AA som systemniveau-praksis: skrev intern strategi og coachede teams i at bygge compliance ind i deres proces.">Embedded WCAG 2.2 AA as a system-level practice: wrote internal strategy and coached teams to build compliance into their process.</p>
@@ -379,7 +374,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
   <div class="work-grid" role="list">
     <article class="case c1 reveal" role="listitem">
-      <div class="case-n" data-da="Case 01 · Eksempel på fradragsdesign">Case 01 · Example of deduction designs</div>
+      <div class="case-n" data-da="Eksempel på fradragsdesign">Example of deduction designs</div>
       <h3 class="case-title" data-da="Beregner til kørselsfradrag">Kørselsfradrag: commute deduction calculator</h3>
       <div class="case-org" data-da="Udviklings- og Forenklingsstyrelsen · Skatteforvaltningen">Udviklings- og Forenklingsstyrelsen · Danish Tax Administration</div>
       <p class="case-desc" data-da="En selvbetjeningsberegner, som borgere bruger til at søge om kørselsfradrag, prototypet fra ende til anden – fra research til udviklerovergivelse.">A self-service calculator citizens use to claim their commute tax deduction, prototyped end-to-end from discovery to developer handoff.</p>
@@ -392,18 +387,14 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       </div>
     </article>
     <article class="case c3 reveal" role="listitem">
-      <div class="case-n">Case 02</div>
       <h3 class="case-title" data-da="Tilgængelighed: design, test og compliance">Accessibility: design, testing and compliance</h3>
       <div class="case-org" data-da="Udviklings- og Forenklingsstyrelsen · Skatteforvaltningen">Udviklings- og Forenklingsstyrelsen · Danish Tax Administration</div>
       <p class="case-desc" data-da="Testede samtlige sider under Skatteministeriets paraply sammen med en kollega, og rapporterede på tilgængelighedscompliance på tværs af ministeriets styrelser, samt fungerede som tilgængelighedens stemme i gennemgangen af komponenter til det fælles komponentbibliotek.">Tested every page under the Danish Tax Ministry umbrella with a colleague, reporting on accessibility compliance across the ministry's governing agencies, and served as the accessibility voice reviewing components for the shared component library.</p>
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG</span><span class="tag">Component Library</span><span class="tag">Public Sector</span></div>
-      <details class="a11y-report case-overview">
-        <summary data-da="Overblik">Overview</summary>
-        <div class="case-overview-body">
-          <p data-da="Testede sammen med en kollega samtlige sider på tværs af de websites, der hører under Skatteministeriet, så compliance-status kunne rapporteres på tværs af ministeriets styrelser frem for styrelse for styrelse.">With a colleague, tested every page across the sites under the Danish Tax Ministry umbrella, so compliance status could be reported on across the ministry's governing agencies rather than agency by agency.</p>
-          <p data-da="Fungerede derudover som tilgængelighedens stemme i gennemgangen af det fælles komponentbibliotek: tjekkede eksisterende komponenter og kvalitetssikrede nye, før de blev lanceret, så tilgængelighedsproblemer blev fanget på komponentniveau i stedet for at skulle genfindes på hver eneste side, der brugte dem.">Separately, acted as the accessibility voice in review of the shared component library: checking existing components and vetting new ones before they shipped, so accessibility got caught at the component level instead of being re-found on every page that used it.</p>
-        </div>
-      </details>
+      <script type="application/json" class="case-overview">{"paragraphs":{"en":["With a colleague, tested every page across the sites under the Danish Tax Ministry umbrella, so compliance status could be reported on across the ministry's governing agencies rather than agency by agency.","Separately, acted as the accessibility voice in review of the shared component library: checking existing components and vetting new ones before they shipped, so accessibility got caught at the component level instead of being re-found on every page that used it."],"da":["Testede sammen med en kollega samtlige sider på tværs af de websites, der hører under Skatteministeriet, så compliance-status kunne rapporteres på tværs af ministeriets styrelser frem for styrelse for styrelse.","Fungerede derudover som tilgængelighedens stemme i gennemgangen af det fælles komponentbibliotek: tjekkede eksisterende komponenter og kvalitetssikrede nye, før de blev lanceret, så tilgængelighedsproblemer blev fanget på komponentniveau i stedet for at skulle genfindes på hver eneste side, der brugte dem."]}}</script>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the case: Accessibility, design, testing and compliance" data-da-aria="Se casen: Tilgængelighed, design, test og compliance" data-da="Casen">The case</button>
+      </div>
     </article>
   </div>
 </section>
@@ -421,13 +412,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="case-org" data-da="Rigshospitalet · Københavns Universitetshospital">Rigshospitalet · Copenhagen University Hospital</div>
       <p class="case-desc" data-da="Trænede sygeplejersker i Sundhedsplatformen og analyserede lægers arbejdsgange for at reducere tid brugt på patientdataindtastning, så der blev frigjort mere tid til patientkontakt.">Trained nurses on Sundhedsplatformen and analysed doctors' workflows to cut down time spent on patient data entry, freeing up more face-to-face time with patients.</p>
       <div class="case-tags"><span class="tag">Research</span><span class="tag">Training</span><span class="tag">Workflow Analysis</span></div>
-      <details class="a11y-report case-overview">
-        <summary data-da="Overblik">Overview</summary>
-        <div class="case-overview-body">
-          <p data-da="Understøttede udrulningen af Sundhedsplatformen på Rigshospitalet. Brugte go-native-observation og think-aloud-sessioner til at se, hvordan læger og sygeplejersker reelt brugte systemet i hverdagen, helt ned til hvordan læger skrev notater og bestilte medicin og procedurer. Trænede sygeplejerskestuderende i systemet, og rapporterede fejl til et fælles team af medarbejdere og udviklere. Målet var hele vejen igennem at reducere tid brugt på pc-baseret dataindtastning, så personalet fik mere tid med patienterne og mindre risiko for at håndtere patientdata forkert.">Supported the rollout of Sundhedsplatformen at Rigshospitalet. Used go-native observation and think-aloud sessions to see how doctors and nurses actually used the system day to day, down to how doctors wrote notes and ordered medicine and procedures. Trained nurse students on the system, and reported errors to a joint staff-engineering team. The aim throughout was to cut down time spent on PC-based data entry, so staff had more time with patients and less risk of handling patient data incorrectly.</p>
-          <p data-da="Fagprofessionelle vil ofte gerne have hver eneste interaktion og informationsbid på én stor side, og det er vigtigt at lytte til brugere, der kender deres felt. Men i sidste ende er de ikke designere: enklere grænseflader viste sig at hjælpe personalet med at fokusere på opgaven foran dem.">Core professionals often want every interaction and piece of information on one big page, and it's important to listen to users who know their field. But in the end they're not designers: simpler interfaces turned out to help staff focus on the task at hand.</p>
-        </div>
-      </details>
+      <script type="application/json" class="case-overview">{"paragraphs":{"en":["Supported the rollout of Sundhedsplatformen at Rigshospitalet. Used go-native observation and think-aloud sessions to see how doctors and nurses actually used the system day to day, down to how doctors wrote notes and ordered medicine and procedures. Trained nurse students on the system, and reported errors to a joint staff-engineering team. The aim throughout was to cut down time spent on PC-based data entry, so staff had more time with patients and less risk of handling patient data incorrectly.","Core professionals often want every interaction and piece of information on one big page, and it's important to listen to users who know their field. But in the end they're not designers: simpler interfaces turned out to help staff focus on the task at hand."],"da":["Understøttede udrulningen af Sundhedsplatformen på Rigshospitalet. Brugte go-native-observation og think-aloud-sessioner til at se, hvordan læger og sygeplejersker reelt brugte systemet i hverdagen, helt ned til hvordan læger skrev notater og bestilte medicin og procedurer. Trænede sygeplejerskestuderende i systemet, og rapporterede fejl til et fælles team af medarbejdere og udviklere. Målet var hele vejen igennem at reducere tid brugt på pc-baseret dataindtastning, så personalet fik mere tid med patienterne og mindre risiko for at håndtere patientdata forkert.","Fagprofessionelle vil ofte gerne have hver eneste interaktion og informationsbid på én stor side, og det er vigtigt at lytte til brugere, der kender deres felt. Men i sidste ende er de ikke designere: enklere grænseflader viste sig at hjælpe personalet med at fokusere på opgaven foran dem."]}}</script>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the case: Helping healthcare professionals make sense of Sundhedsplatformen" data-da-aria="Se casen: Hjælper sundhedsprofessionelle med at forstå Sundhedsplatformen" data-da="Casen">The case</button>
+      </div>
     </article>
   </div>
 </section>
@@ -442,11 +430,11 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
     <article class="case c4 reveal" role="listitem">
       <div class="case-n" data-da="Personligt projekt">Personal Project</div>
       <h3 class="case-title" data-da="At gøre denne portfolio til et designsystem">Turning this portfolio into a design system</h3>
-      <p class="case-desc" data-da="Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, type-trioen Space Grotesk/DM Sans/Space Mono) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek. Hver komponent verificeres med et automatisk render-tjek og en visuel QA-pipeline, før den lanceres.">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Space Grotesk/DM Sans/Space Mono type trio) and formalized it into a documented token scale and a reusable React component library. Every component is verified with an automated render-check and visual QA pipeline before shipping.</p>
+      <p class="case-desc" data-da="Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, type-trioen Archivo/DM Sans/Space Mono) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Archivo/DM Sans/Space Mono type trio) and formalized it into a documented token scale and a reusable React component library.</p>
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Design Tokens</span><span class="tag">React</span></div>
+      <script type="application/json" class="case-overview">{"paragraphs":{"en":["Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the type pairing) and formalized it into a documented token scale and a reusable React component library.","Every component is verified with an automated render-check and visual QA pipeline before shipping."],"da":["Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, typeparringen) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.","Hver komponent verificeres med et automatisk render-tjek og en visuel QA-pipeline, før den lanceres."]},"link":{"href":"https://esbenmo.github.io/portfolio/design-system/dist/","label":{"en":"Open the live design system","da":"Åbn det live designsystem"}}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" aria-haspopup="dialog" aria-label="View case study: Turning this portfolio into a design system" data-da-aria="Se casestudiet: At gøre denne portfolio til et designsystem" data-da="Se">View</button>
-        <a href="https://esbenmo.github.io/portfolio/design-system/dist/" class="btn btn-white case-view-btn" target="_blank" rel="noopener" aria-label="Live design system (opens in a new tab)" data-da-aria="Live designsystem (åbner i en ny fane)" data-da="Live designsystem →">Live design system →</a>
+        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the case: Turning this portfolio into a design system" data-da-aria="Se casen: At gøre denne portfolio til et designsystem" data-da="Casen">The case</button>
       </div>
     </article>
   </div>
@@ -483,9 +471,9 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
 
   <div class="a11y-status">
     <span class="wcag-badge">WCAG 2.2 AA</span>
-    <h3 data-da="Tilgængelighedsstatus: fuld audit gennemført, 15 problemer rettet">Accessibility status: full audit completed, 15 issues fixed</h3>
-    <div class="a11y-status-date" data-da="Auditeret og rettet 4. august 2026 · manuelt + automatisk · hver komponent, tilstand og tastaturvej testet">Audited &amp; fixed 4 August 2026 · manual + automated · every component, state, and keyboard path tested</div>
-    <p data-da="Denne side er testet mod WCAG 2.2: markup, ARIA, farvekontrast (inklusiv fokusindikatorer mod deres faktiske baggrunde), tastaturnavigation, målstørrelser og adfærd ved reduceret bevægelse. 15 reelle problemer blev fundet (heriblandt en fokusring, der var fuldstændig usynlig på to case-kort), og alle er blevet rettet. Intet her er en påstand uden dokumentation.">This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. 15 real issues were found (including a focus ring that was completely invisible on two case-study cards), and every one has been fixed. Nothing here is a claim without a receipt.</p>
+    <h3 data-da="Tilgængelighedsstatus: fuld audit gennemført, 20 problemer rettet">Accessibility status: full audit completed, 20 issues fixed</h3>
+    <div class="a11y-status-date" data-da="Auditeret og rettet 4. august 2026 · genauditeret 14. august 2026 mod NN/g's 10 heuristikker · manuelt + automatisk">Audited &amp; fixed 4 August 2026 · re-audited 14 August 2026 against NN/g's 10 usability heuristics · manual + automated</div>
+    <p data-da="Denne side er testet mod WCAG 2.2: markup, ARIA, farvekontrast (inklusiv fokusindikatorer mod deres faktiske baggrunde), tastaturnavigation, målstørrelser og adfærd ved reduceret bevægelse. En anden runde holdt siden op mod Nielsen Norman Groups 10 brugbarhedsheuristikker og fandt fem problemer mere, heriblandt en overskrift, som skærmlæsere læste op som ét sammenhængende ord. I alt 20 reelle problemer er fundet og rettet. Intet her er en påstand uden dokumentation.">This page was tested against WCAG 2.2: markup, ARIA, color contrast (including focus indicators against their actual backgrounds), keyboard navigation, target sizes, and reduced-motion behaviour. A second pass measured the page against Nielsen Norman Group's 10 usability heuristics and found five more issues, including a heading that screen readers announced as one run-together word. 20 real issues found and fixed in total. Nothing here is a claim without a receipt.</p>
     <div class="a11y-tested">
       <span class="a11y-tested-label" data-da="Hvad blev testet">What was tested</span>
       <div class="a11y-tested-tags">
@@ -502,8 +490,13 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
   </div>
 
   <details class="a11y-report">
-    <summary data-da="Fuld audit- og rettelsesrapport (15 punkter)">Full audit &amp; fix report (15 items)</summary>
+    <summary data-da="Fuld audit- og rettelsesrapport (20 punkter)">Full audit &amp; fix report (20 items)</summary>
     <ol class="a11y-report-list">
+      <li data-da-html='<span class="sc">Skærmlæsertekst · 1.3.1</span><strong>Hovedoverskriften blev læst op som ét sammenhængende ord.</strong> Overskriften var delt over to linjer med et &lt;br&gt;, men uden mellemrum omkring det. Et linjeskift indsætter ikke et tekstmæssigt mellemrum, så NVDA, JAWS og VoiceOver annoncerede "Design der virkerfor alle" i stedet for "Design der virker for alle". Verificeret direkte i browseren via elementets tekstindhold. Rettet med et eksplicit mellemrum før linjeskiftet i begge sprogversioner.'><span class="sc">Screen-reader text · 1.3.1</span><strong>The main heading was announced as one run-together word.</strong> The headline was split across two lines with a &lt;br&gt; and no surrounding space. A line break inserts no text-level space, so NVDA, JAWS and VoiceOver read "Design that worksfor everyone" instead of "Design that works for everyone". Verified directly in-browser against the element's text content. Fixed with an explicit space before the break, in both language versions.</li>
+      <li data-da-html='<span class="sc">WCAG 3.2.4 – Consistent Identification</span><strong>Identisk udseende kort opførte sig på fire forskellige måder.</strong> Nogle kort åbnede en dialog med to knapper, nogle med én, nogle foldede et panel ud på siden, og nogle var eksterne links forklædt som knapper – uden nogen visuel forskel, der kunne forudsige udfaldet før klikket. Målt op mod NN/g-heuristik 4 (konsistens og standarder). Alle kort åbner nu den samme dialog gennem den samme type kontrol.'><span class="sc">WCAG 3.2.4 – Consistent Identification</span><strong>Identical-looking cards behaved in four different ways.</strong> Some opened a dialog with two buttons, some with one, some expanded an inline panel, and some were external links styled as buttons — with no visual difference to predict the outcome before clicking. Measured against NN/g heuristic 4 (Consistency and Standards). Every card now opens the same dialog through the same kind of control.</li>
+      <li data-da-html='<span class="sc">WCAG 2.5.3 – Label in Name</span><strong>Sprogskifteren var mærket med et bart chevron og et skjult navn, der ikke matchede.</strong> Kontrollen viste kun "English ⌄", mens dens tilgængelige navn lød "Change language, current: English" – så talestyring, der siger den synlige tekst, ikke nødvendigvis rammer knappen. Kontrollen bærer nu en synlig "Sprog:"-etiket, og det skjulte navn er fjernet, så det tilgængelige navn er præcis den synlige tekst.'><span class="sc">WCAG 2.5.3 – Label in Name</span><strong>The language switcher was labelled with a bare chevron and a hidden name that did not match it.</strong> The control showed only "English ⌄" while its accessible name read "Change language, current: English" — so speech-input users saying the visible text would not reliably hit the button. The control now carries a visible "Language:" label and the hidden name is gone, making the accessible name exactly the visible text.</li>
+      <li data-da-html='<span class="sc">WCAG 3.2.5 – Change on Request</span><strong>Eksterne links lå blandt kort-knapperne uden nogen advarsel om en ny fane.</strong> "LinkedIn demo" og "Live designsystem" så ud præcis som de knapper, der åbner en dialog, men forlod siden i stedet. Begge ligger nu inde i deres respektive dialog som rigtige links, hver med en synlig "(åbner i en ny fane)"-note, der også læses op af skærmlæsere.'><span class="sc">WCAG 3.2.5 – Change on Request</span><strong>External links sat among the card buttons with no new-tab warning.</strong> "LinkedIn demo" and "Live design system" looked exactly like the buttons that open a dialog, but left the page instead. Both now live inside their case dialog as real links, each carrying a visible "(opens in a new tab)" note that screen readers also announce.</li>
+      <li data-da-html='<span class="sc">WCAG 2.4.3 – Focus Order</span><strong>Dialogens fokusfælde talte kun knapper, ikke links.</strong> Da det eksterne link flyttede ind i dialogen, ville den eksisterende Tab-håndtering have regnet det første og sidste fokuserbare element forkert ud og sendt tastaturfokus ud af dialogen. Fælden tæller nu både knapper og links, og springer alt, der er skjult, over.'><span class="sc">WCAG 2.4.3 – Focus Order</span><strong>The dialog's focus trap counted only buttons, not links.</strong> Once the external link moved inside the dialog, the existing Tab handling would have miscalculated the first and last focusable element and let keyboard focus escape the dialog. The trap now counts buttons and links alike, and skips anything hidden.</li>
       <li data-da-html='<span class="sc">WCAG 1.4.11 · 2.4.7 – Non-text Contrast / Focus Visible</span><strong>Fokusringen var usynlig på 2 ud af 4 case-kort-farver.</strong> Tastaturets fokuskontur brugte samme blå som brandpaletten: på det blå kort matchede den baggrunden fuldstændig (1,00:1 kontrast), og på det grønne kort viste de to farver sig at have næsten identisk lysstyrke (også 1,00:1), på trods af at de så forskellige ud. Rettet med en dobbelt ring i hvid og sort, der forbliver synlig mod enhver kort-farve.'><span class="sc">WCAG 1.4.11 · 2.4.7 – Non-text Contrast / Focus Visible</span><strong>Focus ring was invisible on 2 of 4 case-card colours.</strong> The keyboard focus outline used the same blue as the brand palette: on the blue card it matched the background exactly (1.00:1 contrast), and on the green card the two colours turned out to have near-identical luminance (also 1.00:1), despite looking different. Fixed with a white+black double ring that stays visible against every card colour.</li>
       <li data-da-html='<span class="sc">WCAG 2.4.11 – Focus Not Obscured (new in 2.2)</span><strong>Den fastgjorte navigationsbjælke kunne fuldstændig dække en tastatur-fokuseret knap.</strong> Bekræftet i praksis: en "Se"-knap, der blev scrollet til med Tab, landede fuldstændig under den uigennemsigtige navigation. Rettet ved at give alle fokuserbare elementer nok scroll margin til at rydde navigationen.'><span class="sc">WCAG 2.4.11 – Focus Not Obscured (new in 2.2)</span><strong>The fixed nav bar could completely cover a keyboard-focused button.</strong> Confirmed live: a "View" button scrolled to by Tab landed entirely underneath the opaque nav. Fixed by giving every focusable element enough scroll margin to clear the nav.</li>
       <li data-da-html='<span class="sc">Predictability / 4.1.2</span><strong>"Live designsystem"-linket åbnede også ubemærket case-modalen.</strong> Det delte CSS-klasse med knapperne, der udløser modalen, så aktivering åbnede både en ny fane og en dialog samtidig. Rettet ved at afgrænse modal-adfærden til kun at gælde knapper.'><span class="sc">Predictability / 4.1.2</span><strong>The "Live design system" link also silently opened the case-study modal.</strong> It shared a CSS class with the modal-trigger buttons, so activating it opened a new tab and a dialog at the same time. Fixed by scoping the modal behaviour to buttons only.</li>
@@ -554,8 +547,10 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:#666}
       <div class="modal-gallery" id="modalGallery" hidden>
         <div class="modal-gallery-track" id="modalGalleryTrack"></div>
       </div>
+      <div class="modal-overview" id="modalOverview" hidden></div>
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-tags" id="modalTags" hidden></div>
+      <a class="modal-link" id="modalLink" hidden target="_blank" rel="noopener"></a>
     </div>
     <div id="modalProcess" hidden>
       <div class="modal-section"><span class="modal-label" style="color:var(--red)" data-da="Kontekst">Context</span><p id="modalContext"></p></div>
@@ -586,7 +581,6 @@ const SHAPE_LABELS = { en: { play: 'Play animation', pause: 'Pause animation' },
     da: 'Senior UX/UI-designer med 8 års erfaring med tilgængelighedsfokuseret design, brugerresearch og workshops.'
   };
   const langNames = { en: 'English', da: 'Dansk' };
-  const langToggleLabels = { en: 'Change language, current: English', da: 'Skift sprog, nuværende: Dansk' };
 
   function applyLang(lang){
     currentLang = lang;
@@ -607,7 +601,6 @@ const SHAPE_LABELS = { en: { play: 'Play animation', pause: 'Pause animation' },
     const metaDesc = document.querySelector('meta[name="description"]');
     if(metaDesc) metaDesc.setAttribute('content', descriptions[lang]);
     if(langCurrentLabel) langCurrentLabel.textContent = langNames[lang];
-    if(langToggle) langToggle.setAttribute('aria-label', langToggleLabels[lang]);
     document.querySelectorAll('.lang-option').forEach(opt=>{
       opt.setAttribute('aria-current', String(opt.dataset.lang===lang));
     });
@@ -910,6 +903,8 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
   const modalGalleryTrack=document.getElementById('modalGalleryTrack');
   const modalDesc=document.getElementById('modalDesc');
   const modalTags=document.getElementById('modalTags');
+  const modalOverview=document.getElementById('modalOverview');
+  const modalLink=document.getElementById('modalLink');
   const modalProcess=document.getElementById('modalProcess');
   const modalContext=document.getElementById('modalContext');
   const modalSteps=document.getElementById('modalSteps');
@@ -924,7 +919,9 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
     const card=trigger.closest('.case');
     if(!card) return;
     lastTrigger=trigger;
-    modalN.textContent=card.querySelector('.case-n')?.textContent||'';
+    const nText=card.querySelector('.case-n')?.textContent||'';
+    modalN.textContent=nText;
+    modalN.hidden=!nText;
     modalTitle.textContent=card.querySelector('.case-title')?.textContent||'';
     const org=card.querySelector('.case-org');
     modalOrg.textContent=org?org.textContent:'';
@@ -932,8 +929,44 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
 
     const processEl=card.querySelector('.case-process');
     const data=(trigger.dataset.mode==='process'&&processEl)?JSON.parse(processEl.textContent):null;
+    const overviewEl=card.querySelector('.case-overview');
+    const overviewData=(trigger.dataset.mode==='overview'&&overviewEl)?JSON.parse(overviewEl.textContent):null;
 
-    if(data){
+    if(overviewData){
+      modalProcess.hidden=true;
+      modalSimple.hidden=false;
+      modalNda.hidden=true;
+      modalGallery.hidden=true;
+      modalDesc.textContent='';
+      modalOverview.hidden=false;
+      modalOverview.innerHTML='';
+      (overviewData.paragraphs[currentLang]||[]).forEach(text=>{
+        const p=document.createElement('p');
+        p.textContent=text;
+        modalOverview.appendChild(p);
+      });
+      const tags=card.querySelectorAll('.case-tags .tag');
+      modalTags.innerHTML='';
+      tags.forEach(t=>{
+        const span=document.createElement('span');
+        span.className='tag';
+        span.textContent=t.textContent;
+        modalTags.appendChild(span);
+      });
+      modalTags.hidden=tags.length===0;
+      if(overviewData.link){
+        modalLink.hidden=false;
+        modalLink.href=overviewData.link.href;
+        modalLink.innerHTML='';
+        modalLink.append(overviewData.link.label[currentLang]+' ');
+        const ext=document.createElement('span');
+        ext.className='ext';
+        ext.textContent=currentLang==='da'?'(åbner i en ny fane)':'(opens in a new tab)';
+        modalLink.appendChild(ext);
+      } else {
+        modalLink.hidden=true;
+      }
+    } else if(data){
       modalSimple.hidden=true;
       modalProcess.hidden=false;
       modalContext.textContent=data.context[currentLang];
@@ -966,6 +999,8 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
     } else {
       modalProcess.hidden=true;
       modalSimple.hidden=false;
+      modalOverview.hidden=true;
+      modalLink.hidden=true;
       modalDesc.textContent=card.querySelector('.case-desc')?.textContent||'';
       const tags=card.querySelectorAll('.case-tags .tag');
       modalTags.innerHTML='';
@@ -1024,7 +1059,9 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
   modal.addEventListener('keydown', e=>{
     if(e.key==='Escape'){ e.preventDefault(); closeCaseModal(); return; }
     if(e.key!=='Tab') return;
-    const focusable=modal.querySelectorAll('button,[tabindex="0"]');
+    const focusable=Array.from(modal.querySelectorAll('button,a[href],[tabindex="0"]'))
+      .filter(el=>el.offsetWidth>0||el.offsetHeight>0||el.getClientRects().length>0);
+    if(!focusable.length) return;
     const first=focusable[0], last=focusable[focusable.length-1];
     if(e.shiftKey){ if(document.activeElement===first){e.preventDefault();last.focus();} }
     else { if(document.activeElement===last){e.preventDefault();first.focus();} }
