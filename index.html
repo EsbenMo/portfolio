@@ -43,7 +43,10 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--f-body);color:var(--black);background:var(--white);overflow-x:hidden}
-a,button,[tabindex]{scroll-margin-top:80px}
+/* Anchor jumps must clear the fixed nav. --nav-h is set in JS (nav + any banner);
+   the fallback covers first paint and no-JS. */
+:where(section[id],main[id]){scroll-margin-top:calc(var(--nav-h,74px) + 2.5rem)}
+a,button,[tabindex]{scroll-margin-top:calc(var(--nav-h,74px) + 1.5rem)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
