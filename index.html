@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Keep the site out of search results. Deliberately NOT paired with a
+     robots.txt Disallow: blocking the crawl would stop Google seeing this
+     tag, and the URL could still be listed from inbound links. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
 <meta name="description" content="Senior UX/UI Designer with 8 years of accessibility-first design, user research, and workshops.">
 <title>Esben. UX/UI Designer</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -81,6 +86,11 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .nav-links a:hover{border-color:var(--red)}
 .nav-links a[aria-current="location"]{border-color:var(--red)}
 .nav-links a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
+/* Contact reads as the one action in the nav, not a fifth section link. */
+.nav-links a.nav-cta{background:var(--blue);color:var(--white);padding:.8rem 1.15rem;border:2px solid var(--black);box-shadow:3px 3px 0 var(--black);border-bottom-color:var(--black);transition:transform .15s,box-shadow .15s}
+.nav-links a.nav-cta:hover{border-color:var(--black);transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--black)}
+.nav-links a.nav-cta[aria-current="location"]{border-color:var(--black)}
+.nav-links a.nav-cta:focus-visible{box-shadow:3px 3px 0 var(--black),0 0 0 2px var(--white),0 0 0 5px var(--black)}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-h,57px);overflow:hidden;border-bottom:3px solid var(--black)}
@@ -312,7 +322,7 @@ footer small{font-family:var(--f-mono);font-size:.65rem;color:var(--ink-meta)}
       <li><a href="#work" data-da="Arbejde">Work</a></li>
       <li><a href="#process" data-da="Proces">Process</a></li>
       <li><a href="#accessibility" data-da="Tilgængelighed">Accessibility</a></li>
-      <li><a href="#contact" data-da="Kontakt">Contact</a></li>
+      <li><a class="nav-cta" href="#contact" data-da="Kontakt mig">Contact me</a></li>
     </ul>
     <div class="lang-switch">
       <button type="button" class="lang-toggle" id="langToggle" aria-expanded="false" aria-controls="langMenu">
