@@ -723,6 +723,11 @@ function setNavHeight(){
 }
 setNavHeight();
 window.addEventListener('resize', setNavHeight);
+// The first run happens before the webfonts load, so it measures the nav in the
+// fallback face and overshoots. Re-measure once fonts settle, and keep watching:
+// a stale --nav-h left a white gap above the hero panel and shifted anchor jumps.
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(setNavHeight);
+if (window.ResizeObserver) new ResizeObserver(setNavHeight).observe(document.querySelector('nav'));
 
 // ── MOBILE NAV TOGGLE ────────────────────────────────────
 (function(){
