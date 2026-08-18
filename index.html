@@ -196,7 +196,7 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .modal-facts{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.75rem}
 .modal-facts[hidden]{display:none}
 .modal-fact{border:2px solid var(--black);padding:.55rem .75rem;flex:1 1 8rem}
-.modal-fact-label{font-family:var(--f-mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-meta);display:block;margin-bottom:.3rem}
+.modal-fact-label{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-meta);display:block;margin-bottom:.3rem}
 .modal-fact-value{font-family:var(--f-display);font-weight:700;font-size:.8rem;line-height:1.35;display:block}
 .modal-constraint a{display:inline-block;margin-top:.4rem;padding:.35rem 0;color:var(--black);font-weight:700;text-decoration-thickness:2px;text-underline-offset:3px}
 .modal-constraint a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--surface-alt),0 0 0 5px var(--black);border-radius:2px}
@@ -214,18 +214,33 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .modal-section p{font-size:.95rem;line-height:1.65}
 .modal-label{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.5rem}
 .modal-steps{display:flex;flex-direction:column;margin-top:.5rem}
+/* The lead case renders its process on the page rather than behind the
+   button, so the site's thesis is legible without a click. It reuses the
+   modal's step markup and recolours to the card it sits on. */
+.case-inline{margin-top:var(--space-lg);border-top:3px solid currentColor;padding-top:var(--space-md)}
+.case-inline .modal-steps{margin-top:.25rem}
+.case-inline .modal-step{border-top-color:currentColor}
+.case-inline .modal-step:first-child{border-top:0;padding-top:0}
+.case-inline .modal-step-desc{color:inherit}
+.case-inline .modal-step-badge{background:var(--white);color:var(--red)}
+.case-inline-label{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.35rem}
+@media(min-width:901px){.case-inline{columns:2;column-gap:var(--space-xl)}
+  /* avoid on the container kept all six steps in column one */
+  .case-inline .modal-step{break-inside:avoid}
+  .case-inline .modal-steps{display:block}
+  .case-inline-label{column-span:all}}
 .modal-step{display:flex;gap:.85rem;padding:.85rem 0;border-top:2px solid var(--black)}
 .modal-step:last-child{padding-bottom:0}
 .modal-step-num{font-family:var(--f-display);font-weight:700;font-size:.8rem;width:1.5rem;flex-shrink:0;padding-top:.1rem}
 .modal-step-name{font-family:var(--f-display);font-weight:700;font-size:.8rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .modal-step-desc{font-size:.78rem;line-height:1.55;color:var(--ink-muted);display:block}
-.modal-step-badge{font-family:var(--f-mono);font-size:.55rem;text-transform:uppercase;letter-spacing:.05em;background:var(--yellow);color:var(--black);padding:.15rem .45rem;border:2px solid var(--black)}
+.modal-step-badge{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;background:var(--yellow);color:var(--black);padding:.15rem .45rem;border:2px solid var(--black)}
 @media(max-width:600px){.case-modal{padding:2.5rem 1.5rem}}
 
 /* PROCESS */
 #process{padding:var(--section-y) var(--section-x);border-bottom:3px solid var(--black);background:var(--black);color:var(--white)}
 #process .section-title{color:var(--white)}
-.process-steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:2.5rem;border:3px solid rgba(255,255,255,.15)}
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin-top:2.5rem;border:3px solid rgba(255,255,255,.15)}
 .step{padding:var(--space-lg) var(--space-md);border-right:3px solid rgba(255,255,255,.15)}
 .step:last-child{border-right:none}
 .step-icon{margin-bottom:.9rem;line-height:0}
@@ -276,6 +291,9 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 #contact .section-title{font-size:clamp(2rem,5vw,4rem);margin:0 auto var(--space-lg)}
 #contact p{font-size:1rem;color:var(--ink-muted);max-width:46ch;margin:0 auto 2rem;line-height:1.65}
 #contact p.contact-email{font-family:var(--f-mono);font-size:.9rem;color:var(--black);margin:0 auto}
+.contact-alt{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-muted);margin:.85rem auto 0}
+.contact-alt a{color:var(--black)}
+.contact-alt .ext{font-size:.7rem;color:var(--ink-meta)}
 .contact-email a{display:inline-block;padding:.65rem .25rem;color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
 .contact-email a:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black);border-radius:2px}
 
@@ -305,7 +323,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
   .hero-left{padding:1.5rem 1.5rem 2.5rem;justify-content:flex-start}
   .work-grid{grid-template-columns:1fr}
   .case{padding:var(--space-lg)}
-  .process-steps{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr}
   .a11y-grid{grid-template-columns:1fr}
   footer{padding:var(--space-lg);flex-direction:column;gap:var(--space-sm);text-align:center}
   .nav-toggle{display:block}
@@ -373,11 +391,14 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <h3 class="case-title" data-da="Risikoekspert-platform">Risk expert platform</h3>
       <p class="case-desc" data-da="Fuldt ejerskab af virksomhedens første produkt af sin slags, hvor jeg omlagde den måde risikoeksperter håndterer sager på.">End-to-end ownership of the company's first product of its kind, reworking how risk experts handle cases.</p>
       <div class="case-tags"><span class="tag">Discovery</span><span class="tag">Prototyping</span><span class="tag">Enterprise SaaS</span><span class="tag">NDA</span></div>
+      <div class="case-inline" id="leadCaseProcess" hidden>
+        <span class="case-inline-label" data-da="Sådan blev det gjort">How this one was done</span>
+        <div class="modal-steps" id="leadCaseSteps"></div>
+      </div>
       <script type="application/json" class="case-process">{"context":{"en":"End-to-end ownership of the company's first product of its kind: reworking how risk experts handle cases and documentation across markets.","da":"Fuldt ejerskab af virksomhedens første produkt af sin slags: en omlægning af den måde risikoeksperter håndterer sager og dokumentation på tværs af markeder."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with the business on goals, known limitations and deadlines before starting","da":"Afstemte mål, kendte begrænsninger og deadlines med forretningen, inden arbejdet gik i gang"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Talked to risk experts, SMEs and engineering across markets, and reviewed existing case data","da":"Talte med risikoeksperter, fageksperter og udvikling på tværs af markeder, og gennemgik eksisterende sagsdata"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched directions to test with stakeholders, checking whether existing patterns covered the flow before proposing anything new","da":"Skitserede retninger til at teste med stakeholders, og undersøgte om eksisterende mønstre dækkede flowet, før noget nyt blev foreslået"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Ran a collab session with users and stakeholders, then wrote up findings so everyone shared the same hypotheses","da":"Afholdt en fælles session med brugere og stakeholders, og skrev fund op bagefter, så alle delte de samme hypoteser"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Built annotated prototypes with clear rules and patterns, with questions prepared for engineering and QA review","da":"Byggede annoterede prototyper med tydelige regler og mønstre, med spørgsmål forberedt til gennemgang med udvikling og QA"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Refined through review cycles, then handed over in Figma with documentation for build","da":"Blev finpudset gennem flere reviewrunder, og overleveret i Figma med dokumentation til udvikling"}}],"outcome":{"en":"Reworked complex case handling into a more flexible flow.","da":"Omlagde en kompleks sagsbehandling til et mere fleksibelt flow."},"learning":{"en":"Underestimated how much the technical foundation would keep shifting underneath the design, which made balancing UX against feasibility harder.","da":"Undervurderede hvor meget det tekniske grundlag ville flytte sig under designet, hvilket gjorde det sværere at balancere UX mod gennemførlighed."}}</script>
       <script type="application/json" class="case-work">{"constraint":{"en":"Built at Tia / Sapiens under NDA. No screenshots and no product specifics, so what follows is the problem, what I owned, and what came of it.","da":"Bygget hos Tia / Sapiens under NDA. Ingen skærmbilleder og ingen produktdetaljer, så det følgende er problemet, mit ansvar og hvad der kom ud af det."},"facts":[{"label":{"en":"My role","da":"Min rolle"},"value":{"en":"End-to-end design owner","da":"Ejer af designet fra ende til anden"}},{"label":{"en":"Worked with","da":"Samarbejde med"},"value":{"en":"Risk experts, SMEs, engineering","da":"Risikoeksperter, fageksperter, udvikling"}},{"label":{"en":"Period","da":"Periode"},"value":{"en":"","da":""}}],"users":[],"problem":{"en":"Risk assessments are made on cases that arrive incomplete. What a risk expert needs in order to say yes or no sits across documents, systems and colleagues, it turns up in no fixed order, and what counts as enough differs by market. This was the company's first product of its kind, so there was no internal precedent to design against and no existing screens to inherit.","da":"Risikovurderinger foretages på sager, der kommer ind ufuldstændige. Det, en risikoekspert har brug for, for at kunne sige ja eller nej, ligger spredt i dokumenter, systemer og hos kollegaer, det dukker op i vilkårlig rækkefølge, og hvad der tæller som nok, er forskelligt fra marked til marked. Det var virksomhedens første produkt af sin slags, så der var ingen intern præcedens at designe op imod og ingen eksisterende skærmbilleder at arve."},"owned":{"en":"I owned it end to end. I started by agreeing with the business on goals, known limitations and deadlines, then interviewed risk experts, domain specialists and engineers across markets and went through existing case data. I sketched directions to test with stakeholders, checking first whether patterns we already had could carry the flow before proposing anything new, and ran a working session with users and stakeholders so the hypotheses were shared rather than mine. What I proposed, I built as annotated prototypes with the rules written down, and listed the open questions for engineering and QA to answer.","da":"Jeg ejede det fra ende til anden. Jeg startede med at afstemme mål, kendte begrænsninger og deadlines med forretningen, og talte derefter med risikoeksperter, domænespecialister og udviklere på tværs af markeder og gennemgik eksisterende sagsdata. Jeg skitserede retninger til at teste med stakeholders og undersøgte først, om de mønstre vi allerede havde, kunne bære flowet, før noget nyt blev foreslået, og afholdt en fælles session med brugere og stakeholders, så hypoteserne var delte og ikke bare mine. Det jeg foreslog, byggede jeg som annoterede prototyper med reglerne skrevet ned, og listede de åbne spørgsmål, så udvikling og QA kunne svare på dem."},"result":{"en":"Case handling moved from a fixed sequence to a flow that tolerates information arriving out of order. The harder part was that the technical foundation kept shifting underneath the design while it was being built, so feasibility had to be re-checked against the design repeatedly rather than settled once.","da":"Sagsbehandlingen gik fra en fast rækkefølge til et flow, der kan rumme, at informationer kommer ind i vilkårlig orden. Det sværeste var, at det tekniske grundlag blev ved med at flytte sig under designet undervejs, så gennemførlighed skulle tjekkes op mod designet igen og igen frem for at blive afklaret én gang."},"figures":[]}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="work" aria-haspopup="dialog" aria-label="View the work: Risk expert platform" data-da-aria="Se arbejdet: Risikoekspert-platform" data-da="Arbejdet">The work</button>
-        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Risk expert platform" data-da-aria="Se processen: Risikoekspert-platform" data-da="Processen">The process</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Risk expert platform" data-da-aria="Se arbejdet: Risikoekspert-platform" data-da="Arbejdet">The work</button>
       </div>
     </article>
     <article class="case c2 reveal" role="listitem">
@@ -387,8 +408,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <script type="application/json" class="case-process">{"context":{"en":"Designed a high-complexity product creation platform handling business rules, versioning, and traceability, working closely with an SME and product owner.","da":"Designede en kompleks produktoprettelsesplatform til håndtering af forretningsregler, versionering og sporbarhed, i tæt samarbejde med en fagekspert og en product owner."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with the SME and PO on the business rules, versioning and traceability the product needed to support","da":"Afstemte med fageksperten og product owneren, hvilke forretningsregler, versionering og sporbarhed produktet skulle understøtte"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Reviewed existing configuration flows and past traceability challenges with the SME and PO","da":"Gennemgik eksisterende konfigurationsflows og tidligere udfordringer med sporbarhed sammen med fageksperten og product owneren"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched configuration flows, checking whether existing patterns could carry the complexity before designing new ones","da":"Skitserede konfigurationsflows, og undersøgte om eksisterende mønstre kunne bære kompleksiteten, før nye blev designet"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Walked through hypotheses and direction with the SME and PO before committing to a flow","da":"Gennemgik hypoteser og retning med fageksperten og product owneren, før flowet blev endeligt fastlagt"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped configuration flows end to end, then handed prototyping over to a junior designer to continue","da":"Byggede konfigurationsflows som prototype fra ende til anden, og overdrog derefter prototypearbejdet til en junior designer"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated on feedback and documented patterns so the work could continue past the handoff","da":"Itererede på feedback og dokumenterede mønstrene, så arbejdet kunne fortsætte efter overleveringen"}}],"outcome":{"en":"Improved error handling and speed.","da":"Forbedrede fejlhåndtering og hastighed."},"learning":{"en":"Followed user needs too literally at points, which led to information overload.","da":"Fulgte til tider brugerbehov for bogstaveligt, hvilket førte til informationsoverload."}}</script>
       <script type="application/json" class="case-work">{"constraint":{"en":"Built at Tia / Sapiens under NDA. No screenshots and no product specifics, so what follows is the problem, what I owned, and what came of it.","da":"Bygget hos Tia / Sapiens under NDA. Ingen skærmbilleder og ingen produktdetaljer, så det følgende er problemet, mit ansvar og hvad der kom ud af det."},"facts":[{"label":{"en":"My role","da":"Min rolle"},"value":{"en":"Design owner, then handover","da":"Designejer, derefter overlevering"}},{"label":{"en":"Worked with","da":"Samarbejde med"},"value":{"en":"SME, product owner, junior designer","da":"Fagekspert, product owner, junior designer"}},{"label":{"en":"Period","da":"Periode"},"value":{"en":"","da":""}}],"users":[],"problem":{"en":"An insurance product is a set of rules, and the rules change. Someone has to be able to change them, see what a change touches before committing to it, and prove afterwards what the rules were on any given date. That puts configuration, versioning and traceability in one product, used by people who know insurance deeply and should not have to know the data model in order to work.","da":"Et forsikringsprodukt er et sæt regler, og reglerne ændrer sig. Nogen skal kunne ændre dem, se hvad en ændring rører ved, før den bliver gennemført, og bagefter kunne dokumentere, hvad reglerne var på en given dato. Det lægger konfiguration, versionering og sporbarhed i det samme produkt, brugt af folk der kender forsikring indgående, og som ikke bør skulle kende datamodellen for at kunne arbejde."},"owned":{"en":"I designed it alongside a subject matter expert and a product owner. We went through the existing configuration flows and the traceability problems that had already bitten, then I sketched flows and tested whether existing patterns could carry the complexity before designing new ones. I walked the hypotheses and the direction through with the SME and PO before committing, prototyped the flows end to end, then handed the prototyping to a junior designer and stayed on to review and to document the patterns so the work could continue without me.","da":"Jeg designede det sammen med en fagekspert og en product owner. Vi gennemgik de eksisterende konfigurationsflows og de problemer med sporbarhed, der allerede havde gjort ondt, og derefter skitserede jeg flows og undersøgte, om eksisterende mønstre kunne bære kompleksiteten, før nye blev designet. Jeg gennemgik hypoteser og retning med fageksperten og product owneren, før noget blev endeligt fastlagt, byggede flowene som prototype fra ende til anden, og overdrog derefter prototypearbejdet til en junior designer, mens jeg blev på for at reviewe og dokumentere mønstrene, så arbejdet kunne fortsætte uden mig."},"result":{"en":"Error handling and speed both improved. The correction I had to make on myself was following user requests too literally: taking each stated need at face value produced screens carrying more at once than anyone could actually read, and a round of stripping back was needed before it worked.","da":"Både fejlhåndtering og hastighed blev bedre. Rettelsen jeg måtte lave på mig selv, var at jeg fulgte brugerønsker for bogstaveligt: når hvert udtrykt behov blev taget for pålydende, endte skærmbillederne med at bære mere på én gang, end nogen reelt kunne læse, og der skulle en runde med at skære fra til, før det virkede."},"figures":[]}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="work" aria-haspopup="dialog" aria-label="View the work: Product creation platform" data-da-aria="Se arbejdet: Produktoprettelsesplatform" data-da="Arbejdet">The work</button>
-        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Product creation platform" data-da-aria="Se processen: Produktoprettelsesplatform" data-da="Processen">The process</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Product creation platform" data-da-aria="Se arbejdet: Produktoprettelsesplatform" data-da="Arbejdet">The work</button>
       </div>
     </article>
     <article class="case c5 reveal" role="listitem">
@@ -397,7 +417,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <div class="case-tags"><span class="tag">Case Creation</span><span class="tag">Enterprise SaaS</span><span class="tag">Public</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["The first product I contributed to at Tia, before taking end-to-end ownership of the platforms above. Another designer held it as their primary area, and I worked on the case-creation flow inside it.","Customer service reps use it to open a case on a customer or household, and the fields shown adapt to what the case actually is: policyholder details, policy ID, address, home type, family members and history for a claim, or a narrower set of fields for an enterprise policy request. Anything that needed a case created to be managed and documented ran through this flow.","Shipped as Tia's Customer Service Workbench – publicly announced, unlike the rest of the Tia work on this page. The screens below are the only product visuals I can show from Tia."],"da":["Det første produkt jeg bidrog til hos Tia, før jeg fik fuldt ejerskab af platformene ovenfor. En anden designer havde det som sit primære område, og jeg arbejdede på sagsoprettelsesflowet inde i det.","Kundeservicemedarbejdere bruger det til at oprette en sag på en kunde eller husstand, og de viste felter tilpasser sig, hvad sagen reelt handler om: policeindehaverens oplysninger, police-ID, adresse, boligtype, husstandsmedlemmer og historik ved en skade, eller et mindre sæt felter ved en erhvervskundes policeanmodning. Alt, der krævede en sag oprettet for at kunne håndteres og dokumenteres, gik gennem dette flow.","Lanceret som Tias Customer Service Workbench – offentligt annonceret, i modsætning til resten af Tia-arbejdet på denne side. Skærmbillederne herunder er de eneste produktvisuals, jeg kan vise fra Tia."]},"figures":[],"link":{"href":"https://www.linkedin.com/posts/tia-technology_customer-service-workbench-activity-6879728927531700224-q4R8","label":{"en":"Watch the launch video on LinkedIn","da":"Se lanceringsvideoen på LinkedIn"}}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the work: Customer Service Workbench" data-da-aria="Se arbejdet: Customer Service Workbench" data-da="Arbejdet">The work</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Customer Service Workbench" data-da-aria="Se arbejdet: Customer Service Workbench" data-da="Arbejdet">The work</button>
       </div>
     </article>
     <article class="case c3 reveal" role="listitem">
@@ -407,8 +427,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <script type="application/json" class="case-process">{"context":{"en":"Designed authorization, server status, and communication services across multiple user types, defining scalable interaction patterns for onboarding enterprise clients.","da":"Designede autorisation, serverstatus og kommunikationsservices på tværs af flere brugertyper, og definerede skalerbare interaktionsmønstre til onboarding af erhvervskunder."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned on the goal of cutting redundancy, clicks and risk when onboarding enterprise clients","da":"Afstemte målet om at reducere redundans, klik og risiko ved onboarding af erhvervskunder"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Mapped authorization, server status and communication needs, and redundant steps, across user types","da":"Kortlagde behov for autorisation, serverstatus og kommunikation samt overflødige trin på tværs af brugertyper"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched interaction patterns, checking whether existing navigation could be reused before defining new ones","da":"Skitserede interaktionsmønstre, og undersøgte om eksisterende navigation kunne genbruges, før nye blev defineret"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Aligned with dev and architects on which patterns were worth centralizing","da":"Afstemte med udvikling og arkitekter, hvilke mønstre der var værd at centralisere"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped scalable interaction patterns with documentation for engineering and architects","da":"Byggede skalerbare interaktionsmønstre som prototype, med dokumentation til udvikling og arkitekter"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated with stakeholders, then handed over patterns for build across the platform","da":"Itererede med stakeholders, og overleverede derefter mønstrene til udvikling på tværs af platformen"}}],"outcome":{"en":"Centralized navigation reduced operational friction.","da":"Centraliseret navigation reducerede driftsmæssig friktion."},"learning":{"en":"Stakeholder alignment on what to centralize was limited, which shaped how far the consolidation could go.","da":"Afstemningen med stakeholders om, hvad der skulle centraliseres, var begrænset, hvilket satte grænsen for, hvor langt konsolideringen kunne nå."}}</script>
       <script type="application/json" class="case-work">{"constraint":{"en":"Built at Tia / Sapiens under NDA. No screenshots and no product specifics, so what follows is the problem, what I owned, and what came of it.","da":"Bygget hos Tia / Sapiens under NDA. Ingen skærmbilleder og ingen produktdetaljer, så det følgende er problemet, mit ansvar og hvad der kom ud af det."},"facts":[{"label":{"en":"My role","da":"Min rolle"},"value":{"en":"End-to-end design owner","da":"Ejer af designet fra ende til anden"}},{"label":{"en":"Worked with","da":"Samarbejde med"},"value":{"en":"Developers, architects, multiple user types","da":"Udviklere, arkitekter, flere brugertyper"}},{"label":{"en":"Period","da":"Periode"},"value":{"en":"","da":""}}],"users":[],"problem":{"en":"Getting an enterprise client set up touched authorization, server status and communication services. Each had its own screens and its own logic, and each user type met them in a different order. The same information got entered more than once, and a mistake made in one of them showed up somewhere else, later.","da":"At få en erhvervskunde sat op berørte autorisation, serverstatus og kommunikationsservices. Hver af dem havde sine egne skærmbilleder og sin egen logik, og hver brugertype mødte dem i forskellig rækkefølge. De samme oplysninger blev tastet ind mere end én gang, og en fejl begået ét sted dukkede op et andet sted, senere."},"owned":{"en":"I mapped what each user type actually needed across authorization, server status and communication, and where steps were simply duplicated. I sketched interaction patterns against the navigation we already had before defining new ones, took them to developers and architects to agree on which were worth centralizing, and prototyped the ones we kept with documentation, so they could be built consistently across the platform.","da":"Jeg kortlagde, hvad hver brugertype reelt havde brug for på tværs af autorisation, serverstatus og kommunikation, og hvor trin blot var gentagelser. Jeg skitserede interaktionsmønstre op imod den navigation, vi allerede havde, før nye blev defineret, tog dem med til udviklere og arkitekter for at blive enige om, hvilke der var værd at centralisere, og byggede dem vi beholdt, som prototyper med dokumentation, så de kunne bygges ensartet på tværs af platformen."},"result":{"en":"Centralizing the navigation took friction out of getting a client set up. How far the consolidation could go was set by how much agreement there was on what should be centralized, and that turned out to be less than the design assumed at the start.","da":"Centraliseringen af navigationen tog friktion ud af at få en kunde sat op. Hvor langt konsolideringen kunne nå, blev sat af, hvor stor enighed der var om, hvad der skulle centraliseres, og det viste sig at være mindre, end designet gik ud fra til at begynde med."},"figures":[]}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="work" aria-haspopup="dialog" aria-label="View the work: Management platform" data-da-aria="Se arbejdet: Styringsplatform" data-da="Arbejdet">The work</button>
-        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Management platform" data-da-aria="Se processen: Styringsplatform" data-da="Processen">The process</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Management platform" data-da-aria="Se arbejdet: Styringsplatform" data-da="Arbejdet">The work</button>
       </div>
     </article>
     <article class="case c4 reveal" role="listitem">
@@ -417,7 +436,9 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG 2.2 AA</span><span class="tag">Coaching</span></div>
       <script type="application/json" class="case-process">{"context":{"en":"Proactively pushed accessibility as standard practice at Tia / Sapiens, then used the upcoming European Accessibility Act as the moment to make WCAG 2.2 AA the org-wide standard.","da":"Skubbede proaktivt på for at gøre tilgængelighed til standardpraksis hos Tia / Sapiens, og brugede derefter det kommende European Accessibility Act som anledning til at gøre WCAG 2.2 AA til den organisationsdækkende standard."},"systemsThinkingStep":0,"steps":[{"name":{"en":"Baseline practice","da":"Grundlæggende praksis"},"desc":{"en":"Looked for accessibility low-hanging fruit whenever deciding on new components, iterating existing ones, or setting up patterns and flows","da":"Holdt øje med lavthængende frugter inden for tilgængelighed, hver gang nye komponenter blev besluttet, eksisterende blev videreudviklet, eller mønstre og flows blev sat op"}},{"name":{"en":"Flag the moment","da":"Flagede momentet"},"desc":{"en":"Flagged the upcoming European Accessibility Act, enforceable from June 2025, to product and UX management and legal, and pushed to start an analysis","da":"Gjorde produkt- og UX-ledelsen samt jura opmærksom på det kommende European Accessibility Act, som træder i kraft juni 2025, og skubbede på for at igangsætte en analyse"}},{"name":{"en":"Analysis","da":"Analyse"},"desc":{"en":"Found the team wasn't directly bound by the enforcement, but should still act: training for developers, writers, designers and testers","da":"Fandt frem til at teamet ikke var direkte omfattet af lovkravet, men alligevel burde handle: træning til udviklere, tekstforfattere, designere og testere"}},{"name":{"en":"Build the case","da":"Byggede argumentet"},"desc":{"en":"Built presentations for each role, arguing from both a user and business perspective to make the case for WCAG 2.2 AA","da":"Byggede præsentationer til hver rolle, med argumenter fra både et bruger- og forretningsperspektiv for at gøre en sag for WCAG 2.2 AA"}},{"name":{"en":"Get buy-in","da":"Fik opbakning"},"desc":{"en":"Convinced stakeholders to adopt WCAG 2.2 AA as the standard across every step of development and testing","da":"Overbeviste stakeholders om at gøre WCAG 2.2 AA til standarden i alle trin af udvikling og test"}},{"name":{"en":"Coach","da":"Coaching"},"desc":{"en":"Taught fellow designers the new process, the tools to master, and how it supports a more inclusive experience for customers and back-office users","da":"Undervist andre designere i den nye proces, værktøjerne der skulle mestres, og hvordan det understøtter en mere inkluderende oplevelse for kunder og back office-brugere"}}],"outcome":{"en":"WCAG 2.2 AA became the shared standard across development and testing, not just a design concern.","da":"WCAG 2.2 AA blev den fælles standard på tværs af udvikling og test – ikke kun et designanliggende."},"learning":{"en":"Getting stakeholder buy-in was one step. Changing how designers actually worked day to day, the tools and habits, took a separate, ongoing effort.","da":"At få opbakning fra stakeholders var ét skridt. At ændre hvordan designere reelt arbejdede i hverdagen – værktøjerne og vanerne – krævede en separat, vedvarende indsats."}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Accessibility SME" data-da-aria="Se processen: Tilgængeligheds-SME" data-da="Processen">The process</button>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Accessibility SME" data-da-aria="Se arbejdet: Tilgængeligheds-SME" data-da="Arbejdet">The work</button>
       </div>
     </article>
   </div>
@@ -441,9 +462,10 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <script type="application/json" class="case-process">{"context":{"en":"Designed the self-service flow citizens use to calculate and claim their commute tax deduction (Kørselsfradrag), from discovery through to developer handoff.","da":"Designede det selvbetjeningsflow, borgere bruger til at beregne og søge om kørselsfradrag, fra research til udviklerovergivelse."},"systemsThinkingStep":2,"steps":[{"name":{"en":"Framing","da":"Rammesætning"},"desc":{"en":"Aligned with BAs and domain experts on what citizens, companies and tax professionals needed from the calculator","da":"Afstemte med forretningsanalytikere og fageksperter, hvad borgere, virksomheder og skatterådgivere havde brug for fra beregneren"}},{"name":{"en":"Research","da":"Research"},"desc":{"en":"Used evidence-based design and Design Thinking within an agile/Scrum framework to understand how people handle commute deductions today","da":"Brugte evidensbaseret design og Design Thinking inden for en agil/Scrum-ramme til at forstå, hvordan folk håndterer kørselsfradrag i dag"}},{"name":{"en":"Sketch and scope-check","da":"Skitser og scope-tjek"},"desc":{"en":"Sketched the flow across hi/lo-fidelity prototypes, checking against existing self-service patterns before introducing new ones","da":"Skitserede flowet gennem både low- og high-fidelity-prototyper, og holdt det op mod eksisterende selvbetjeningsmønstre, før nye blev introduceret"}},{"name":{"en":"Workshop and align","da":"Workshop og afstemning"},"desc":{"en":"Worked alongside frontend, backend, BAs and domain experts to align on scope within the Scrum framework","da":"Arbejdede sammen med frontend, backend, forretningsanalytikere og fageksperter om at afstemme scope inden for Scrum-rammen"}},{"name":{"en":"Prototype and document","da":"Prototype og dokumentation"},"desc":{"en":"Prototyped the calculator end-to-end, from period and address input through to days-with-commute entry and route distance","da":"Byggede beregneren som prototype fra ende til anden, fra periode- og adresseindtastning til registrering af kørselsdage og rutedistance"}},{"name":{"en":"Iterate and handover","da":"Iteration og overlevering"},"desc":{"en":"Iterated through sprints and handed over to developers for build","da":"Itererede gennem sprints og overleverede til udviklerne til bygning"}}],"outcome":{"en":"Citizens can calculate their commute deduction and transfer it directly into their preliminary tax assessment, without manual paperwork.","da":"Borgere kan beregne deres kørselsfradrag og overføre det direkte til deres forskudsopgørelse, uden manuelt papirarbejde."},"learning":{"en":"A regulated, rules-heavy domain made it hard to keep the flow feeling like self-service rather than a tax form.","da":"Et reguleret, regeltungt domæne gjorde det svært at få flowet til at føles som selvbetjening frem for en skatteblanket."}}</script>
       <script type="application/json" class="case-product">{"screenshots":["images/tax-deduction/1-period-addresses.png","images/tax-deduction/2-days-with-commute.png","images/tax-deduction/3-days-total.png","images/tax-deduction/4-route.png","images/tax-deduction/5-result.png"]}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="product" aria-haspopup="dialog" aria-label="View the product: Kørselsfradrag" data-da-aria="Se produktet: Kørselsfradrag" data-da="Produktet">The product</button>
-        <button class="btn btn-white case-view-btn" data-mode="process" aria-haspopup="dialog" aria-label="View the process: Kørselsfradrag" data-da-aria="Se processen: Kørselsfradrag" data-da="Processen">The process</button>
       </div>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Kørselsfradrag: commute deduction calculator" data-da-aria="Se arbejdet: Beregner til kørselsfradrag" data-da="Arbejdet">The work</button>
       </div>
     </article>
     <article class="case c3 reveal" role="listitem">
@@ -453,7 +475,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <div class="case-tags"><span class="tag">Accessibility</span><span class="tag">WCAG</span><span class="tag">Component Library</span><span class="tag">Public Sector</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["With a colleague, tested every page across the sites under the Danish Tax Ministry umbrella, so compliance status could be reported on across the ministry's governing agencies rather than agency by agency.","Separately, acted as the accessibility voice in review of the shared component library: checking existing components and vetting new ones before they shipped, so accessibility got caught at the component level instead of being re-found on every page that used it."],"da":["Testede sammen med en kollega samtlige sider på tværs af de websites, der hører under Skatteministeriet, så compliance-status kunne rapporteres på tværs af ministeriets styrelser frem for styrelse for styrelse.","Fungerede derudover som tilgængelighedens stemme i gennemgangen af det fælles komponentbibliotek: tjekkede eksisterende komponenter og kvalitetssikrede nye, før de blev lanceret, så tilgængelighedsproblemer blev fanget på komponentniveau i stedet for at skulle genfindes på hver eneste side, der brugte dem."]}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the work: Accessibility, design, testing and compliance" data-da-aria="Se arbejdet: Tilgængelighed, design, test og compliance" data-da="Arbejdet">The work</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Accessibility, design, testing and compliance" data-da-aria="Se arbejdet: Tilgængelighed, design, test og compliance" data-da="Arbejdet">The work</button>
       </div>
     </article>
   </div>
@@ -471,7 +493,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
       <div class="case-tags"><span class="tag">Research</span><span class="tag">Training</span><span class="tag">Workflow Analysis</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["Supported the rollout of Sundhedsplatformen at Rigshospitalet. Used go-native observation and think-aloud sessions to see how doctors and nurses actually used the system day to day, down to how doctors wrote notes and ordered medicine and procedures. Trained nurse students on the system, and reported errors to a joint staff-engineering team. The aim throughout was to cut down time spent on PC-based data entry, so staff had more time with patients and less risk of handling patient data incorrectly.","Core professionals often want every interaction and piece of information on one big page, and it's important to listen to users who know their field. But in the end they're not designers: simpler interfaces turned out to help staff focus on the task at hand."],"da":["Understøttede udrulningen af Sundhedsplatformen på Rigshospitalet. Brugte go-native-observation og think-aloud-sessioner til at se, hvordan læger og sygeplejersker reelt brugte systemet i hverdagen, helt ned til hvordan læger skrev notater og bestilte medicin og procedurer. Trænede sygeplejerskestuderende i systemet, og rapporterede fejl til et fælles team af medarbejdere og udviklere. Målet var hele vejen igennem at reducere tid brugt på pc-baseret dataindtastning, så personalet fik mere tid med patienterne og mindre risiko for at håndtere patientdata forkert.","Fagprofessionelle vil ofte gerne have hver eneste interaktion og informationsbid på én stor side, og det er vigtigt at lytte til brugere, der kender deres felt. Men i sidste ende er de ikke designere: enklere grænseflader viste sig at hjælpe personalet med at fokusere på opgaven foran dem."]}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the work: Helping healthcare professionals make sense of Sundhedsplatformen" data-da-aria="Se arbejdet: Hjælper sundhedsprofessionelle med at forstå Sundhedsplatformen" data-da="Arbejdet">The work</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Helping healthcare professionals make sense of Sundhedsplatformen" data-da-aria="Se arbejdet: Hjælper sundhedsprofessionelle med at forstå Sundhedsplatformen" data-da="Arbejdet">The work</button>
       </div>
     </article>
   </div>
@@ -485,11 +507,11 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
   <div class="work-grid" role="list">
     <article class="case c4 reveal" role="listitem">
       <h3 class="case-title" data-da="At gøre denne portfolio til et designsystem">Turning this portfolio into a design system</h3>
-      <p class="case-desc" data-da="Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, type-trioen Archivo/DM Sans/Space Mono) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Archivo/DM Sans/Space Mono type trio) and formalized it into a documented token scale and a reusable React component library.</p>
+      <p class="case-desc" data-da="Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, typesystemet Archivo og Atkinson Hyperlegible) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.">Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the Archivo and Atkinson Hyperlegible type system) and formalized it into a documented token scale and a reusable React component library.</p>
       <div class="case-tags"><span class="tag">Design Systems</span><span class="tag">Design Tokens</span><span class="tag">React</span></div>
       <script type="application/json" class="case-overview">{"paragraphs":{"en":["Audited this site's own brutalist visual language (flat color blocks, thick borders, hard offset shadows, the type pairing) and formalized it into a documented token scale and a reusable React component library.","Every component is verified with an automated render-check and visual QA pipeline before shipping."],"da":["Auditerede sitets eget brutalistiske visuelle sprog (flade farveblokke, tykke kanter, hårde forskudte skygger, typeparringen) og formaliserede det til en dokumenteret token-skala og et genanvendeligt React-komponentbibliotek.","Hver komponent verificeres med et automatisk render-tjek og en visuel QA-pipeline, før den lanceres."]},"link":{"href":"https://esbenmo.github.io/portfolio/design-system/dist/","label":{"en":"Open the live design system","da":"Åbn det live designsystem"}}}</script>
       <div class="cta-row">
-        <button class="btn btn-white case-view-btn" data-mode="overview" aria-haspopup="dialog" aria-label="View the work: Turning this portfolio into a design system" data-da-aria="Se arbejdet: At gøre denne portfolio til et designsystem" data-da="Arbejdet">The work</button>
+        <button class="btn btn-white case-view-btn" data-mode="case" aria-haspopup="dialog" aria-label="View the work: Turning this portfolio into a design system" data-da-aria="Se arbejdet: At gøre denne portfolio til et designsystem" data-da="Arbejdet">The work</button>
       </div>
     </article>
   </div>
@@ -516,7 +538,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
     <h2 class="section-title" id="a11y-h" data-da="Bygget til alle, som designprincip.">Built for everyone, by design.</h2>
   </div>
   <div class="a11y-grid">
-    <div class="a11y-card"><span class="wcag-badge">WCAG 2.1 AA</span><h3 data-da="Farve er ikke det eneste signal">Colour isn't the only signal</h3><p data-da="Al information, der formidles gennem farve, findes også i tekst, mønster eller form. Kontrast er en bundlinje, ikke et mål i sig selv.">Every piece of information conveyed through colour also exists in text, pattern, or shape. Contrast is a baseline, not a finish line.</p></div>
+    <div class="a11y-card"><span class="wcag-badge">WCAG 2.2 AA</span><h3 data-da="Farve er ikke det eneste signal">Colour isn't the only signal</h3><p data-da="Al information, der formidles gennem farve, findes også i tekst, mønster eller form. Kontrast er en bundlinje, ikke et mål i sig selv.">Every piece of information conveyed through colour also exists in text, pattern, or shape. Contrast is a baseline, not a finish line.</p></div>
     <div class="a11y-card"><span class="wcag-badge" data-da="Tastatur">Keyboard</span><h3 data-da="Kan du ikke tabbe dig igennem det, er det i stykker">If you can't tab through it, it's broken</h3><p data-da="Ethvert interaktivt element har en synlig fokustilstand. Skip-links, logisk tabuleringsrækkefølge: ikke ekstra tilføjelser, men selve grænsefladen.">Every interactive element has a visible focus state. Skip links, logical tab order: not extras, but the interface itself.</p></div>
     <div class="a11y-card"><span class="wcag-badge" data-da="Skærmlæsere">Screen readers</span><h3 data-da="Navne der beskriver, ikke bare mærker">Names that describe, not label</h3><p data-da="Tilgængelige navne, landmark-regioner, live-meddelelser. Testet med NVDA, JAWS og VoiceOver, før nogen prototype er færdig.">Accessible names, landmark regions, live announcements. Tested with NVDA, JAWS, and VoiceOver before any prototype is done.</p></div>
     <div class="a11y-card"><span class="wcag-badge" data-da="Rigtige brugere">Real users</span><h3 data-da="Funktionsnedsættelse er kontekst, ikke en undtagelse">Disability is context, not edge case</h3><p data-da="Mennesker med funktionsnedsættelser indgår i hver eneste researchrunde: ikke som en separat undersøgelse, men den samme undersøgelse som alle andre.">People with disabilities are included in every research round: not a separate study, but the same study as everyone else.</p></div>
@@ -544,7 +566,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
 
   <details class="a11y-report">
     <summary data-da="Fuld audit- og rettelsesrapport (23 punkter)">Full audit &amp; fix report (23 items)</summary>
-    <ol class="a11y-report-list">
+    <ol class="a11y-report-list" role="list">
       <li data-da-html='<span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>Den samme orange fejlede igen, denne gang som labeltekst i case-dialogen.</strong> Forrige runde rettede det orange kort ved at skifte tekstfarve, men #FF6B00 blev stadig brugt som tekst på hvid til labelen "Læring" – samme 2,86:1, som rapporten allerede havde dokumenteret som utilstrækkeligt. Rettelsen var kun blevet anvendt ét sted. Der blev tilføjet en separat tekstsikker værdi (#B34B00, 5,35:1), så den lyse orange kun bruges som baggrund.'><span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>The same orange failed again, this time as label text in the case dialog.</strong> The previous pass fixed the orange card by changing its text colour, but #FF6B00 was still used as text on white for the "Learning" label – the same 2.86:1 the report had already documented as insufficient. The fix had only been applied in one place. Added a separate text-safe value (#B34B00, 5.35:1) so the bright orange is only ever a background.</li>
       <li data-da-html='<span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>Det orange case-kort havde hvid tekst på 2,86:1 og faldt igennem.</strong> Kortet blev tilføjet efter den forrige runde og arvede den hvide tekstfarve fra de mørkere kort, men orange (#FF6B00) er for lys til hvid tekst: 2,86:1 mod kravet på 4,5:1. Fanget ved at måle alle ni kort igen frem for at stole på den tidligere rapport. Skiftet til sort tekst, som giver 7,43:1 på samme baggrund.'><span class="sc">WCAG 1.4.3 – Contrast (Minimum)</span><strong>The orange case card shipped white text at 2.86:1 and failed.</strong> The card was added after the previous audit and inherited the white text colour from the darker cards, but orange (#FF6B00) is too light to carry white type: 2.86:1 against a 4.5:1 requirement. Caught by re-measuring all nine cards rather than trusting the earlier report. Switched to black text, which measures 7.43:1 on the same background.</li>
       <li data-da-html='<span class="sc">Robusthed · gengivelse uden JavaScript</span><strong>Alt indhold under hero-sektionen var skjult, indtil JavaScript afslørede det.</strong> 26 elementer havde <code>opacity:0</code> som udgangspunkt i CSS, og kun en IntersectionObserver kunne vise dem. Uden JavaScript, ved print, og i renderere uden observer blev siden derfor tom under hero-sektionen. Verificeret: elementer inde i viewporten forblev usynlige, når observeren ikke kørte. Indholdet er nu synligt som standard, og først når JavaScript bekræfter at det kan køre, lægges den skjulte starttilstand på. Print og reduceret bevægelse tvinger fuld synlighed.'><span class="sc">Robustness · no-JavaScript rendering</span><strong>Every section below the hero was hidden until JavaScript revealed it.</strong> 26 elements defaulted to <code>opacity:0</code> in CSS, with only an IntersectionObserver able to show them. Without JavaScript, in print, and in renderers where the observer never runs, the page below the hero rendered blank. Verified: elements sitting inside the viewport stayed invisible whenever the observer did not fire. Content is now visible by default, and the hidden starting state is applied only once JavaScript confirms it can run. Print and reduced-motion force full visibility.</li>
@@ -577,6 +599,7 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
   <div class="reveal">
     <h2 class="section-title" id="contact-h" data-da="Jeg er tilgængelig til det rette projekt.">I'm available for the right project.</h2>
     <p class="contact-email" data-da-html='E-mail: <a href="mailto:hello@esben.design">hello@esben.design</a>'>E-mail: <a href="mailto:hello@esben.design">hello@esben.design</a></p>
+    <p class="contact-alt" data-da-html='eller <a href="https://www.linkedin.com/in/esben-mortensen/" target="_blank" rel="noopener">skriv på LinkedIn <span class="ext">(åbner i en ny fane)</span></a>'>or <a href="https://www.linkedin.com/in/esben-mortensen/" target="_blank" rel="noopener">message me on LinkedIn <span class="ext">(opens in a new tab)</span></a></p>
   </div>
 </section>
 
@@ -591,35 +614,32 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
 <div class="modal-overlay" id="caseModalOverlay" hidden>
   <div class="case-modal" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
     <button class="modal-close" id="modalClose" aria-label="Close" data-da-aria="Luk">✕</button>
-    <div class="modal-n" id="modalN"></div>
     <h2 class="modal-title" id="modalTitle"></h2>
     <div class="modal-org" id="modalOrg" hidden></div>
-    <div id="modalSimple">
-      <div class="modal-gallery" id="modalGallery" hidden>
-        <div class="modal-gallery-track" id="modalGalleryTrack"></div>
-      </div>
-      <div class="modal-overview" id="modalOverview" hidden></div>
-      <div class="modal-figures" id="modalOverviewFigures" hidden></div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-tags" id="modalTags" hidden></div>
-      <a class="modal-link" id="modalLink" hidden target="_blank" rel="noopener"></a>
-    </div>
+    <p class="modal-constraint" id="modalConstraint" hidden></p>
+    <div class="modal-facts" id="modalFacts" hidden></div>
     <div class="modal-work" id="modalWork" hidden>
-      <p class="modal-constraint" id="modalConstraint" hidden></p>
-      <div class="modal-facts" id="modalFacts" hidden></div>
-      <div class="modal-section"><span class="modal-label" style="color:var(--red)" data-da="Problemet">The problem</span><p id="modalProblem"></p></div>
+      <div class="modal-section" id="modalProblemSection"><span class="modal-label" style="color:var(--red)" data-da="Problemet">The problem</span><p id="modalProblem"></p></div>
       <div class="modal-section" id="modalUsersSection" hidden><span class="modal-label" style="color:var(--orange-ink)" data-da="Hvem brugte det">Who used it</span><dl class="modal-users" id="modalUsers"></dl></div>
       <div class="modal-section"><span class="modal-label" style="color:var(--blue)" data-da="Mit ansvar">What I owned</span><p id="modalOwned"></p></div>
       <div class="modal-section"><span class="modal-label" style="color:var(--green)" data-da="Hvad der kom ud af det">What came out of it</span><p id="modalResult"></p></div>
       <div class="modal-figures" id="modalFigures" hidden></div>
-      <div class="modal-tags" id="modalWorkTags" hidden></div>
+    </div>
+    <div id="modalSimple" hidden>
+      <div class="modal-overview" id="modalOverview" hidden></div>
+      <div class="modal-figures" id="modalOverviewFigures" hidden></div>
+      <div class="modal-gallery" id="modalGallery" hidden>
+        <div class="modal-gallery-track" id="modalGalleryTrack"></div>
+      </div>
+      <a class="modal-link" id="modalLink" hidden target="_blank" rel="noopener"></a>
     </div>
     <div id="modalProcess" hidden>
-      <div class="modal-section"><span class="modal-label" style="color:var(--red)" data-da="Kontekst">Context</span><p id="modalContext"></p></div>
+      <div class="modal-section" id="modalContextSection"><span class="modal-label" style="color:var(--red)" data-da="Kontekst">Context</span><p id="modalContext"></p></div>
       <div class="modal-section"><span class="modal-label" style="color:var(--blue)" data-da="Proces">Process</span><div class="modal-steps" id="modalSteps"></div></div>
       <div class="modal-section"><span class="modal-label" style="color:var(--green)" data-da="Resultat">Outcome</span><p id="modalOutcome"></p></div>
       <div class="modal-section"><span class="modal-label" style="color:var(--orange-ink)" data-da="Læring">Learning</span><p id="modalLearning"></p></div>
     </div>
+    <div class="modal-tags" id="modalTags" hidden></div>
   </div>
 </div>
 
@@ -681,6 +701,11 @@ const SHAPE_LABELS = { en: { play: 'Play animation', pause: 'Pause animation' },
     }
     try{ localStorage.setItem('lang', lang); }catch(e){}
     if(typeof setNavHeight==='function') setNavHeight();
+    // Modal body copy is injected from JSON, so it does not carry data-da and
+    // is not touched by the loops above. Re-render it, or the open modal keeps
+    // the old language under the new <html lang> (WCAG 3.1.2).
+    if(typeof window.__impeccableRerenderModal==='function') window.__impeccableRerenderModal();
+    if(typeof window.__impeccableRenderLeadCase==='function') window.__impeccableRenderLeadCase();
   }
   window.applyLang = applyLang;
 
@@ -1006,7 +1031,6 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
 (function(){
   const overlay=document.getElementById('caseModalOverlay');
   const modal=document.getElementById('caseModal');
-  const modalN=document.getElementById('modalN');
   const modalTitle=document.getElementById('modalTitle');
   const modalOrg=document.getElementById('modalOrg');
   const modalSimple=document.getElementById('modalSimple');
@@ -1019,10 +1043,8 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
   const modalOwned=document.getElementById('modalOwned');
   const modalResult=document.getElementById('modalResult');
   const modalFigures=document.getElementById('modalFigures');
-  const modalWorkTags=document.getElementById('modalWorkTags');
   const modalGallery=document.getElementById('modalGallery');
   const modalGalleryTrack=document.getElementById('modalGalleryTrack');
-  const modalDesc=document.getElementById('modalDesc');
   const modalTags=document.getElementById('modalTags');
   const modalOverview=document.getElementById('modalOverview');
   const modalOverviewFigures=document.getElementById('modalOverviewFigures');
@@ -1036,6 +1058,35 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
   const inertTargets=[document.querySelector('nav'),document.getElementById('main'),document.querySelector('footer')].filter(Boolean);
   if(!overlay||!modal) return;
   let lastTrigger=null;
+
+  // Shared by the modal and the inline lead case, so the numbered steps and the
+  // systems-thinking marker can never drift between the two.
+  function renderSteps(container,data){
+    container.innerHTML='';
+    data.steps.forEach((step_,i)=>{
+      const step=document.createElement('div');
+      step.className='modal-step';
+      const num=document.createElement('span');
+      num.className='modal-step-num';
+      num.textContent=String(i+1).padStart(2,'0');
+      const content=document.createElement('div');
+      const name=document.createElement('div');
+      name.className='modal-step-name';
+      name.append(step_.name[currentLang]);
+      if(i===data.systemsThinkingStep){
+        const badge=document.createElement('span');
+        badge.className='modal-step-badge';
+        badge.textContent=currentLang==='da'?'Systemtænkning':'Systems thinking';
+        name.appendChild(badge);
+      }
+      const desc_=document.createElement('div');
+      desc_.className='modal-step-desc';
+      desc_.textContent=step_.desc[currentLang];
+      content.append(name,desc_);
+      step.append(num,content);
+      container.appendChild(step);
+    });
+  }
 
   function fillTags(container,card){
     const tags=card.querySelectorAll('.case-tags .tag');
@@ -1071,59 +1122,85 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
     container.hidden=container.children.length===0;
   }
 
-  function openCaseModal(trigger){
+  // The NDA constraint is the site's thesis, so it renders in every mode,
+  // not only the work one. It is read from the case-work block wherever the
+  // case has one, regardless of which button was pressed.
+  function renderConstraint(card){
+    let note='';
+    try{
+      const el=card.querySelector('.case-work');
+      const d=el?JSON.parse(el.textContent):null;
+      note=(d&&d.constraint&&d.constraint[currentLang])||'';
+    }catch(err){ note=''; }
+    modalConstraint.innerHTML='';
+    if(note){
+      modalConstraint.append(note+' ');
+      const ask=document.createElement('a');
+      ask.href='#contact';
+      ask.textContent=currentLang==='da'?'Spørg mig om resten':'Ask me about the rest';
+      ask.addEventListener('click',()=>closeCaseModal(false));
+      modalConstraint.appendChild(ask);
+    }
+    modalConstraint.hidden=!note;
+  }
+
+  // Re-render the open modal in the current language. Without this, switching
+  // language mid-modal left injected body copy in the old language under a
+  // flipped <html lang> — English prose announced with Danish phonemes.
+  function rerenderOpenModal(){
+    if(overlay.hidden || !lastTrigger) return;
+    const keep=lastTrigger;
+    openCaseModal(keep, true);
+  }
+  window.__impeccableRerenderModal = rerenderOpenModal;
+
+  function openCaseModal(trigger, keepOpen){
     const card=trigger.closest('.case');
     if(!card) return;
     lastTrigger=trigger;
-    const nText=card.querySelector('.case-n')?.textContent||'';
-    modalN.textContent=nText;
-    modalN.hidden=!nText;
     modalTitle.textContent=card.querySelector('.case-title')?.textContent||'';
     const org=card.querySelector('.case-org');
     modalOrg.textContent=org?org.textContent:'';
     modalOrg.hidden=!org;
 
-    const processEl=card.querySelector('.case-process');
-    const data=(trigger.dataset.mode==='process'&&processEl)?JSON.parse(processEl.textContent):null;
-    const overviewEl=card.querySelector('.case-overview');
-    const overviewData=(trigger.dataset.mode==='overview'&&overviewEl)?JSON.parse(overviewEl.textContent):null;
-    const workEl=card.querySelector('.case-work');
-    const workData=(trigger.dataset.mode==='work'&&workEl)?JSON.parse(workEl.textContent):null;
+    const parseCase=el=>{
+      if(!el) return null;
+      try{ return JSON.parse(el.textContent); }
+      catch(err){ console.error('[case] malformed JSON in',el.className,err); return null; }
+    };
 
+    // One case, one modal, one order. Previously each card offered two buttons
+    // opening mutually exclusive panes, so the constraint and the reasoning
+    // could only be read by opening both and holding one in memory.
+    const workData=parseCase(card.querySelector('.case-work'));
+    const overviewData=parseCase(card.querySelector('.case-overview'));
+    const productData=parseCase(card.querySelector('.case-product'));
+    const processData=parseCase(card.querySelector('.case-process'));
+
+    // 1. The constraint. Renders for any case that declares one, in every case.
+    renderConstraint(card);
+
+    // 2. Facts.
+    modalFacts.innerHTML='';
+    ((workData&&workData.facts)||[]).forEach(f=>{
+      const value=f.value&&f.value[currentLang];
+      if(!value) return;
+      const box=document.createElement('div');
+      box.className='modal-fact';
+      const label=document.createElement('span');
+      label.className='modal-fact-label';
+      label.textContent=f.label[currentLang];
+      const val=document.createElement('span');
+      val.className='modal-fact-value';
+      val.textContent=value;
+      box.append(label,val);
+      modalFacts.appendChild(box);
+    });
+    modalFacts.hidden=modalFacts.children.length===0;
+
+    // 3. Problem / who used it / what I owned / what came of it.
+    modalWork.hidden=!workData;
     if(workData){
-      modalProcess.hidden=true;
-      modalSimple.hidden=true;
-      modalWork.hidden=false;
-
-      const note=workData.constraint&&workData.constraint[currentLang];
-      modalConstraint.innerHTML='';
-      if(note){
-        modalConstraint.append(note+' ');
-        const ask=document.createElement('a');
-        ask.href='#contact';
-        ask.textContent=currentLang==='da'?'Spørg mig om resten':'Ask me about the rest';
-        ask.addEventListener('click',()=>closeCaseModal(false));
-        modalConstraint.appendChild(ask);
-      }
-      modalConstraint.hidden=!note;
-
-      modalFacts.innerHTML='';
-      (workData.facts||[]).forEach(f=>{
-        const value=f.value&&f.value[currentLang];
-        if(!value) return;
-        const box=document.createElement('div');
-        box.className='modal-fact';
-        const label=document.createElement('span');
-        label.className='modal-fact-label';
-        label.textContent=f.label[currentLang];
-        const val=document.createElement('span');
-        val.className='modal-fact-value';
-        val.textContent=value;
-        box.append(label,val);
-        modalFacts.appendChild(box);
-      });
-      modalFacts.hidden=modalFacts.children.length===0;
-
       modalProblem.textContent=workData.problem[currentLang];
       modalUsers.innerHTML='';
       (workData.users||[]).forEach(u=>{
@@ -1141,89 +1218,59 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
       modalOwned.textContent=workData.owned[currentLang];
       modalResult.textContent=workData.result[currentLang];
       fillFigures(modalFigures,workData.figures);
-      fillTags(modalWorkTags,card);
-    } else if(overviewData){
-      modalProcess.hidden=true;
-      modalWork.hidden=true;
-      modalSimple.hidden=false;
-      modalGallery.hidden=true;
-      modalDesc.textContent='';
-      modalOverview.hidden=false;
-      modalOverview.innerHTML='';
-      (overviewData.paragraphs[currentLang]||[]).forEach(text=>{
-        const p=document.createElement('p');
-        p.textContent=text;
-        modalOverview.appendChild(p);
-      });
-      fillFigures(modalOverviewFigures,overviewData.figures);
-      fillTags(modalTags,card);
-      if(overviewData.link){
-        modalLink.hidden=false;
-        modalLink.href=overviewData.link.href;
-        modalLink.innerHTML='';
-        modalLink.append(overviewData.link.label[currentLang]+' ');
-        const ext=document.createElement('span');
-        ext.className='ext';
-        ext.textContent=currentLang==='da'?'(åbner i en ny fane)':'(opens in a new tab)';
-        modalLink.appendChild(ext);
-      } else {
-        modalLink.hidden=true;
-      }
-    } else if(data){
-      modalSimple.hidden=true;
-      modalWork.hidden=true;
-      modalProcess.hidden=false;
-      modalContext.textContent=data.context[currentLang];
-      modalOutcome.textContent=data.outcome[currentLang];
-      modalLearning.textContent=data.learning[currentLang];
-      modalSteps.innerHTML='';
-      data.steps.forEach((step_,i)=>{
-        const step=document.createElement('div');
-        step.className='modal-step';
-        const num=document.createElement('span');
-        num.className='modal-step-num';
-        num.textContent=String(i+1).padStart(2,'0');
-        const content=document.createElement('div');
-        const name=document.createElement('div');
-        name.className='modal-step-name';
-        name.append(step_.name[currentLang]);
-        if(i===data.systemsThinkingStep){
-          const badge=document.createElement('span');
-          badge.className='modal-step-badge';
-          badge.textContent=currentLang==='da'?'Systemtænkning':'Systems thinking';
-          name.appendChild(badge);
-        }
-        const desc_=document.createElement('div');
-        desc_.className='modal-step-desc';
-        desc_.textContent=step_.desc[currentLang];
-        content.append(name,desc_);
-        step.append(num,content);
-        modalSteps.appendChild(step);
-      });
-    } else {
-      modalProcess.hidden=true;
-      modalWork.hidden=true;
-      modalSimple.hidden=false;
-      modalOverview.hidden=true;
-      modalOverviewFigures.hidden=true;
-      modalLink.hidden=true;
-      modalDesc.textContent=card.querySelector('.case-desc')?.textContent||'';
-      fillTags(modalTags,card);
-
-      const productEl=card.querySelector('.case-product');
-      const productData=productEl?JSON.parse(productEl.textContent):null;
-      const shots=(productData&&productData.screenshots)||[];
-      modalGalleryTrack.innerHTML='';
-      shots.forEach((src,i)=>{
-        const img=document.createElement('img');
-        img.src=src;
-        img.alt=`${modalTitle.textContent} ${currentLang==='da'?'skærmbillede':'screenshot'} ${i+1}`;
-        img.loading='lazy';
-        modalGalleryTrack.appendChild(img);
-      });
-      modalGallery.hidden=shots.length===0;
     }
 
+    // 4. Overview prose, its figures, any screenshot gallery, and the outbound link.
+    const shots=(productData&&productData.screenshots)||[];
+    modalSimple.hidden=!overviewData&&shots.length===0;
+    modalOverview.innerHTML='';
+    if(overviewData){
+      (overviewData.paragraphs[currentLang]||[]).forEach(text=>{
+        const el=document.createElement('p');
+        el.textContent=text;
+        modalOverview.appendChild(el);
+      });
+    }
+    modalOverview.hidden=modalOverview.children.length===0;
+    fillFigures(modalOverviewFigures,overviewData&&overviewData.figures);
+
+    modalGalleryTrack.innerHTML='';
+    shots.forEach((src,i)=>{
+      const img=document.createElement('img');
+      img.src=src;
+      img.alt=`${modalTitle.textContent} ${currentLang==='da'?'skærmbillede':'screenshot'} ${i+1}`;
+      img.loading='lazy';
+      img.decoding='async';
+      modalGalleryTrack.appendChild(img);
+    });
+    modalGallery.hidden=shots.length===0;
+
+    const link=overviewData&&overviewData.link;
+    modalLink.hidden=!link;
+    if(link){
+      modalLink.href=link.href;
+      modalLink.innerHTML='';
+      modalLink.append(link.label[currentLang]+' ');
+      const ext=document.createElement('span');
+      ext.className='ext';
+      ext.textContent=currentLang==='da'?'(åbner i en ny fane)':'(opens in a new tab)';
+      modalLink.appendChild(ext);
+    }
+
+    // 5. How the work was done, then the outcome and the learning.
+    modalProcess.hidden=!processData;
+    if(!processData) modalSteps.innerHTML='';
+    if(processData){
+      modalContext.textContent=processData.context[currentLang];
+      modalOutcome.textContent=processData.outcome[currentLang];
+      modalLearning.textContent=processData.learning[currentLang];
+      renderSteps(modalSteps,processData);
+    }
+
+    // 6. Tags, once, at the end.
+    fillTags(modalTags,card);
+
+    if(keepOpen) return;
     overlay.hidden=false;
     requestAnimationFrame(()=>overlay.classList.add('open'));
     document.body.style.overflow='hidden';
@@ -1240,6 +1287,27 @@ document.querySelectorAll('.reveal,.step,.a11y-card,.a11y-status').forEach(el =>
     setTimeout(finish, 300);
     if(restoreFocus) lastTrigger?.focus();
   }
+
+  // Lead case only: render its process on the page surface. Same JSON, same
+  // renderer as the modal, so the two can never disagree. Re-rendered on
+  // language change alongside the modal.
+  function renderLeadCase(){
+    const mount=document.getElementById('leadCaseProcess');
+    const steps=document.getElementById('leadCaseSteps');
+    if(!mount||!steps) return;
+    const card=mount.closest('.case');
+    const data=card?parseCaseStatic(card.querySelector('.case-process')):null;
+    if(!data){ mount.hidden=true; return; }
+    renderSteps(steps,data);
+    mount.hidden=false;
+  }
+  function parseCaseStatic(el){
+    if(!el) return null;
+    try{ return JSON.parse(el.textContent); }
+    catch(err){ console.error('[case] malformed JSON in',el.className,err); return null; }
+  }
+  renderLeadCase();
+  window.__impeccableRenderLeadCase = renderLeadCase;
 
   document.querySelectorAll('button.case-view-btn').forEach(btn=>{
     btn.addEventListener('click',()=>openCaseModal(btn));
