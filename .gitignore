@@ -1,0 +1,25 @@
+# Root ignores. design-system/ carries its own .gitignore, which documents why
+# design-system/dist/ IS committed: GitHub Pages serves it. Nothing here may
+# override that, so there is deliberately no dist rule below.
+
+# Dependencies and build output, for any JS project that lands in this folder
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Secrets. studio/ sat here with a DATABASE_URL in .env.local until it was moved
+# out of the repo; this is the guard so the next one cannot be added by accident.
+# The repo is public, so a committed secret means rotating it, not just reverting.
+.env
+.env.*
+!.env.example
+
+# Local tooling state, not part of the site
+.claude/
+.cursor/
+.impeccable/
+
+# OS and OneDrive droppings
+.DS_Store
+Thumbs.db
+desktop.ini
