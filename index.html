@@ -91,7 +91,6 @@ a,button,[tabindex]{scroll-margin-top:calc(var(--nav-h,74px) + 1.5rem)}
      without moving anything. */
   .btn:hover{transform:none}
   .btn{transition:box-shadow .15s var(--ease-s)}
-  .shape-blk{transition:none}
   .modal-overlay{transition:opacity .12s var(--ease-s)}
   .case-modal{transform:none;transition:none}
 }
@@ -161,14 +160,8 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .btn-red{background:var(--cta);color:var(--cta-ink)}
 .btn-white{background:var(--cta-2);color:var(--cta-2-ink)}
 .hero-right{background:var(--yellow);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.shape-stage{position:relative;width:260px;height:300px}
-.shape-blk{position:absolute;top:0;left:0;width:32px;height:32px;border:3px solid var(--black);opacity:0;transition:transform .8s var(--ease-s),opacity .8s var(--ease-s)}
-.shape-blk.circle{border-radius:50%}
-.shape-blk.pill{border-radius:999px}
-.shape-blk.tri{background:var(--black);border:none;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
-.shape-blk.tri i{content:'';position:absolute;inset:3px;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
-.shape-blk.tri-down{background:var(--black);border:none;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
-.shape-blk.tri-down i{content:'';position:absolute;inset:3px;clip-path:polygon(0% 0%,100% 0%,50% 100%)}
+/* Cubes: canvas port of React Bits "Cubes", recast in the site's palette */
+.cube-scene{position:absolute;inset:24px;display:block;width:calc(100% - 48px);height:calc(100% - 48px);touch-action:none;cursor:crosshair}
 .shape-toggle{position:absolute;bottom:1.5rem;right:1.5rem;width:44px;height:44px;border:3px solid var(--black);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .shape-toggle:hover{background:var(--surface-sunken)}
 .shape-toggle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--white),0 0 0 5px var(--black)}
@@ -179,7 +172,6 @@ nav{position:fixed;top:var(--banner-h,0px);left:0;right:0;z-index:100;display:fl
 .shape-toggle.paused .shape-toggle-icon{width:0;height:0;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--black)}
 .shape-toggle.paused .shape-toggle-icon::before,.shape-toggle.paused .shape-toggle-icon::after{content:none}
 @keyframes eyeBlink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}
-@media (prefers-reduced-motion:reduce){.shape-blk{transition:none}}
 
 .work-section{padding:var(--section-y) var(--section-x);border-bottom:3px solid var(--black)}
 
@@ -447,7 +439,6 @@ footer small{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-meta)}
     </div>
   </div>
   <div class="hero-right">
-    <div class="shape-stage" id="shapeStage" aria-hidden="true"></div>
     <button type="button" class="shape-toggle" id="shapeToggle" aria-label="Pause animation"><span class="shape-toggle-icon" aria-hidden="true"></span></button>
   </div>
 </section>
@@ -889,199 +880,195 @@ if (window.ResizeObserver) new ResizeObserver(setNavHeight).observe(document.que
   window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
 })();
 
-// ── HERO SHAPES: blocks assemble into D E S I G N, on repeat ──────────
+// ── HERO CUBES: a grid of cubes that tilt toward the pointer, or wander on their own ──
+// Drawn on one canvas rather than as CSS 3D faces: one continuous outline per face
+// means no hairline seams, and painting ~150 polygons is far cheaper than the
+// browser compositing the same number of 3D layers.
 (function(){
-  const stage = document.getElementById('shapeStage');
+  const panel = document.querySelector('.hero-right');
   const toggle = document.getElementById('shapeToggle');
-  if (!stage) return;
+  if (!panel) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Reference the tokens rather than resolving them: these strings are handed
-  // straight to style.background, so a token edit re-skins the animation with
-  // the page and the shapes can't drift from the palette.
-  const RED = 'var(--red)', YELLOW = 'var(--yellow)', BLUE = 'var(--blue)',
-        GREEN = 'var(--green)', ORANGE = 'var(--orange)';
-  const cols = [RED, YELLOW, BLUE, GREEN, ORANGE];
-  const shapeTypes = ['square','circle','tri','pill'];
-  const CELL = 32, GAP = 6, STEP = CELL + GAP;
-  const STAGE_W = 260, STAGE_H = 300;
+  const MAX_ANGLE = 45 * Math.PI / 180, RADIUS = 2.6, TARGET_CELL = 76, GAP_RATIO = .6, LINE = 3;
+  const RIPPLE = ['--red','--blue','--green','--orange'];
 
-  // 5-col x 5-row blocky letterforms (1 = filled cell)
-  const LETTERS = {
-    D: [[1,1,1,1,0],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,0]],
-    E: [[1,1,1,1,1],[1,0,0,0,0],[1,1,1,0,0],[1,0,0,0,0],[1,1,1,1,1]],
-    S: [[0,1,1,1,1],[1,0,0,0,0],[0,1,1,1,0],[0,0,0,0,1],[1,1,1,1,0]],
-    I: [[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[1,1,1,1,1]],
-    G: [[0,1,1,1,1],[1,0,0,0,0],[1,0,1,1,1],[1,0,0,0,1],[0,1,1,1,0]],
-    N: [[1,0,0,0,1],[1,1,0,0,1],[1,0,1,0,1],[1,0,0,1,1],[1,0,0,0,1]]
-  };
-  const WORD = ['D','E','S','I','G','N','SMILEY'];
+  const canvas = document.createElement('canvas');
+  canvas.className = 'cube-scene';
+  canvas.setAttribute('aria-hidden','true');
+  panel.insertBefore(canvas, panel.firstChild);
+  const ctx = canvas.getContext('2d');
 
-  function cellsFor(letter){
-    const out = [];
-    LETTERS[letter].forEach((row,r) => row.forEach((on,c) => { if (on) out.push({ c, r }); }));
-    return out;
+  // Colours come from the tokens, re-read when the theme flips
+  let C = {};
+  function readColours(){
+    const cs = getComputedStyle(document.documentElement);
+    ['--white','--black','--red','--green','--blue','--orange'].forEach(t => { C[t] = cs.getPropertyValue(t).trim(); });
   }
-  const letterMaxCells = Math.max(...Object.keys(LETTERS).map(l => cellsFor(l).length));
 
-  const patternW = 5*STEP - GAP, patternH = 5*STEP - GAP;
-  const originX = (STAGE_W - patternW)/2, originY = (STAGE_H - patternH)/2;
+  let cubes = [], cols = 0, rows = 0, cell = 0, gx = 0, gy = 0, W = 0, H = 0;
+  let visible = true, paused = reduce, userActive = false, idleTimer = null, raf = null, dirty = false;
+  const sim = { x:0, y:0, tx:0, ty:0 };
 
-  // smiley: a ring of circles plus eyes/nose/mouth, laid out with real geometry (not the letter grid)
-  const RING_N = 16, RING_R = 105;
-  const SMILEY_N = RING_N + 2 + 1 + 5;
-  const BLINK_EYE_INDEX = RING_N + 1;
-  function smileyLayout(){
-    const cx = STAGE_W/2, cy = STAGE_H/2;
-    const items = [];
-    for (let k = 0; k < RING_N; k++){
-      const ang = -Math.PI/2 + k*(2*Math.PI/RING_N);
-      items.push({ x: cx + RING_R*Math.cos(ang) - CELL/2, y: cy + RING_R*Math.sin(ang) - CELL/2, type: 'circle', color: ORANGE });
+  function build(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    W = w; H = h;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.max(3, Math.round(w / (TARGET_CELL * (1 + GAP_RATIO))));
+    rows = Math.max(3, Math.round(h / (TARGET_CELL * (1 + GAP_RATIO))));
+    cell = Math.floor(Math.min(w / (cols + (cols + 1) * GAP_RATIO), h / (rows + (rows + 1) * GAP_RATIO)));
+    gx = (w - cols * cell) / (cols + 1);
+    gy = (h - rows * cell) / (rows + 1);
+
+    // Leave out any cube the pause button would sit on top of
+    let skip = null;
+    if (toggle) {
+      const cb = canvas.getBoundingClientRect(), tb = toggle.getBoundingClientRect();
+      skip = { l: tb.left - cb.left - 8, r: tb.right - cb.left + 8, t: tb.top - cb.top - 8, b: tb.bottom - cb.top + 8 };
     }
-    items.push({ x: cx - 35 - CELL/2, y: cy - 28 - CELL/2, type: 'eye', color: GREEN });
-    items.push({ x: cx + 35 - CELL/2, y: cy - 28 - CELL/2, type: 'eye', color: GREEN });
-    items.push({ x: cx - CELL/2, y: cy - CELL/2, type: 'tri-down', color: RED });
-    [[-53,23],[-26,38],[0,43],[26,38],[53,23]].forEach(([dx,dy]) => {
-      items.push({ x: cx + dx - CELL/2, y: cy + dy - CELL/2, type: 'circle', color: YELLOW, hollow: true });
-    });
-    return items;
+    cubes = [];
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const x = gx + c * (cell + gx), y = gy + r * (cell + gy);
+      if (skip && x + cell > skip.l && x < skip.r && y + cell > skip.t && y < skip.b) continue;
+      cubes.push({ r, c, cx: x + cell / 2, cy: y + cell / 2, ax: 0, ay: 0, tx: 0, ty: 0, flash: null });
+    }
+    sim.x = Math.random() * cols; sim.y = Math.random() * rows;
+    sim.tx = Math.random() * cols; sim.ty = Math.random() * rows;
+    draw();
   }
 
-  const maxCells = Math.max(letterMaxCells, SMILEY_N);
+  // Unit cube faces: corner offsets and outward normal. y points down, z toward the viewer.
+  const FACES = [
+    { n:[0,-1,0], v:[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]], fill:'--red' },   // top
+    { n:[-1,0,0], v:[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]], fill:'--green' }, // left
+    { n:[1,0,0],  v:[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]],     fill:'--black' }, // right
+    { n:[0,1,0],  v:[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]],     fill:'--blue' },  // bottom
+    { n:[0,0,1],  v:[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]],     fill:'--white', front:true }
+  ];
 
-  // final resting arrangement: a tidy grid using every block
-  const restCols = 5;
-  const restW = restCols*STEP - GAP, restH = Math.ceil(maxCells/restCols)*STEP - GAP;
-  const restX = (STAGE_W - restW)/2, restY = (STAGE_H - restH)/2;
-  function restCell(i){ return { c: i % restCols, r: Math.floor(i/restCols) }; }
-
-  function applyAppearance(b, type, color, hollow){
-    const inner = b.firstElementChild;
-    if (type === 'eye') {
-      // visuals live on the inner element so its own transform (the blink squish)
-      // stays independent of the outer element's position transform
-      b.className = 'shape-blk';
-      b.style.background = 'transparent';
-      b.style.border = 'none';
-      inner.style.position = 'absolute';
-      inner.style.inset = '0';
-      inner.style.borderRadius = '50%';
-      inner.style.background = color;
-      inner.style.border = '3px solid var(--black)';
-      inner.style.animation = '';
-      inner.style.transform = '';
+  function drawCube(q){
+    const s = (cell - LINE) / 2;
+    if (q.ax === 0 && q.ay === 0) {
+      ctx.beginPath();
+      ctx.rect(q.cx - s, q.cy - s, s * 2, s * 2);
+      ctx.fillStyle = q.flash ? C[q.flash] : C['--white'];
+      ctx.fill(); ctx.stroke();
       return;
     }
-    b.style.border = '';
-    b.style.borderColor = '';
-    inner.style.position = '';
-    inner.style.inset = '';
-    inner.style.borderRadius = '';
-    inner.style.border = '';
-    inner.style.animation = '';
-    inner.style.transform = '';
-    b.className = 'shape-blk ' + type;
-    if (type === 'tri' || type === 'tri-down') {
-      inner.style.background = color;
-      b.style.background = '';
-    } else if (hollow) {
-      b.style.background = 'transparent';
-      inner.style.background = '';
-    } else {
-      b.style.background = color;
-      inner.style.background = '';
-    }
-  }
-
-  const blocks = [];
-  for (let i = 0; i < maxCells; i++) {
-    const type = shapeTypes[i % shapeTypes.length];
-    const color = cols[i % cols.length];
-    const b = document.createElement('div');
-    b.appendChild(document.createElement('i'));
-    b.dataset.defType = type;
-    b.dataset.defColor = color;
-    applyAppearance(b, type, color);
-    stage.appendChild(b);
-    blocks.push(b);
-  }
-
-  function place(b, x, y, visible){
-    b.style.transform = `translate(${x}px,${y}px)`;
-    b.style.opacity = visible ? '1' : '0';
-  }
-  function showLetter(letter){
-    if (letter === 'SMILEY') {
-      const items = smileyLayout();
-      blocks.forEach((b,i) => {
-        if (i < items.length) {
-          applyAppearance(b, items[i].type, items[i].color, items[i].hollow);
-          place(b, items[i].x, items[i].y, true);
-        } else {
-          applyAppearance(b, b.dataset.defType, b.dataset.defColor);
-          place(b, STAGE_W/2 - CELL/2, originY - 40, false);
-        }
+    const sx = Math.sin(q.ax), cxr = Math.cos(q.ax), sy = Math.sin(q.ay), cyr = Math.cos(q.ay);
+    // rotate about Y, then X
+    const rot = (x, y, z) => {
+      const x1 = x * cyr + z * sy, z1 = -x * sy + z * cyr;
+      return [x1, y * cxr - z1 * sx, y * sx + z1 * cxr];
+    };
+    for (const f of FACES) {
+      if (rot(f.n[0], f.n[1], f.n[2])[2] <= 0.001) continue; // facing away
+      ctx.beginPath();
+      f.v.forEach((p, i) => {
+        const [x, y] = rot(p[0] * s, p[1] * s, p[2] * s);
+        i ? ctx.lineTo(q.cx + x, q.cy + y) : ctx.moveTo(q.cx + x, q.cy + y);
       });
-      return;
-    }
-    const cells = cellsFor(letter);
-    blocks.forEach((b,i) => {
-      applyAppearance(b, b.dataset.defType, b.dataset.defColor);
-      if (i < cells.length) place(b, originX + cells[i].c*STEP, originY + cells[i].r*STEP, true);
-      else place(b, STAGE_W/2 - CELL/2, originY - 40, false);
-    });
-  }
-
-  function showRest(){
-    blocks.forEach((b,i) => {
-      const { c, r } = restCell(i);
-      place(b, restX + c*STEP, restY + r*STEP, true);
-    });
-  }
-
-  if (reduce) {
-    showRest();
-    if (toggle) toggle.hidden = true;
-    return;
-  }
-
-  blocks.forEach(b => place(b, STAGE_W/2 - CELL/2, originY - 120, false));
-
-  let idx = 0;
-  let timer = null;
-  let paused = false;
-
-  function blinkEye(){
-    const eye = blocks[BLINK_EYE_INDEX];
-    if (!eye) return;
-    const inner = eye.firstElementChild;
-    inner.style.animation = 'eyeBlink 1s ease-in-out';
-    setTimeout(() => { inner.style.animation = ''; }, 1000);
-  }
-  function step(){
-    const letter = WORD[idx];
-    showLetter(letter);
-    idx = (idx + 1) % WORD.length;
-    if (letter === 'SMILEY') {
-      setTimeout(blinkEye, 1000);
-      timer = setTimeout(step, 2200);
-    } else {
-      timer = setTimeout(step, 1100);
+      ctx.closePath();
+      ctx.fillStyle = (f.front && q.flash) ? C[q.flash] : C[f.fill];
+      ctx.fill(); ctx.stroke();
     }
   }
-  timer = setTimeout(step, 350);
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = LINE; ctx.lineJoin = 'round'; ctx.strokeStyle = C['--black'];
+    // Flat cubes first, then the most-tilted last so they overlap their neighbours
+    const order = cubes.slice().sort((a, b) => (Math.abs(a.ax) + Math.abs(a.ay)) - (Math.abs(b.ax) + Math.abs(b.ay)));
+    order.forEach(drawCube);
+  }
+
+  function aim(row, col){
+    for (const q of cubes) {
+      const d = Math.hypot(q.r - row, q.c - col);
+      const a = d <= RADIUS ? (1 - d / RADIUS) * MAX_ANGLE : 0;
+      q.tx = -a; q.ty = a;
+    }
+  }
+  function settle(){ for (const q of cubes) { q.tx = 0; q.ty = 0; } }
+
+  function frame(){
+    if (!paused && !userActive) {
+      sim.x += (sim.tx - sim.x) * .035;
+      sim.y += (sim.ty - sim.y) * .035;
+      aim(sim.y, sim.x);
+      if (Math.hypot(sim.x - sim.tx, sim.y - sim.ty) < .1) {
+        sim.tx = Math.random() * cols; sim.ty = Math.random() * rows;
+      }
+    }
+    let moving = false;
+    for (const q of cubes) {
+      if (q.ax === 0 && q.tx === 0) continue;
+      const k = (Math.abs(q.tx) > Math.abs(q.ax)) ? .35 : .14; // tip in fast, settle a little slower
+      q.ax += (q.tx - q.ax) * k;
+      q.ay += (q.ty - q.ay) * k;
+      if (q.tx === 0 && Math.abs(q.ax) < .002) { q.ax = q.ay = 0; }
+      moving = true;
+    }
+    if (moving || dirty) { draw(); dirty = false; }
+    raf = (visible && (moving || !paused)) ? requestAnimationFrame(frame) : null;
+  }
+  function kick(){ if (!raf && visible) raf = requestAnimationFrame(frame); }
+
+  function cellAt(e){
+    const b = canvas.getBoundingClientRect();
+    return { col: (e.clientX - b.left - gx / 2) / (cell + gx) - .5, row: (e.clientY - b.top - gy / 2) / (cell + gy) - .5 };
+  }
+
+  canvas.addEventListener('pointermove', e => {
+    if (paused) return;
+    userActive = true;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => { userActive = false; }, 3000);
+    const p = cellAt(e);
+    aim(p.row, p.col);
+    kick();
+  });
+  canvas.addEventListener('pointerleave', () => { if (!paused) settle(); });
+
+  // Click sends a ripple of palette colour out across the front faces
+  canvas.addEventListener('click', e => {
+    const p = cellAt(e);
+    const colour = RIPPLE[Math.floor(Math.random() * RIPPLE.length)];
+    for (const q of cubes) {
+      const ring = Math.round(Math.hypot(q.r - p.row, q.c - p.col));
+      setTimeout(() => {
+        q.flash = colour; dirty = true; kick();
+        setTimeout(() => { q.flash = null; dirty = true; kick(); }, 380);
+      }, reduce ? 0 : ring * 70);
+    }
+  });
 
   if (toggle) {
     toggle.addEventListener('click', () => {
       paused = !paused;
       toggle.classList.toggle('paused', paused);
       toggle.setAttribute('aria-label', paused ? SHAPE_LABELS[currentLang].play : SHAPE_LABELS[currentLang].pause);
-      if (paused) {
-        clearTimeout(timer);
-      } else {
-        timer = setTimeout(step, 400);
-      }
+      if (paused) settle();
+      kick();
     });
+    if (reduce) { toggle.classList.add('paused'); toggle.setAttribute('aria-label', SHAPE_LABELS[currentLang].play); }
   }
+
+  // Don't spend frames on a hero nobody can see
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting && !document.hidden; kick(); }).observe(panel);
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; kick(); });
+  // Colours follow the theme
+  const recolour = () => { readColours(); dirty = true; kick(); };
+  new MutationObserver(recolour).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme','data-style','class'] });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolour);
+
+  readColours();
+  build();
+  kick();
+  let rt;
+  new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { build(); kick(); }, 150); }).observe(panel);
 })();
 
 // ── SCROLL REVEAL ──────────────────────────────────────
